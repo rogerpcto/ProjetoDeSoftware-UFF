@@ -1,0 +1,112 @@
+@startuml diagrama
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+
+entity Tabuleiro{
+    - pontuacao: int
+    - parede: Parede
+    - fileirasModelo: FileiraModelo[]
+    - fileiraChao: FileiraChao
+    + InserirFileiraModelo(int index, Azulejo[] azulejos): void
+    + InserirFileiraChao(Azulejo[] azulejos): void
+    + DescartarAzulejos(): Azulejo[]
+}
+
+entity Fileira{
+    - azulejos: Azulejo[]
+    + InserirAzulejos(Azulejo[] azulejos): void
+    - ContarPontuacao(): int
+    - LimparFileira(): void
+}
+
+entity FileiraModelo{
+    - tamanho: int
+    - ChecarRevestimento(): bool
+}
+
+entity FileiraChao{
+}
+
+entity Parede{
+    - fileiras: Azulejo[][]
+    + InsereAzulejo(int x, int y): int
+    - Pontuar(): int
+    - ConfereFimDoJogo(): bool
+}
+
+entity Jogador{
+    - id: int
+    - tabuleiro: Tabuleiro
+}
+
+entity ExpositorFabrica{
+    - limite: int
+    + Encher(Azulejo[] azulejos): void
+    + Descartar(): Azulejo[]
+}
+
+entity Saco{
+    - azulejos: Azulejo[]
+    + RetirarAzulejo(): Azulejo
+    + Reabestecer(Azulejo[] azulejos): void
+}
+
+entity Tampa{
+    - azulejos: Azulejo[]
+    + InserirAzulejos(Azulejo[] azulejos): void
+    + RetirarAzulejos(): Azulejo[]
+}
+
+enum Cor{
+    AMARELO
+    AZUL
+    BRANCO
+    PRETO
+    VERMELHO
+}
+
+entity Azulejo{
+    + cor: Cor
+}
+
+entity CentroMesa{
+    + AdicionarAzulejos(Azulejo[] azulejos): void
+}
+
+entity RepositorioAzulejos{
+    - azulejos: Azulejo[]
+    + RetirarAzulejos(Cor cor): Azulejo[]
+}
+
+entity Partida{
+    - saco: Saco
+    - jogadores: Jogador[]
+    - expositoresFabricas: ExpositorFabrica[]
+    - centroMesa: CentroMesa
+    - tampa: Tampa
+    - rodada: int
+}
+
+Tabuleiro "1" *-- "*" FileiraModelo
+Tabuleiro "1" *-- "1" FileiraChao
+Tabuleiro "1" *-- "1" Parede
+
+Jogador "1" *-- "1" Tabuleiro
+
+Partida "1" *-- "1" Saco
+Partida "1" *-- "*" Jogador
+Partida "1" *-- "*" ExpositorFabrica
+
+Saco "1" o-- "*" Azulejo
+ExpositorFabrica "1" o-- "*" Azulejo
+Parede "1" o-- "*" Azulejo
+FileiraModelo "1" o-- "*" Azulejo
+FileiraChao "1" o-- "*" Azulejo
+
+CentroMesa --> RepositorioAzulejos
+ExpositorFabrica --> RepositorioAzulejos
+ExpositorFabrica ..> CentroMesa
+FileiraChao --> Fileira
+FileiraModelo --> Fileira
+
+@enduml

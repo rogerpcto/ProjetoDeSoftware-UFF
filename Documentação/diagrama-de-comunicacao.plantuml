@@ -1,0 +1,7 @@
+@startuml diagrama
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+
+Oi --> Mundo
+
+@enduml
