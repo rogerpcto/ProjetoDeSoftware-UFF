@@ -1,34 +1,36 @@
 @startuml diagrama
 skinparam linetype ortho
-skinparam classAttributeIconSize 0
 
 entity Tabuleiro{
-    - Propriedade : Propriedade[]
-    - Prisao : Prisao
-    + CartaSorte : CartaSorte
-    - PontoDePartida : PontoDePartida
+    + Casas : List<Casa>
+    + Cartas : List<Carta>
+    + Jogadores : List<Jogador>
 }
 
-
 entity Casa{
-
+    - Nome: string
+    - Posicao : int   
+    - Efeito : Efeito
+    + RealizarEfeitos(Tabuleiro) : void
 }
 
 entity Propriedade{
-    - Nome: string
     - Preco: int
     - Aluguel: int
+    - AluguelDobrado : bool
     + Cor: Cor
     - Proprietario: Jogador
-    - Posicao : int   
+    + CobrarAluguel(): int
 }
 
 entity Jogador{
     - Id: int
-    - Dado : int[]
-    - Propriedades: Propriedade[]
+    - Dado : List<int>
+    - Propriedades: List<Propriedade>
     - Saldo : int
     - Posicao: int
+    + Receber(int): void
+    + Pagar(int): void
 }
 
 enum Cor{
@@ -40,62 +42,89 @@ enum Cor{
     MARROM
     ROXO
 }
-enum CartaSorte{ 
-        carta1
-        carta2
-        carta3
-        carta4
-        carta5
-        carta6
-        carta7
-        carta8
-        carta9
-        carta10
-        carta11
-        carta12
-        carta13
-        carta14
-        carta15
-        carta16
-        carta17
-        carta18
-        carta19
-        carta20
-}
 
 entity Carta{
     - Texto : string
-    - Efeito() : void
+    - Efeitos : List<Efeito>
+    + RealizarEfeitos(Tabuleiro) : void
 }
 
+entity Efeito{
+    + RealizarEfeito() : void
+}
 
-entity CartaEspecialPersonagem{
+entity EfeitoEspecialPersonagem{
+    - EfeitoComprarCarta : Efeito
     - Personagem : Personagem
     - EscolhePropriedade() : Propriedade
+    - EntregarCartaAoPersonagem : void
 }
 
-
-entity CartaPropriedadeGratis{
+entity EfeitoEscolhePropriedade{
     - Cor1, Cor2 : Cor
     - EscolhePropriedadeCor() : Propriedade
 }
 
-entity CartaTeleporte{
+entity EfeitoPropriedadeGratis{
+    - PegaOuPaga() : Propriedade
+}
+
+entity EfeitoTeleporte{
     - Destino : Casa
 }
 
-entity CartaPassos{
-    - Passos : Int
+entity EfeitoPassos{
+    - Passos : int
+    - AndarJogador(int) : void
 }
 
-entity Partida{
-    - Tabuleiro : Tabuleiro
-    - Jogadores: Jogador[]
-    }
+entity EfeitoComprarCarta{
+    - ComprarCarta() : Carta 
+}
 
-    Tabuleiro "1" *-- "*" Jogador
-    Tabuleiro "1" *-- "*" Propriedade
-    
-    Jogador "1"  *-- "*" Propriedade
+entity EfeitoTransacao{
+    - Transacao : int
+}
+
+entity EfeitoHabeasCorpus{
+    - SairDaPrisao() : void
+}
+
+entity EfeitoMoverOuComprar{
+    - EfeitoMover : Efeito
+    - EfeitoComprar : Efeito
+    - EscolheMoverOuComprar() : Efeito
+}
+
+entity EfeitoPrisao{
+    - VerificarHabeasCorpus() : bool
+    - CobrarMulta() : void
+}
+
+Tabuleiro "1" *-- "*" Jogador
+Tabuleiro "1" *-- "*" Casas
+Banco "1" *-- "1" Tabuleiro
+
+Casa --> Propriedade
+Casa --> VaParaPrisao
+Casa --> Prisao
+Casa --> CasaInicial
+Casa --> Estacionamento
+Casa --> Sorte
+
+Jogador "1"  *-- "*" Propriedade
+
+Carta "*" *-- "*" Efeito
+
+Efeito --> EfeitoComprar
+Efeito --> EfeitoComprarCarta
+Efeito --> EfeitoEscolhePropriedade
+Efeito --> EfeitoEspecialPersonagem
+Efeito --> EfeitoHabeasCorpus
+Efeito --> EfeitoMover
+Efeito --> EfeitoMoverOuComprar
+Efeito --> EfeitoPassos
+Efeito --> EfeitoPropriedadeGratis
+Efeito --> EfeitoPrisao
 
 @enduml
