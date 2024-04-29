@@ -3,110 +3,69 @@ skinparam linetype ortho
 skinparam classAttributeIconSize 0
 
 entity Tabuleiro{
-    - pontuacao: int
-    - parede: Parede
-    - fileirasModelo: FileiraModelo[]
-    - fileiraChao: FileiraChao
-    + InserirFileiraModelo(int index, Azulejo[] azulejos): void
-    + InserirFileiraChao(Azulejo[] azulejos): void
-    + DescartarAzulejos(): Azulejo[]
+    - Propriedade : Propriedade[]
+    - Prisao : Prisao
+    + cartaSorte : CartaSorte
+    - pontoDePartida : PontoDePartida
 }
 
-entity Fileira{
-    - azulejos: Azulejo[]
-    + InserirAzulejos(Azulejo[] azulejos): void
-    - ContarPontuacao(): int
-    - LimparFileira(): void
-}
-
-entity FileiraModelo{
-    - tamanho: int
-    - ChecarRevestimento(): bool
-}
-
-entity FileiraChao{
-}
-
-entity Parede{
-    - fileiras: Azulejo[][]
-    + InsereAzulejo(int x, int y): int
-    - Pontuar(): int
-    - ConfereFimDoJogo(): bool
+entity Propiedade{
+    - Nome: string
+    - Preco: int
+    - Aluguel: int
+    + cor: Cor
+    - Proprietario: Jogador
+    - Posicao : int   
 }
 
 entity Jogador{
     - id: int
-    - tabuleiro: Tabuleiro
-}
-
-entity ExpositorFabrica{
-    - limite: int
-    + Encher(Azulejo[] azulejos): void
-    + Descartar(): Azulejo[]
-}
-
-entity Saco{
-    - azulejos: Azulejo[]
-    + RetirarAzulejo(): Azulejo
-    + Reabestecer(Azulejo[] azulejos): void
-}
-
-entity Tampa{
-    - azulejos: Azulejo[]
-    + InserirAzulejos(Azulejo[] azulejos): void
-    + RetirarAzulejos(): Azulejo[]
+    - Dado : int[]
+    - Propriedades: Propriedade[]
+    - Saldo : int
+    - Posicao: int
 }
 
 enum Cor{
     AMARELO
     AZUL
     BRANCO
-    PRETO
+    LARANJA
     VERMELHO
+    MARROM
+    ROXO
 }
-
-entity Azulejo{
-    + cor: Cor
-}
-
-entity CentroMesa{
-    + AdicionarAzulejos(Azulejo[] azulejos): void
-}
-
-entity RepositorioAzulejos{
-    - azulejos: Azulejo[]
-    + RetirarAzulejos(Cor cor): Azulejo[]
+enum CartaSorte{ 
+        carta1
+        carta2
+        carta3
+        carta4
+        carta5
+        carta6
+        carta7
+        carta8
+        carta9
+        carta10
+        carta11
+        carta12
+        carta13
+        carta14
+        carta15
+        carta16
+        carta17
+        carta18
+        carta19
+        carta20
 }
 
 entity Partida{
-    - saco: Saco
+    - tabuleiro : Tabuleiro
     - jogadores: Jogador[]
-    - expositoresFabricas: ExpositorFabrica[]
-    - centroMesa: CentroMesa
-    - tampa: Tampa
-    - rodada: int
-}
+    }
 
-Tabuleiro "1" *-- "*" FileiraModelo
-Tabuleiro "1" *-- "1" FileiraChao
-Tabuleiro "1" *-- "1" Parede
-
-Jogador "1" *-- "1" Tabuleiro
-
-Partida "1" *-- "1" Saco
-Partida "1" *-- "*" Jogador
-Partida "1" *-- "*" ExpositorFabrica
-
-Saco "1" o-- "*" Azulejo
-ExpositorFabrica "1" o-- "*" Azulejo
-Parede "1" o-- "*" Azulejo
-FileiraModelo "1" o-- "*" Azulejo
-FileiraChao "1" o-- "*" Azulejo
-
-CentroMesa --> RepositorioAzulejos
-ExpositorFabrica --> RepositorioAzulejos
-ExpositorFabrica ..> CentroMesa
-FileiraChao --> Fileira
-FileiraModelo --> Fileira
+    Tabuleiro "1" *-- "*" Jogador
+    Tabuleiro "1" *-- "*" Propriedade
+    
+    Jogador "1"  *-- "*" Propiedade
 
 @enduml
