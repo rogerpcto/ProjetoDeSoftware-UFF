@@ -5,21 +5,26 @@ skinparam classAttributeIconSize 0
 entity Tabuleiro{
     - Propriedade : Propriedade[]
     - Prisao : Prisao
-    + cartaSorte : CartaSorte
-    - pontoDePartida : PontoDePartida
+    + CartaSorte : CartaSorte
+    - PontoDePartida : PontoDePartida
 }
 
-entity Propiedade{
+
+entity Casa{
+
+}
+
+entity Propriedade{
     - Nome: string
     - Preco: int
     - Aluguel: int
-    + cor: Cor
+    + Cor: Cor
     - Proprietario: Jogador
     - Posicao : int   
 }
 
 entity Jogador{
-    - id: int
+    - Id: int
     - Dado : int[]
     - Propriedades: Propriedade[]
     - Saldo : int
@@ -58,14 +63,39 @@ enum CartaSorte{
         carta20
 }
 
+entity Carta{
+    - Texto : string
+    - Efeito() : void
+}
+
+
+entity CartaEspecialPersonagem{
+    - Personagem : Personagem
+    - EscolhePropriedade() : Propriedade
+}
+
+
+entity CartaPropriedadeGratis{
+    - Cor1, Cor2 : Cor
+    - EscolhePropriedadeCor() : Propriedade
+}
+
+entity CartaTeleporte{
+    - Destino : Casa
+}
+
+entity CartaPassos{
+    - Passos : Int
+}
+
 entity Partida{
-    - tabuleiro : Tabuleiro
-    - jogadores: Jogador[]
+    - Tabuleiro : Tabuleiro
+    - Jogadores: Jogador[]
     }
 
     Tabuleiro "1" *-- "*" Jogador
     Tabuleiro "1" *-- "*" Propriedade
     
-    Jogador "1"  *-- "*" Propiedade
+    Jogador "1"  *-- "*" Propriedade
 
 @enduml
