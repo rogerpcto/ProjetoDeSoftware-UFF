@@ -1,0 +1,24 @@
+@startuml comunicacao
+
+skinparam linestyle ortho
+
+rectangle "Sorte" as one
+rectangle "Carta" as two
+rectangle "EfeitoComprarCarta" as three
+rectangle "EfeitoMoverComprar" as four
+rectangle "EfeitoMover" as five
+
+
+
+one -right- three: 1: RealizarEfeitos(tabuleiro: Tabuleiro): void
+
+three -right- two: 2: ComprarCarta(): void
+
+two --> four: 2.1: RealizarEfeitos(): void
+
+four --> four: 3: EscolheMoverOuComprar(): Efeito
+four --> five: 3A: RealizarEfeitos(): void
+four --> three: 3B: RealizarEefeitos(): void
+
+
+@enduml
