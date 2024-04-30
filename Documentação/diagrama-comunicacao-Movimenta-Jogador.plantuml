@@ -1,0 +1,19 @@
+@startuml comunicacao
+
+skinparam linestyle ortho
+
+rectangle "Tabuleiro" as one
+rectangle "Jogador" as two
+rectangle "Casa" as three
+rectangle "Efeito" as four
+rectangle "Carta" as five
+
+one -right- two: 1: EscolheJogador(index: int): Jogador --> \n 2.1.1.1: ProximoJogador(): void <--
+
+two --> two: 2: JogarDado(): int \n 2.1: Mover(posicao: int): void
+two --> three: 2.1.1: RealizarEfeitos(tabuleiro: Tabuleiro): void
+
+three --> four: 3: RealizarEfeitos(tabuleiro: Tabuleiro): void
+four --> five: 4: RealizarEfeitos(tabuleiro: Tabuleiro): void
+
+@enduml
