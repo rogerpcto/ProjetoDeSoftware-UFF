@@ -1,10 +1,13 @@
 @startuml diagrama
 skinparam linetype ortho
+skinparam classAttributeIconSize 0
 
 entity Tabuleiro{
     + Casas : List<Casa>
     + Cartas : List<Carta>
     + Jogadores : List<Jogador>
+    
+    ProximoJogador() : void
 }
 
 entity Casa{
@@ -25,12 +28,13 @@ entity Propriedade{
 
 entity Jogador{
     - Id: int
-    - Dado : List<int>
     - Propriedades: List<Propriedade>
     - Saldo : int
     - Posicao: int
     + Receber(int): void
     + Pagar(int): void
+    + JogarDado(): int
+    + Mover(int) : void
 }
 
 enum Cor{
