@@ -1,0 +1,11 @@
+@startuml comunicacao
+
+skinparam linestyle ortho
+
+rectangle "Jogador 1 : Jogador" as jogador
+rectangle "Propriedade" as propriedade
+
+jogador --> propriedade: 1: ChecarProprietario(jogador:Jogador): void
+propriedade --> propriedade: [null] 1.1A: Comprar(jogador:Jogador): void \n [Proprietario != Jogador 1 && not null] 1.1B: PagarAluguel()
+
+@enduml

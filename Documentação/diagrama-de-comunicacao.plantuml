@@ -1,7 +1,12 @@
 @startuml diagrama
-skinparam linetype ortho
-skinparam classAttributeIconSize 0
+skinparam linestyle ortho
+rectangle "A" as one
+rectangle "B" as two
+rectangle "C" as three
+rectangle "D" as four
 
-Oi --> Mundo
-
+one -right-> two: message 1-->2
+two -right-> three: message 2-->3
+two --> four: message 2-->4
+three -[hidden]- four
 @enduml

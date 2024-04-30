@@ -6,7 +6,6 @@ entity Tabuleiro{
     + Casas : List<Casa>
     + Cartas : List<Carta>
     + Jogadores : List<Jogador>
-    
     ProximoJogador() : void
 }
 
@@ -23,7 +22,9 @@ entity Propriedade{
     - AluguelDobrado : bool
     + Cor: Cor
     - Proprietario: Jogador
+    + ChecarProprietario(Jogador) : void
     + CobrarAluguel(): int
+    + Comprar(Jogador): void
 }
 
 entity Jogador{
@@ -83,7 +84,7 @@ entity EfeitoPassos{
 }
 
 entity EfeitoComprarCarta{
-    - ComprarCarta() : Carta 
+    - ComprarCarta() : void 
 }
 
 entity EfeitoTransacao{
@@ -106,8 +107,7 @@ entity EfeitoPrisao{
 }
 
 Tabuleiro "1" *-- "*" Jogador
-Tabuleiro "1" *-- "*" Casas
-Banco "1" *-- "1" Tabuleiro
+Tabuleiro "1" *-- "*" Casa
 
 Casa --> Propriedade
 Casa --> VaParaPrisao
@@ -120,7 +120,6 @@ Jogador "1"  *-- "*" Propriedade
 
 Carta "*" *-- "*" Efeito
 
-Efeito --> EfeitoComprar
 Efeito --> EfeitoComprarCarta
 Efeito --> EfeitoEscolhePropriedade
 Efeito --> EfeitoEspecialPersonagem
