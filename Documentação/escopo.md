@@ -36,33 +36,37 @@ O sistema permite que os jogadores comprem propriedades quando caírem em casas 
 
 ## Requisitos Não Funcionais
 
-* TA FALTANDO fazer
-* TA FALTANDO fazer
+* Tempo de resposta do sistema: O sistema deve responder de forma rápida às ações dos jogadores, garantindo uma experiência fluida e sem atrasos perceptíveis.
 
-## ? Regras de Negócio ?
+* Segurança: O sistema deve garantir a segurança dos dados dos jogadores, evitando acesso não autorizado e protegendo as informações pessoais.
 
-* tempo limite para jogador jogar a cada rodada?
-* só o sistema pode acessar os dados de outros jogadores? 
+* Disponibilidade : O sistema deve estar disponível sempre que os jogadores quiserem jogar
 
-## Caso de Uso 01 - < nome caso de uso >
 
-#### Nome: Movimentar Jogador
 
-#### Resumo: O jogador se move pelo tabuleiro
+
+## Caso de Uso 01 - < Comprar propriedade >
+
+#### Nome:Comprar propriedade
+
+#### Resumo:O jogador compra uma propriedade
 
 #### Lista de atores: Jogador
 
-#### Pré-condições:Ser a vez do jogador
+#### Pré-condições: Jogador estar em cima da casa da propriedade
 
 #### Cenário típico:
-1. Jogador lança os dados 
-2. Sistema verifica o resultado
-3. Sistema Move o Jogador a quantidade de casas correspondente ao número do dado
+    1. Sistema Verifica a situação da propriedade
+    2. Jogador Escolhe comprar a propriedade    
+    3. Sistema Aloca a propriedade no patrimonio do jogador.
 
 
 #### Cenário Alternativo: 
-* 5A - Jogador está na prisão
-* 6A - sei la oq
+    A1 A propriedade ja possui um dono
+        1. O jogador paga um aluguel igual ao valor da propriedade ao dono
+    A2 O jogador escolhe não comprar a propriedade
+        1. O jogador apenas espera em cima da propriedade a sua proxima vez
+
 
 #### Regras de Negócio: ??
 
