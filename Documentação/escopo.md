@@ -46,20 +46,22 @@ O sistema permite que os jogadores comprem propriedades quando caírem em casas 
 
 ## Caso de Uso 01 - < nome caso de uso >
 
-#### Nome: 
+#### Nome: Movimentar Jogador
 
-#### Resumo:
+#### Resumo: O jogador se move pelo tabuleiro
 
-#### Lista de atores:
+#### Lista de atores: Jogador
 
-#### Pré-condições:
+#### Pré-condições:Ser a vez do jogador
 
 #### Cenário típico:
-* açao1
-* ação2
+1. Jogador lança os dados 
+2. Sistema verifica o resultado
+3. Sistema Move o Jogador a quantidade de casas correspondente ao número do dado
+
 
 #### Cenário Alternativo: 
-* 5A - sei la
+* 5A - Jogador está na prisão
 * 6A - sei la oq
 
 #### Regras de Negócio: ??
