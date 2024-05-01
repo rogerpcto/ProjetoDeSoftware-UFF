@@ -45,7 +45,25 @@ O sistema permite que os jogadores comprem propriedades quando caírem em casas 
 
 
 
-## Caso de Uso 01 - < Comprar propriedade >
+## Caso de Uso 01 - < Mover Jogador >
+
+#### Nome:Mover Jogador
+
+#### Resumo:O Jogador se move no tabuleiro
+
+#### Lista de atores: Jogador
+
+#### Pré-condições: Ser a vez do jogador
+
+#### Cenário típico:
+    1. O Jogadore lança o dado 
+    2. O Sistema verifica o resultado do dado    
+    3. O Sistema move o jogador o numero de casas igual o resultado do dado
+
+
+
+
+## Caso de Uso 02 - < Comprar propriedade >
 
 #### Nome:Comprar propriedade
 
@@ -56,8 +74,8 @@ O sistema permite que os jogadores comprem propriedades quando caírem em casas 
 #### Pré-condições: Jogador estar em cima da casa da propriedade
 
 #### Cenário típico:
-    1. Sistema Verifica a situação da propriedade
-    2. Jogador Escolhe comprar a propriedade    
+    1. Sistema Verifica a situação da propriedade[A1]
+    2. Jogador Escolhe comprar a propriedade[A2]    
     3. Sistema Aloca a propriedade no patrimonio do jogador.
 
 
@@ -68,6 +86,38 @@ O sistema permite que os jogadores comprem propriedades quando caírem em casas 
         1. O jogador apenas espera em cima da propriedade a sua proxima vez
 
 
-#### Regras de Negócio: ??
+
+## Caso de Uso 03 - < Realizar Efeito Carta >
+
+#### Nome:Realizar Efeito da Carta
+
+#### Resumo:Ao comprar uma carta de sorte ativa seu efeito
+
+#### Lista de atores: Sistema e Jogador
+
+#### Pré-condições: Jogador estar em cima da casa de carta de sorte
+
+#### Cenário típico:
+    1. O Jogador compra uma carta
+    2. O Sistema verifica qual o tipo de carta foi comprada    
+    3. O Sistema ativa o efeito da carta[A1][A2][A4]
 
 
+#### Cenário Alternativo: 
+    A1 Carta com efeito mover 
+        1. O Sistema Ativa o efeito da carta de movimentação
+    A2 Carta com efeito sair da prisao
+        1. O Sistema Verifica se o jogador esta na prisão[A3]
+        2. O Sistema libera o jogador da prisão
+        3. O caso de uso encerra
+    A3 O Jogadoe não está na prisão
+        1. O caso de uso encerra
+    A4 Carta com efeito especial de personagem
+        1. O Sistema verifica se o personagem e o mesmo da carta[A5]
+        2. O Sistema ativa o efeito da carta especial de personagem
+        3. O caso de uso encerra
+    A5 Jogador que comprou a carta não é o personagem indicado
+        1. O sistema envia a carta ao Jogador que é o personagem
+        2. O sistema ativa a carta com efeito especial de personagem
+        3. O Jogador compra outra carta de sorte
+        4. Retorna ao passo 1 do cenário típico
