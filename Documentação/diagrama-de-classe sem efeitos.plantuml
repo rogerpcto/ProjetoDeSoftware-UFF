@@ -1,0 +1,86 @@
+@startuml diagrama
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+
+entity Tabuleiro{
+    + Casas : List<Casa>
+    + Cartas : List<Carta>
+    + Jogadores : List<Jogador>
+    - static Instance : Tabuleiro
+
+    + static GetInstance() : Tabuleiro
+    + ProximoJogador() : void
+    + JogadorAtual(): Jogador
+}
+
+entity Casa{
+    - Nome: string
+    - Posicao : int   
+    - Efeito : Efeito
+    + RealizarEfeitos() : void
+}
+
+entity Propriedade{
+    - Preco: int
+    - Aluguel: int
+    - AluguelDobrado : bool
+    + Cor: Cor
+    - Proprietario: Jogador
+    + ChecarProprietario(Jogador) : bool
+    + CobrarAluguel(): int
+    + Comprar(Jogador): void
+}
+
+entity Jogador{
+    - Personagem: Personagem
+    - Propriedades: List<Propriedade>
+    - Saldo : int
+    - Posicao: int
+    + EfeitoInicial : Efeito
+    + Receber(int): void
+    + Pagar(int): void
+    + IniciarRodada() : void
+    + Mover(int) : void
+    + Teleportar(int) : void
+    - JogarDado(): int
+    - GanharDinheiroPorVolta(): void
+}
+
+enum Cor{
+    AMARELO
+    AZUL
+    BRANCO
+    LARANJA
+    VERMELHO
+    MARROM
+    ROXO
+}
+
+enum Personagem{
+    CACHORRO
+    GATO
+    BARCO
+    CARRO
+}
+
+entity Carta{
+    - Texto : string
+    - Efeitos : List<Efeito>
+    + RealizarEfeitos() : void
+}
+
+entity Efeito{
+    + RealizarEfeito() : void
+}
+
+Tabuleiro "1" *-- "*" Jogador
+Tabuleiro "1" *-- "*" Casa
+
+Casa --> Propriedade
+
+Jogador "1"  *-- "*" Propriedade
+
+Carta "*" *-- "*" Efeito
+Casa "1" *-- "1" Efeito
+
+@enduml

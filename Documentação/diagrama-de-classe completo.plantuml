@@ -6,14 +6,18 @@ entity Tabuleiro{
     + Casas : List<Casa>
     + Cartas : List<Carta>
     + Jogadores : List<Jogador>
-    ProximoJogador() : void
+    - static Instance : Tabuleiro
+
+    + static GetInstance() : Tabuleiro
+    + ProximoJogador() : void
+    + JogadorAtual(): Jogador
 }
 
 entity Casa{
     - Nome: string
     - Posicao : int   
     - Efeito : Efeito
-    + RealizarEfeitos(Tabuleiro) : void
+    + RealizarEfeitos() : void
 }
 
 entity Propriedade{
@@ -22,20 +26,24 @@ entity Propriedade{
     - AluguelDobrado : bool
     + Cor: Cor
     - Proprietario: Jogador
-    + ChecarProprietario(Jogador) : void
+    + ChecarProprietario(Jogador) : bool
     + CobrarAluguel(): int
     + Comprar(Jogador): void
 }
 
 entity Jogador{
-    - Id: int
+    - Personagem: Personagem
     - Propriedades: List<Propriedade>
     - Saldo : int
     - Posicao: int
+    + EfeitoInicial : Efeito
     + Receber(int): void
     + Pagar(int): void
-    + JogarDado(): int
+    + IniciarRodada() : void
     + Mover(int) : void
+    + Teleportar(int) : void
+    - JogarDado(): int
+    - GanharDinheiroPorVolta(): void
 }
 
 enum Cor{
@@ -48,10 +56,17 @@ enum Cor{
     ROXO
 }
 
+enum Personagem{
+    CACHORRO
+    GATO
+    BARCO
+    CARRO
+}
+
 entity Carta{
     - Texto : string
     - Efeitos : List<Efeito>
-    + RealizarEfeitos(Tabuleiro) : void
+    + RealizarEfeitos() : void
 }
 
 entity Efeito{
@@ -62,7 +77,7 @@ entity EfeitoEspecialPersonagem{
     - EfeitoComprarCarta : Efeito
     - Personagem : Personagem
     - EscolhePropriedade() : Propriedade
-    - EntregarCartaAoPersonagem : void
+    - EntregarCartaAoPersonagem(Efeito) : void
 }
 
 entity EfeitoEscolhePropriedade{
@@ -75,12 +90,13 @@ entity EfeitoPropriedadeGratis{
 }
 
 entity EfeitoTeleporte{
-    - Destino : Casa
+    - Destino : int
+    - TeleportarJogador() : void
 }
 
 entity EfeitoPassos{
     - Passos : int
-    - AndarJogador(int) : void
+    - AndarJogador() : void
 }
 
 entity EfeitoComprarCarta{
@@ -89,6 +105,7 @@ entity EfeitoComprarCarta{
 
 entity EfeitoTransacao{
     - Transacao : int
+    - AplicarTransacao() : void
 }
 
 entity EfeitoHabeasCorpus{
@@ -96,9 +113,14 @@ entity EfeitoHabeasCorpus{
 }
 
 entity EfeitoMoverOuComprar{
-    - EfeitoMover : Efeito
+    - EfeitoPassos : Efeito
     - EfeitoComprar : Efeito
     - EscolheMoverOuComprar() : Efeito
+}
+
+entity EfeitoVaParaPrisao{
+    - EfeitoTeleporte : Efeito
+    - EfeitoPrisao : Efeito
 }
 
 entity EfeitoPrisao{
@@ -110,24 +132,22 @@ Tabuleiro "1" *-- "*" Jogador
 Tabuleiro "1" *-- "*" Casa
 
 Casa --> Propriedade
-Casa --> VaParaPrisao
-Casa --> Prisao
-Casa --> CasaInicial
-Casa --> Estacionamento
-Casa --> Sorte
 
 Jogador "1"  *-- "*" Propriedade
 
 Carta "*" *-- "*" Efeito
+Casa "1" *-- "1" Efeito
 
 Efeito --> EfeitoComprarCarta
 Efeito --> EfeitoEscolhePropriedade
 Efeito --> EfeitoEspecialPersonagem
 Efeito --> EfeitoHabeasCorpus
-Efeito --> EfeitoMover
 Efeito --> EfeitoMoverOuComprar
 Efeito --> EfeitoPassos
 Efeito --> EfeitoPropriedadeGratis
 Efeito --> EfeitoPrisao
+Efeito --> EfeitoTeleporte
+Efeito --> EfeitoTransacao
+Efeito --> EfeitoVaParaPrisao
 
 @enduml

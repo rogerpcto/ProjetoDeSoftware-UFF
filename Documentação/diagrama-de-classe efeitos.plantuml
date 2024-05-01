@@ -1,0 +1,60 @@
+@startuml diagrama
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+
+entity EfeitoEspecialPersonagem{
+    - EfeitoComprarCarta : Efeito
+    - Personagem : Personagem
+    - EscolhePropriedade() : Propriedade
+    - EntregarCartaAoPersonagem(Efeito) : void
+}
+
+entity EfeitoEscolhePropriedade{
+    - Cor1, Cor2 : Cor
+    - EscolhePropriedadeCor() : Propriedade
+}
+
+entity EfeitoPropriedadeGratis{
+    - PegaOuPaga() : Propriedade
+}
+
+entity EfeitoTeleporte{
+    - Destino : int
+    - TeleportarJogador() : void
+}
+
+entity EfeitoPassos{
+    - Passos : int
+    - AndarJogador() : void
+}
+
+entity EfeitoComprarCarta{
+    - ComprarCarta() : void 
+}
+
+entity EfeitoTransacao{
+    - Transacao : int
+    - AplicarTransacao() : void
+}
+
+entity EfeitoHabeasCorpus{
+    - SairDaPrisao() : void
+}
+
+entity EfeitoMoverOuComprar{
+    - EfeitoPassos : Efeito
+    - EfeitoComprar : Efeito
+    - EscolheMoverOuComprar() : Efeito
+}
+
+entity EfeitoVaParaPrisao{
+    - EfeitoTeleporte : Efeito
+    - EfeitoPrisao : Efeito
+}
+
+entity EfeitoPrisao{
+    - VerificarHabeasCorpus() : bool
+    - CobrarMulta() : void
+}
+
+@enduml
