@@ -2,7 +2,7 @@
 
 skinparam linestyle ortho
 
-rectangle "Sorte" as one
+rectangle "Casa" as one
 rectangle "Carta" as two
 rectangle "EfeitoComprarCarta" as three
 rectangle "EfeitoMoverComprar" as four
