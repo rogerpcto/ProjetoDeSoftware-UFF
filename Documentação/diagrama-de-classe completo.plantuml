@@ -37,6 +37,7 @@ entity Jogador{
     - Saldo : int
     - Posicao: int
     + EfeitoInicial : Efeito
+    + EfeitoHabeasCorpus : Efeito
     + Receber(int): void
     + Pagar(int): void
     + IniciarRodada() : void
