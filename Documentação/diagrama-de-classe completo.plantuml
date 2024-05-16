@@ -1,3 +1,97 @@
+@startuml diagrama
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+skinparam nodesep 100
+skinparam ranksep 50
+
+entity Tabuleiro{
+    <u>- Instance : Tabuleiro</u>
+
+    <u>+ GetInstance() : Tabuleiro</u>
+    + ProximoJogador() : void
+    + JogadorAtual(): Jogador
+}
+
+entity Casa{
+    - Nome: string
+    - Posicao : int
+
+    + RealizarEfeitos() : void
+}
+
+entity Propriedade{
+    - Preco: int
+    - Aluguel: int
+    - AluguelDobrado : bool
+
+    + RealizarEfeitos() : void
+    + ChecarProprietario(Jogador) : bool
+    + CobrarAluguel(): int
+    + Comprar(Jogador): void
+}
+
+entity Jogador{
+    - Saldo : int
+    - Posicao: int
+
+    - JogarDado(): int
+    - GanharDinheiroPorVolta(): void
+    + Receber(int): void
+    + Pagar(int): void
+    + IniciarRodada() : void
+    + Mover(int) : void
+    + Teleportar(int) : void
+}
+
+enum Cor{
+    AMARELO
+    AZUL
+    BRANCO
+    LARANJA
+    VERMELHO
+    MARROM
+    ROXO
+}
+
+enum Personagem{
+    CACHORRO
+    GATO
+    BARCO
+    CARRO
+}
+
+entity Carta{
+    - Texto : string
+    + RealizarEfeitos() : void
+}
+
+interface Efeito{
+    + RealizarEfeito() : void
+}
+
+entity EfeitoEspecialPersonagem{
+    - EfeitoComprarCarta : EfeitoComprarCarta
+    - Personagem : Personagem
+    - EscolhePropriedade() : Propriedade
+    - EntregarCartaAoPersonagem(Efeito) : void
+}
+
+entity EfeitoEscolhePropriedade{
+    - Cor1, Cor2 : Cor
+    - EscolhePropriedadeCor() : Propriedade
+}
+
+entity EfeitoPropriedadeGratis{
+    - PegaOuPaga() : Propriedade
+}
+
+entity EfeitoTeleporte{
+    - Destino : int
+    - TeleportarJogador() : void
+}
+
+entity EfeitoPassos{
+    - Passos : int
     - AndarJogador() : void
 }
 
