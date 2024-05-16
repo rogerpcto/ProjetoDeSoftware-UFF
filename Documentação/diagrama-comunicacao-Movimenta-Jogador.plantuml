@@ -5,15 +5,15 @@ skinparam linestyle ortho
 rectangle "Tabuleiro" as one
 Actor "Jogador" as two
 rectangle "Casa" as three
-rectangle "Efeito" as four
+rectangle "EfeitoComprarCarta" as four
 rectangle "Carta" as five
 
-one -right- two: 1: IniciarRodada(): int --> \n 2.1.1.1: ProximoJogador(): void <--
+one -right- two: 1: IniciarRodada(): int --> \n 2: ProximoJogador() <--
 
-two --> two: 2: JogarDado(): int \n 2.1: Mover(posicao: int): void
-two --> three: 2.1.1: RealizarEfeitos(): void
+two --> two: 1.1: JogarDado(): int \n 1.2: Mover(posicao: int)
+two --> three: 1.2.1: RealizarEfeitos()
 
-three --> four: 3: RealizarEfeitos(): void
-four --> five: 4: RealizarEfeitos(): void
+three --> four: 1.2.1.1: RealizarEfeitos()
+four --> five: 1.2.1.1.1: RealizarEfeitos()
 
 @enduml

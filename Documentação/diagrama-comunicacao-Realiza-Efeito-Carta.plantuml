@@ -7,16 +7,15 @@ rectangle "Carta" as two
 rectangle "EfeitoComprarCarta" as three
 rectangle "EfeitoMoverComprar" as four
 rectangle "EfeitoMover" as five
-Actor "Jogador" as jogador
 
-one -right- three: 1: RealizarEfeitos(tabuleiro: Tabuleiro): void
+one -right- three: 1: RealizarEfeitos() ->
 
-three -right- two: 2: ComprarCarta(): void
+three -right- two: 1.1: ComprarCarta() ->
 
-two --> four: 2.1: RealizarEfeitos(): void
+two --> four: 1.1.1: RealizarEfeitos()
 
-jogador --> four: 3: EscolheMoverOuComprar(): Efeito
-four --> five: 3A: RealizarEfeitos(): void
-four --> three: 3B: RealizarEefeitos(): void
+four --> four: 1.1.2: EscolheMoverOuComprar(): Efeito
+four --> five: 1.1.2.1A: RealizarEfeitos()
+four --> three: 1.1.2.1B: RealizarEfeitos()
 
 @enduml
