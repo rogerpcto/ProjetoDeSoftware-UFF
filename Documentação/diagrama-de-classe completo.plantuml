@@ -1,8 +1,8 @@
 @startuml diagrama
 skinparam linetype ortho
 skinparam classAttributeIconSize 0
-skinparam nodesep 100
-skinparam ranksep 50
+skinparam nodesep 200
+skinparam ranksep 150
 
 entity Tabuleiro{
     <u>- Instance : Tabuleiro</u>
@@ -33,6 +33,7 @@ entity Propriedade{
 entity Jogador{
     - Saldo : int
     - Posicao: int
+    + EfeitoHabeasCorpus: EfeitoHabeasCorpus
 
     - JogarDado(): int
     - GanharDinheiroPorVolta(): void
@@ -124,33 +125,33 @@ entity EfeitoPrisao{
     - CobrarMulta() : void
 }
 
-Tabuleiro *-- "1...*" Jogador : + Jogadores
-Tabuleiro *-- "1...*" Casa : + Casas
-Tabuleiro *-- "1...*" Carta : + Cartas
+Tabuleiro *- "1...*" Jogador : + Jogadores
+Tabuleiro *- "1...*" Casa : + Casas
+Tabuleiro *- "1...*" Carta : + Cartas
 
-Casa --> Propriedade
-Casa *-- "1...1" Efeito : - Efeito
+Casa --|> Propriedade
+Casa --> "1...1" Efeito : - Efeito
 
-Propriedade -left-> "1..1" Cor : + Cor
-Propriedade -> Jogador: - Proprietario
+Propriedade --> "1..1" Cor : + Cor
+Propriedade --> Jogador: - Proprietario
 
 Jogador  o-- "1...*" Propriedade : + Propriedades
 Jogador --> "1...1" Personagem : - Personagem
-Jogador -> Efeito : + EfeitoInicial
+Jogador --> Efeito : + EfeitoInicial
 Jogador -> EfeitoHabeasCorpus: + EfeitoHabeasCorpus
 
-Carta o-- "*...*" Efeito : - Efeitos
+Carta o- "*...*" Efeito : - Efeitos
 
-Efeito --> EfeitoComprarCarta
-Efeito --> EfeitoEscolhePropriedade
-Efeito --> EfeitoEspecialPersonagem
-Efeito --> EfeitoHabeasCorpus
-Efeito --> EfeitoMoverOuComprar
-Efeito --> EfeitoPassos
-Efeito --> EfeitoPropriedadeGratis
-Efeito --> EfeitoPrisao
-Efeito --> EfeitoTeleporte
-Efeito --> EfeitoTransacao
-Efeito --> EfeitoVaParaPrisao
+Efeito ..> EfeitoComprarCarta
+Efeito ..> EfeitoEscolhePropriedade
+Efeito ..> EfeitoEspecialPersonagem
+Efeito ..> EfeitoHabeasCorpus
+Efeito ..> EfeitoMoverOuComprar
+Efeito ..> EfeitoPassos
+Efeito ..> EfeitoPropriedadeGratis
+Efeito ..> EfeitoPrisao
+Efeito ..> EfeitoTeleporte
+Efeito ..> EfeitoTransacao
+Efeito ..> EfeitoVaParaPrisao
 
 @enduml

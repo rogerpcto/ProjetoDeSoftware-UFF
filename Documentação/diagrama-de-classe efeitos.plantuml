@@ -1,58 +1,76 @@
 @startuml diagrama
 skinparam linetype ortho
 skinparam classAttributeIconSize 0
+skinparam nodesep 100
+skinparam ranksep 50
 
 entity EfeitoEspecialPersonagem{
-    - EfeitoComprarCarta : Efeito
+    - EfeitoComprarCarta : EfeitoComprarCarta
     - Personagem : Personagem
+
+    + RealizarEfeito() : void
     - EscolhePropriedade() : Propriedade
     - EntregarCartaAoPersonagem(Efeito) : void
 }
 
 entity EfeitoEscolhePropriedade{
     - Cor1, Cor2 : Cor
+
+    + RealizarEfeito() : void
     - EscolhePropriedadeCor() : Propriedade
 }
 
 entity EfeitoPropriedadeGratis{
+    + RealizarEfeito() : void
     - PegaOuPaga() : Propriedade
 }
 
 entity EfeitoTeleporte{
     - Destino : int
+
+    + RealizarEfeito() : void
     - TeleportarJogador() : void
 }
 
 entity EfeitoPassos{
     - Passos : int
+
+    + RealizarEfeito() : void
     - AndarJogador() : void
 }
 
 entity EfeitoComprarCarta{
+    + RealizarEfeito() : void
     - ComprarCarta() : void 
 }
 
 entity EfeitoTransacao{
     - Transacao : int
+
+    + RealizarEfeito() : void
     - AplicarTransacao() : void
 }
 
 entity EfeitoHabeasCorpus{
+    + RealizarEfeito() : void
     - SairDaPrisao() : void
 }
 
 entity EfeitoMoverOuComprar{
-    - EfeitoPassos : Efeito
-    - EfeitoComprar : Efeito
+    + RealizarEfeito() : void
+    - EfeitoPassos : EfeitoPassos
+    - EfeitoComprar : EfeitoComprar
     - EscolheMoverOuComprar() : Efeito
 }
 
 entity EfeitoVaParaPrisao{
-    - EfeitoTeleporte : Efeito
-    - EfeitoPrisao : Efeito
+    - EfeitoTeleporte : EfeitoTeleporte
+    - EfeitoPrisao : EfeitoPrisao
+    + RealizarEfeito() : void
 }
 
 entity EfeitoPrisao{
+    + RealizarEfeito() : void
     - VerificarHabeasCorpus() : bool
     - CobrarMulta() : void
 }

@@ -1,22 +1,21 @@
 @startuml diagrama
 skinparam linetype ortho
 skinparam classAttributeIconSize 0
+skinparam nodesep 200
+skinparam ranksep 150
 
 entity Tabuleiro{
-    + Casas : List<Casa>
-    + Cartas : List<Carta>
-    + Jogadores : List<Jogador>
-    - static Instance : Tabuleiro
+    <u>- Instance : Tabuleiro</u>
 
-    + static GetInstance() : Tabuleiro
+    <u>+ GetInstance() : Tabuleiro</u>
     + ProximoJogador() : void
     + JogadorAtual(): Jogador
 }
 
 entity Casa{
     - Nome: string
-    - Posicao : int   
-    - Efeito : Efeito
+    - Posicao : int
+
     + RealizarEfeitos() : void
 }
 
@@ -24,26 +23,25 @@ entity Propriedade{
     - Preco: int
     - Aluguel: int
     - AluguelDobrado : bool
-    + Cor: Cor
-    - Proprietario: Jogador
+
+    + RealizarEfeitos() : void
     + ChecarProprietario(Jogador) : bool
     + CobrarAluguel(): int
     + Comprar(Jogador): void
 }
 
 entity Jogador{
-    - Personagem: Personagem
-    - Propriedades: List<Propriedade>
     - Saldo : int
     - Posicao: int
-    + EfeitoInicial : Efeito
+    + EfeitoHabeasCorpus: EfeitoHabeasCorpus
+
+    - JogarDado(): int
+    - GanharDinheiroPorVolta(): void
     + Receber(int): void
     + Pagar(int): void
     + IniciarRodada() : void
     + Mover(int) : void
     + Teleportar(int) : void
-    - JogarDado(): int
-    - GanharDinheiroPorVolta(): void
 }
 
 enum Cor{
@@ -65,7 +63,6 @@ enum Personagem{
 
 entity Carta{
     - Texto : string
-    - Efeitos : List<Efeito>
     + RealizarEfeitos() : void
 }
 
@@ -73,14 +70,20 @@ interface Efeito{
     + RealizarEfeito() : void
 }
 
-Tabuleiro "1" *-- "*" Jogador
-Tabuleiro "1" *-- "*" Casa
+Tabuleiro *- "1...*" Jogador : + Jogadores
+Tabuleiro *- "1...*" Casa : + Casas
+Tabuleiro *- "1...*" Carta : + Cartas
 
-Casa --> Propriedade
+Casa --|> Propriedade
+Casa --> "1...1" Efeito : - Efeito
 
-Jogador "1"  *-- "*" Propriedade
+Propriedade --> "1..1" Cor : + Cor
+Propriedade --> Jogador: - Proprietario
 
-Carta "*" *-- "*" Efeito
-Casa "1" *-- "1" Efeito
+Jogador  o-- "1...*" Propriedade : + Propriedades
+Jogador --> "1...1" Personagem : - Personagem
+Jogador --> Efeito : + EfeitoInicial
+
+Carta o- "*...*" Efeito : - Efeitos
 
 @enduml
