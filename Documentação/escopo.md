@@ -100,7 +100,7 @@ A1. Carta com efeito ir para casa inicial
 2. O Sistema paga 2 reais para o jogador 
 
 A2. Carta com efeito especial de personagem
-1. O Sistema verifica se o personagem é o mesmo indicado na carta[A5]
+1. O Sistema verifica se o personagem é o mesmo indicado na carta[A3]
 2. O Sistema ativa o efeito da carta especial de personagem
 
 A3. Jogador que comprou a carta com efeito especial de personagem não é o personagem indicado
@@ -118,4 +118,4 @@ A6. Carta com efeito espaço grátis
 1. Sistema oferece ao jogador opções de casas de propriedades
 2. Jogador escolhe uma propriedade
 3. Sistema ativa o efeito de teleporte com destino a casa que o jogador escolheu
-1. Caso a propriedade não tenha dono, o jogador a obtém de graça. Senão, paga aluguel ao proprietário
+4. Caso a propriedade não tenha dono, o jogador a obtém de graça. Senão, paga aluguel ao proprietário
