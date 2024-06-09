@@ -17,7 +17,7 @@ namespace Game
             throw new NotImplementedException();
         }
 
-        private Propriedade EscolhePropriedadeCor()
+        private Propriedade EscolherPropriedadeCor()
         {
             throw new NotImplementedException();
         }

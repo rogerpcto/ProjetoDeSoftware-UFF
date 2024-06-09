@@ -5,12 +5,12 @@ namespace Game
     public class EfeitoMoverOuComprar : Efeito
     {
         private EfeitoPassos efeitoPassos;
-        private EfeitoComprarCarta efeitoComprar;
+        private EfeitoComprarCarta efeitoComprarCarta;
 
         public EfeitoMoverOuComprar()
         {
             efeitoPassos = new(1);
-            efeitoComprar = new();
+            efeitoComprarCarta = new();
         }
 
         public void RealizarEfeito()

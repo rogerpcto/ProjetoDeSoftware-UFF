@@ -4,13 +4,12 @@ skinparam classAttributeIconSize 0
 skinparam nodesep 200
 skinparam ranksep 150
 
-entity Tabuleiro{
-    <u>- Instance : Tabuleiro</u>
-
-    <u>+ GetInstance() : Tabuleiro</u>
-    + ProximoJogador() : void
-    + JogadorAtual(): Jogador
+entity Carta{
+    - Texto : string
+    + RealizarEfeitos() : void
 }
+
+Carta o- "*...*" Efeito : - Efeitos
 
 entity Casa{
     - Nome: string
@@ -19,15 +18,21 @@ entity Casa{
     + RealizarEfeitos() : void
 }
 
-entity Propriedade{
-    - Preco: int
-    - Aluguel: int
-    - AluguelDobrado : bool
+Casa --|> Propriedade
+Casa --> "1...1" Efeito : - Efeito
 
-    + RealizarEfeitos() : void
-    + ChecarProprietario(Jogador) : bool
-    + CobrarAluguel(): int
-    + Comprar(Jogador): void
+enum Cor{
+    AMARELO
+    AZUL
+    BRANCO
+    LARANJA
+    MARROM
+    VERMELHO
+    ROXO
+}
+
+interface Efeito{
+    + RealizarEfeito() : void
 }
 
 entity Jogador{
@@ -44,46 +49,41 @@ entity Jogador{
     + Teleportar(int) : void
 }
 
-enum Cor{
-    AMARELO
-    AZUL
-    BRANCO
-    LARANJA
-    VERMELHO
-    MARROM
-    ROXO
-}
+Jogador  o-- "1...*" Propriedade : + Propriedades
+Jogador --> "1...1" Personagem : - Personagem
+Jogador --> Efeito : + EfeitoInicial
 
 enum Personagem{
-    CACHORRO
-    GATO
     BARCO
+    CACHORRO
     CARRO
+    GATO
 }
 
-entity Carta{
-    - Texto : string
+entity Propriedade{
+    - Preco: int
+    - Aluguel: int
+    - AluguelDobrado : bool
+
     + RealizarEfeitos() : void
+    + ChecarProprietario(Jogador) : bool
+    + CobrarAluguel(): int
+    + Comprar(Jogador): void
 }
 
-interface Efeito{
-    + RealizarEfeito() : void
+Propriedade --> "1..1" Cor : + Cor
+Propriedade --> Jogador: - Proprietario
+
+entity Tabuleiro{
+    <u>- Instance : Tabuleiro</u>
+
+    <u>+ GetInstance() : Tabuleiro</u>
+    + ProximoJogador() : void
+    + JogadorAtual(): Jogador
 }
 
 Tabuleiro *- "1...*" Jogador : + Jogadores
 Tabuleiro *- "1...*" Casa : + Casas
 Tabuleiro *- "1...*" Carta : + Cartas
-
-Casa --|> Propriedade
-Casa --> "1...1" Efeito : - Efeito
-
-Propriedade --> "1..1" Cor : + Cor
-Propriedade --> Jogador: - Proprietario
-
-Jogador  o-- "1...*" Propriedade : + Propriedades
-Jogador --> "1...1" Personagem : - Personagem
-Jogador --> Efeito : + EfeitoInicial
-
-Carta o- "*...*" Efeito : - Efeitos
 
 @enduml

@@ -4,32 +4,38 @@ skinparam classAttributeIconSize 0
 skinparam nodesep 100
 skinparam ranksep 50
 
+entity EfeitoComprarCarta{
+    + RealizarEfeito() : void
+    - ComprarCarta() : void 
+}
+
+entity EfeitoEscolherPropriedade{
+    - Cor1, Cor2 : Cor
+
+    + RealizarEfeito() : void
+    - EscolherPropriedadeCor() : Propriedade
+}
+
 entity EfeitoEspecialPersonagem{
     - EfeitoComprarCarta : EfeitoComprarCarta
     - Personagem : Personagem
 
     + RealizarEfeito() : void
-    - EscolhePropriedade() : Propriedade
+    - EscolherPropriedade() : Propriedade
     - EntregarCartaAoPersonagem(Efeito) : void
 }
 
-entity EfeitoEscolhePropriedade{
-    - Cor1, Cor2 : Cor
-
+entity EfeitoHabeasCorpus{
     + RealizarEfeito() : void
-    - EscolhePropriedadeCor() : Propriedade
+    - SairDaPrisao() : void
 }
 
-entity EfeitoPropriedadeGratis{
-    + RealizarEfeito() : void
-    - PegaOuPaga() : Propriedade
-}
-
-entity EfeitoTeleporte{
-    - Destino : int
+entity EfeitoMoverOuComprar{
+    - EfeitoPassos : EfeitoPassos
+    - EfeitoComprarCarta : EfeitoComprarCarta
 
     + RealizarEfeito() : void
-    - TeleportarJogador() : void
+    - EscolherMoverOuComprar() : Efeito
 }
 
 entity EfeitoPassos{
@@ -39,9 +45,22 @@ entity EfeitoPassos{
     - AndarJogador() : void
 }
 
-entity EfeitoComprarCarta{
+entity EfeitoPrisao{
     + RealizarEfeito() : void
-    - ComprarCarta() : void 
+    - VerificarHabeasCorpus() : bool
+    - CobrarMulta() : void
+}
+
+entity EfeitoPropriedadeGratis{
+    + RealizarEfeito() : void
+    - PegarOuPagar() : Propriedade
+}
+
+entity EfeitoTeleporte{
+    - Destino : int
+
+    + RealizarEfeito() : void
+    - TeleportarJogador() : void
 }
 
 entity EfeitoTransacao{
@@ -51,28 +70,10 @@ entity EfeitoTransacao{
     - AplicarTransacao() : void
 }
 
-entity EfeitoHabeasCorpus{
-    + RealizarEfeito() : void
-    - SairDaPrisao() : void
-}
-
-entity EfeitoMoverOuComprar{
-    + RealizarEfeito() : void
-    - EfeitoPassos : EfeitoPassos
-    - EfeitoComprar : EfeitoComprar
-    - EscolheMoverOuComprar() : Efeito
-}
-
 entity EfeitoVaParaPrisao{
     - EfeitoTeleporte : EfeitoTeleporte
     - EfeitoPrisao : EfeitoPrisao
     + RealizarEfeito() : void
-}
-
-entity EfeitoPrisao{
-    + RealizarEfeito() : void
-    - VerificarHabeasCorpus() : bool
-    - CobrarMulta() : void
 }
 
 @enduml

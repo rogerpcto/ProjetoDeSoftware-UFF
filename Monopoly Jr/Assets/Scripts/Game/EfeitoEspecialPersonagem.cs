@@ -4,8 +4,8 @@ namespace Game
 {
     public class EfeitoEspecialPersonagem : Efeito
     {
-        private Personagem personagem;
         private EfeitoComprarCarta comprarCarta;
+        private Personagem personagem;
 
         public EfeitoEspecialPersonagem(Personagem personagem)
         {

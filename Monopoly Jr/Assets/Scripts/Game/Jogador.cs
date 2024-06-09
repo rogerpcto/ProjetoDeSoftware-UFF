@@ -47,6 +47,5 @@ namespace Game
         {
             throw new NotImplementedException();
         }
-
     }
 }
