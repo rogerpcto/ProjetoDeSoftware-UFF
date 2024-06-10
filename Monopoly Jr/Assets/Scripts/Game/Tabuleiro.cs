@@ -23,6 +23,7 @@ namespace Game
         public List<Jogador> jogadores = new();
         public List<Casa> casas = new();
         public List<Carta> cartas = new();
+        public InterfaceUsuario InterfaceUsuario;
 
         public void ProximoJogador()
         {
