@@ -1,5 +1,6 @@
 # Projeto de Console
 !ConsoleApp.sln
+!ConsoleApp.csproj
 .vs
 bin
 obj
