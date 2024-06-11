@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Game
 {
     public class Tabuleiro
@@ -26,7 +28,7 @@ namespace Game
         {
             jogadorDaVez++;    
 
-            if (jogadorDaVez > jogadores.Count())
+            if (jogadorDaVez > jogadores.Count)
             {
                 jogadorDaVez = 0;
             }

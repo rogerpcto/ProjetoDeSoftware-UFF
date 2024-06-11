@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Game
 {
     public class Jogador
@@ -46,7 +49,7 @@ namespace Game
             List<Casa> casas = Tabuleiro.GetInstance().casas;
             for (int passo = 1; passo <= passos; passo++)
             {
-                if (posicao > casas.Count())
+                if (posicao > casas.Count)
                 {
                     posicao = 0;
 

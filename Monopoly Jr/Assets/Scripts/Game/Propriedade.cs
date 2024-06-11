@@ -1,3 +1,5 @@
+using System;
+
 namespace Game
 {
     public class Propriedade : Casa
@@ -35,8 +37,6 @@ namespace Game
             }
             proprietario.Receber(valorAPagar);
             jogadorDaVez.Pagar(valorAPagar);
-
-
         }
 
         public void Comprar(Jogador comprador)
