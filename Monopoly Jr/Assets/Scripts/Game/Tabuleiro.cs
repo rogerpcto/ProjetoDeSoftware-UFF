@@ -24,12 +24,13 @@ namespace Game
         public int jogadorDaVez = 0;
         public void ProximoJogador()
         {
+            jogadorDaVez++;    
 
             if (jogadorDaVez > jogadores.Count())
             {
                 jogadorDaVez = 0;
             }
-            jogadorDaVez++;
+
         }
 
         public Jogador JogadorAtual()
