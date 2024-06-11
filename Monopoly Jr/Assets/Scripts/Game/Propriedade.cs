@@ -1,5 +1,3 @@
-using System;
-
 namespace Game
 {
     public class Propriedade : Casa
@@ -16,19 +14,39 @@ namespace Game
             throw new NotImplementedException();
         }
 
+        //rever necessidade.
         public bool ChecarProprietario(Jogador jogador)
         {
-            throw new NotImplementedException();
+            if (jogador == proprietario)
+            {
+                return true;
+            }
+            return false;
         }
 
-        public int CobrarAluguel()
+        public void CobrarAluguel()
         {
-            throw new NotImplementedException();
+            Jogador jogadorDaVez = Tabuleiro.GetInstance().JogadorAtual();
+            int valorAPagar = aluguel;
+
+            if (aluguelDobrado)
+            {
+                valorAPagar *= 2;
+            }
+            proprietario.Receber(valorAPagar);
+            jogadorDaVez.Pagar(valorAPagar);
+
+
         }
-        
-        public int Comprar(Jogador comprador)
+
+        public void Comprar(Jogador comprador)
         {
-            throw new NotImplementedException();
+            if (proprietario == null)
+            {
+                comprador.Pagar(preco);
+                comprador.propriedades.Add(this);
+                proprietario = comprador;
+            }
         }
     }
 }

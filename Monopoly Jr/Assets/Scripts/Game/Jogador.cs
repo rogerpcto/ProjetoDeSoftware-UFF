@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace Game
 {
     public class Jogador
@@ -13,39 +10,59 @@ namespace Game
         public Efeito efeitoInicial;
         public EfeitoHabeasCorpus efeitoHabeasCorpus;
 
+
         private int JogarDado()
         {
-            throw new NotImplementedException();
+            Random dado = new Random();
+            int resultado = dado.Next(1, 6);
+            return resultado;
         }
 
         private void GanharDinheiroPorVolta()
         {
-            throw new NotImplementedException();
+            saldo += 10;
         }
 
         public void Receber(int dinheiro)
         {
-            throw new NotImplementedException();
+            saldo += dinheiro;
         }
 
         public void Pagar(int dinheiro)
         {
-            throw new NotImplementedException();
+            saldo -= dinheiro;
+
         }
 
         public void IniciarRodada()
         {
-            throw new NotImplementedException();
+            Jogador jogador = Tabuleiro.GetInstance().JogadorAtual();
+            int passos = jogador.JogarDado();
+            jogador.Mover(passos);
         }
 
         public void Mover(int passos)
         {
-            throw new NotImplementedException();
+            List<Casa> casas = Tabuleiro.GetInstance().casas;
+            for (int passo = 1; passo <= passos; passo++)
+            {
+                if (posicao > casas.Count())
+                {
+                    posicao = 0;
+
+                    GanharDinheiroPorVolta();
+                }
+                else
+                {
+                    posicao += 1;
+                }
+            }
         }
 
         public void Teleportar(int posicaoCasa)
         {
-            throw new NotImplementedException();
+            posicao = posicaoCasa;
         }
     }
+
 }
