@@ -109,13 +109,16 @@ namespace Game
 
         public void ProximoJogador()
         {
+            InterfaceUsuario.MudarVez(JogadorAtual().GetPersonagem(), false);
+
             jogadorDaVez++;    
 
-            if (jogadorDaVez > jogadores.Count)
+            if (jogadorDaVez >= jogadores.Count)
             {
                 jogadorDaVez = 0;
             }
-
+            InterfaceUsuario.MudarVez(JogadorAtual().GetPersonagem(), true);
+            JogadorAtual().IniciarRodada();
         }
 
         public Jogador JogadorAtual()

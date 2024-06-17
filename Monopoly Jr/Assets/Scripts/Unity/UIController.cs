@@ -13,13 +13,34 @@ namespace Unity
         [SerializeField]
         private List<GameObject> _personagens;
         [SerializeField]
+        private List<JogadorUI> _jogadoresUI;
+        [SerializeField]
         private Dado dado;
 
+        public void MudarVez(Personagem personagem, bool vez)
+        {
+            _jogadoresUI[(int)personagem].MudarVez(vez);
+        }
+        
+        public void AtualizarSaldo(Personagem personagem, int saldo)
+        {
+            _jogadoresUI[(int)personagem].AtualizarSaldo(saldo);
+        }
+        
+        public void AdicionarPropriedade(Personagem personagem, Propriedade propriedade)
+        {
+            _jogadoresUI[(int)personagem].AdicionaPropriedade(propriedade);
+        }
+        
+        public void RemoverPropriedade(Personagem personagem, Propriedade propriedade)
+        {
+            _jogadoresUI[(int)personagem].RemovePropriedade(propriedade);
+        }
+        
         public async Task AnimarDado(int resultado)
         {
             await dado.RolarDado(resultado).AsTask(this);
         }
-        
 
         public async Task MoverPersonagemUmPasso(Personagem personagem, int posicaoFinal)
         {
@@ -35,7 +56,7 @@ namespace Unity
             Vector3 posInicial = personagemAtual.position;
             Vector3 posFinal = _casas[posicaoFinal].transform.position;
 
-            float duration = 1;
+            float duration = .75f;
 
             for (float t = 0; t < duration; t += Time.deltaTime)
             {
@@ -48,5 +69,9 @@ namespace Unity
             personagemAtual.SetParent(_casas[posicaoFinal].transform);
         }
 
+        public void AcabarJogo()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

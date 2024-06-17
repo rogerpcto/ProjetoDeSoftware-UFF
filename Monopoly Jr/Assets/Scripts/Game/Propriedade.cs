@@ -54,6 +54,7 @@ namespace Game
                 comprador.Pagar(preco);
                 comprador.propriedades.Add(this);
                 proprietario = comprador;
+                Tabuleiro.GetInstance().InterfaceUsuario.AdicionarPropriedade(comprador.GetPersonagem(), this);
             }
         }
     }

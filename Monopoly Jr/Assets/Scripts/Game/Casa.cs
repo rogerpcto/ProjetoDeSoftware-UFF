@@ -15,6 +15,8 @@ namespace Game
             this.efeito = efeito;
         }
 
+        public string GetNome() => nome;
+
         public virtual void RealizarEfeitos()
         {
             throw new NotImplementedException();

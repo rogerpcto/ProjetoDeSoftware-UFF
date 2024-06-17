@@ -21,6 +21,8 @@ namespace Game
             this.personagem = personagem;
         }
 
+        public Personagem GetPersonagem() => personagem;
+        
         private async Task<int> JogarDado()
         {
             Random dado = new Random();
@@ -37,27 +39,33 @@ namespace Game
         public void Receber(int dinheiro)
         {
             saldo += dinheiro;
+            Tabuleiro.GetInstance().InterfaceUsuario.AtualizarSaldo(personagem, saldo);
         }
 
         public void Pagar(int dinheiro)
         {
+            Tabuleiro tabuleiro = Tabuleiro.GetInstance();
             saldo -= dinheiro;
-
+            tabuleiro.InterfaceUsuario.AtualizarSaldo(personagem, saldo);
+            if (saldo < 0)
+                tabuleiro.InterfaceUsuario.AcabarJogo();
         }
 
         public async void IniciarRodada()
         {
             int passos = await JogarDado();
-            Mover(passos);
+            await Mover(passos);
+            // Resto da Rodada
+            Tabuleiro.GetInstance().ProximoJogador();
         }
 
-        public async void Mover(int passos)
+        public async Task Mover(int passos)
         {
             Tabuleiro tabuleiro = Tabuleiro.GetInstance();
             List<Casa> casas = tabuleiro.casas;
             for (int passo = 0; passo < passos; passo++)
             {
-                if (posicao > casas.Count)
+                if (posicao >= casas.Count)
                 {
                     posicao = 0;
 
