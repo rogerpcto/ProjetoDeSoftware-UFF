@@ -105,7 +105,7 @@ namespace Game
         public List<Casa> casas = new();
         public List<Carta> cartas = new();
         public InterfaceUsuario InterfaceUsuario;
-        public int jogadorDaVez = 0;
+        private int jogadorDaVez = 0;
 
         public void ProximoJogador()
         {

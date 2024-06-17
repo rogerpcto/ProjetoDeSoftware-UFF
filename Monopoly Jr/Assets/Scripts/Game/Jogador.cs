@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Game
 {
@@ -20,10 +21,11 @@ namespace Game
             this.personagem = personagem;
         }
 
-        private int JogarDado()
+        private async Task<int> JogarDado()
         {
             Random dado = new Random();
             int resultado = dado.Next(1, 6);
+            await Tabuleiro.GetInstance().InterfaceUsuario.AnimarDado(resultado);
             return resultado;
         }
 
@@ -43,11 +45,10 @@ namespace Game
 
         }
 
-        public void IniciarRodada()
+        public async void IniciarRodada()
         {
-            Jogador jogador = Tabuleiro.GetInstance().JogadorAtual();
-            int passos = jogador.JogarDado();
-            jogador.Mover(passos);
+            int passos = await JogarDado();
+            Mover(passos);
         }
 
         public async void Mover(int passos)
