@@ -3,11 +3,12 @@ namespace Game
     public enum Cor
     {
         AMARELO,
-        AZUL,
-        BRANCO,
+        AZUL_CLARO,
+        AZUL_ESCURO,
         LARANJA,
         MARROM,
+        VERDE,
         VERMELHO,
-        ROXO
+        ROSA
     }
 }

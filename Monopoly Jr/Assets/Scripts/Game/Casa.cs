@@ -8,6 +8,13 @@ namespace Game
         private int posicao;
         private Efeito efeito;
 
+        public Casa(string nome, int posicao, Efeito efeito)
+        {
+            this.nome = nome;
+            this.posicao = posicao;
+            this.efeito = efeito;
+        }
+
         public virtual void RealizarEfeitos()
         {
             throw new NotImplementedException();

@@ -6,6 +6,11 @@ namespace Game
     {
         private int transacao;
 
+        public EfeitoTransacao(int transacao)
+        {
+            this.transacao = transacao;
+        }
+
         public void RealizarEfeito()
         {
             throw new NotImplementedException();

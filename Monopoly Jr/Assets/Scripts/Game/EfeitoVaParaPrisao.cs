@@ -7,9 +7,9 @@ namespace Game
         private EfeitoTeleporte efeitoTeleporte;
         private EfeitoPrisao efeitoPrisao;
 
-        public EfeitoVaParaPrisao()
+        public EfeitoVaParaPrisao(int posicaoPrisao)
         {
-            efeitoTeleporte = new();
+            efeitoTeleporte = new(posicaoPrisao);
             efeitoPrisao = new();
         }
 

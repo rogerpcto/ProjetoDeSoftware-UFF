@@ -12,6 +12,11 @@ namespace Game
             this.cor2 = cor2;
         }
 
+        public EfeitoEscolherPropriedade(Cor cor1)
+        {
+            this.cor1 = cor1;
+        }
+
         public void RealizarEfeito()
         {
             throw new NotImplementedException();

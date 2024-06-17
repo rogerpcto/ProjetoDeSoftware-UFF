@@ -11,12 +11,20 @@ namespace Game
 
         public Cor Cor;
 
+        public Propriedade(string nome, int posicao, int preco, int aluguel, Cor cor) : base(nome, posicao, null)
+        {
+            this.preco = preco;
+            this.aluguel = aluguel;
+            aluguelDobrado = false;
+            proprietario = null;
+            Cor = cor;
+        }
+
         public override void RealizarEfeitos()
         {
             throw new NotImplementedException();
         }
 
-        //rever necessidade.
         public bool ChecarProprietario(Jogador jogador)
         {
             if (jogador == proprietario)

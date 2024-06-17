@@ -13,6 +13,12 @@ namespace Game
         public Efeito efeitoInicial;
         public EfeitoHabeasCorpus efeitoHabeasCorpus;
 
+        public Jogador(Personagem personagem)
+        {
+            saldo = 18;
+            posicao = 0;
+            this.personagem = personagem;
+        }
 
         private int JogarDado()
         {
@@ -23,7 +29,7 @@ namespace Game
 
         private void GanharDinheiroPorVolta()
         {
-            saldo += 10;
+            saldo += 2;
         }
 
         public void Receber(int dinheiro)
@@ -44,10 +50,11 @@ namespace Game
             jogador.Mover(passos);
         }
 
-        public void Mover(int passos)
+        public async void Mover(int passos)
         {
-            List<Casa> casas = Tabuleiro.GetInstance().casas;
-            for (int passo = 1; passo <= passos; passo++)
+            Tabuleiro tabuleiro = Tabuleiro.GetInstance();
+            List<Casa> casas = tabuleiro.casas;
+            for (int passo = 0; passo < passos; passo++)
             {
                 if (posicao > casas.Count)
                 {
@@ -59,6 +66,7 @@ namespace Game
                 {
                     posicao += 1;
                 }
+                await tabuleiro.InterfaceUsuario.MoverPersonagemUmPasso(personagem, posicao);
             }
         }
 
@@ -67,5 +75,4 @@ namespace Game
             posicao = posicaoCasa;
         }
     }
-
 }
