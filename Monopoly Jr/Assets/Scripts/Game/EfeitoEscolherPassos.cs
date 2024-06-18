@@ -6,7 +6,6 @@ namespace Game
     {
         public void RealizarEfeito()
         {
-            throw new NotImplementedException();
         }
 
         private Propriedade EscolherPropriedadeCor()

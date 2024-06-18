@@ -19,6 +19,8 @@ namespace Unity
         private Dado dado;
         [SerializeField]
         private PropriedadeJanela propriedadeJanela;
+        [SerializeField]
+        private CartaJanela cartaJanela;
 
         public void MudarVez(Personagem personagem, bool vez)
         {
@@ -79,7 +81,12 @@ namespace Unity
 
         public async Task PerguntarComprarPropriedade(Propriedade propriedade, Action opcao1, Action opcao2)
         {
-            propriedadeJanela.Inicializar(propriedade, opcao1, opcao2);
+            await propriedadeJanela.Inicializar(propriedade, opcao1, opcao2);
+        }
+
+        public async Task MostrarCarta(Carta carta)
+        {
+            await cartaJanela.Inicializar(carta);
         }
     }
 }

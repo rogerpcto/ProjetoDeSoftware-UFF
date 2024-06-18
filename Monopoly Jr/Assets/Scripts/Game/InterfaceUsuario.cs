@@ -12,6 +12,7 @@ namespace Game
         void RemoverPropriedade(Personagem personagem, Propriedade propriedade);
         Task AnimarDado(int resultado);
         Task MoverPersonagemUmPasso(Personagem personagem, int posicaoFinal);
+        Task MostrarCarta(Carta carta);
         void AcabarJogo();
     }
 }

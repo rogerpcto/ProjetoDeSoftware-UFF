@@ -19,10 +19,10 @@ namespace Game
 
         public virtual void RealizarEfeitos()
         {
-            //if (efeito != null)
-            //    efeito.RealizarEfeito();
-            Tabuleiro.GetInstance().ProximoJogador();
-            throw new NotImplementedException();
+            if (efeito != null)
+                efeito.RealizarEfeito();
+            else
+                Tabuleiro.GetInstance().ProximoJogador();
         }
     }
 }

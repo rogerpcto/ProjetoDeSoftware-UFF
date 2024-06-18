@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Game
 {
     public class Carta
@@ -13,9 +11,12 @@ namespace Game
             this.efeito = efeito;
         }
 
-        public void RealizarEfeitos()
+        public string GetTexto() => texto;
+
+        public void RealizarEfeito()
         {
-            throw new System.NotImplementedException();
+            efeito.RealizarEfeito();
+            Tabuleiro.GetInstance().ProximoJogador();
         }
     }
 }

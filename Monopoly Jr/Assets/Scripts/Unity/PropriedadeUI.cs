@@ -17,26 +17,10 @@ namespace Unity
 
         public void Inicializar(Propriedade propriedade)
         {
-            ColorUtility.TryParseHtmlString(GerarHexCor(propriedade.Cor), out Color color);
+            ColorUtility.TryParseHtmlString(propriedade.Cor.GerarHex(), out Color color);
             _image.color = color;
             Nome = propriedade.GetNome();
             _text.text = Nome;
-        }
-
-        private string GerarHexCor(Cor cor)
-        {
-            return cor switch
-            {
-                Cor.AMARELO => "#FFDC00",
-                Cor.AZUL_CLARO => "#75C2FA",
-                Cor.AZUL_ESCURO => "#0025FF",
-                Cor.LARANJA => "#FF8100",
-                Cor.MARROM => "#904C3A",
-                Cor.VERDE => "#00FF27",
-                Cor.VERMELHO => "#FF1E00",
-                Cor.ROSA => "#FF4C87",
-                _ => "#FFFFFF",
-            };
         }
     }
 }

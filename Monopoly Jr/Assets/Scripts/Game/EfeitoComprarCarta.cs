@@ -6,12 +6,13 @@ namespace Game
     {
         public void RealizarEfeito()
         {
-            throw new NotImplementedException();
+            Carta carta = ComprarCarta();
+            Tabuleiro.GetInstance().InterfaceUsuario.MostrarCarta(carta);
         }
 
-        private void ComprarCarta()
+        private Carta ComprarCarta()
         {
-            throw new NotImplementedException();
+            return Tabuleiro.GetInstance().PegarCarta();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Game
     {
         private int saldo;
         private int posicao;
-        private Personagem personagem;
+        private readonly Personagem personagem;
 
         public List<Propriedade> propriedades = new();
         public Efeito efeitoInicial;
@@ -54,6 +54,12 @@ namespace Game
 
         public async void IniciarRodada()
         {
+            if (efeitoInicial != null)
+            {
+                efeitoInicial.RealizarEfeito();
+                efeitoInicial = null;
+            }
+
             int passos = await JogarDado();
             await Mover(passos);
             // Resto da Rodada

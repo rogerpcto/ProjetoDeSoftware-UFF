@@ -13,7 +13,6 @@ namespace Game
 
         public void RealizarEfeito()
         {
-            throw new NotImplementedException();
         }
         private void TeleportarJogador()
         {

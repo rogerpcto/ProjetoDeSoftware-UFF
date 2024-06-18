@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Game
 {
@@ -72,22 +73,20 @@ namespace Game
                 new("Você fez todos os seus deveres! Receba $2 do Banco.", new EfeitoTransacao(2)),
                 new("É seu aniversário! Receba $2 do Banco. Feliz Aniversário!", new EfeitoTransacao(2)),
                 new("Você comeu muitos doces! Pague $2 ao Banco.", new EfeitoTransacao(-2)),
-                new("Dê esta carta ao Barco e pegue outra carta de Sorte. " +
+                new("Dê esta carta ao Barco e pegue outra carta de Sorte.\n" +
                     "Barco: no seu próximo turno, navegue até qualquer casa livre e compre-a. Se todas estiverem ocupadas, compre uma propriedade de qualquer jogador!",
                     new EfeitoEspecialPersonagem(Personagem.BARCO)),
-                new("Dê esta carta ao Carro e pegue outra carta de Sorte. " +
-                    "Carro: no seu próximo turno, navegue até qualquer casa livre e compre-a. Se todas estiverem ocupadas, compre uma propriedade de qualquer jogador!",
-                    new EfeitoEspecialPersonagem(Personagem.CARRO)),
-                new("Dê esta carta ao Carro e pegue outra carta de Sorte. " +
-                    "Carro: no seu próximo turno, navegue até qualquer casa livre e compre-a. Se todas estiverem ocupadas, compre uma propriedade de qualquer jogador!",
-                    new EfeitoEspecialPersonagem(Personagem.BARCO)),
-                new("Dê esta carta ao Cachorro e pegue outra carta de Sorte. " +
+                new("Dê esta carta ao Cachorro e pegue outra carta de Sorte.\n" +
                     "Cachorro: no seu próximo turno, navegue até qualquer casa livre e compre-a. Se todas estiverem ocupadas, compre uma propriedade de qualquer jogador!",
                     new EfeitoEspecialPersonagem(Personagem.CACHORRO)),
-                new("Dê esta carta ao Gato e pegue outra carta de Sorte. " +
+                new("Dê esta carta ao Carro e pegue outra carta de Sorte.\n" +
+                    "Carro: no seu próximo turno, navegue até qualquer casa livre e compre-a. Se todas estiverem ocupadas, compre uma propriedade de qualquer jogador!",
+                    new EfeitoEspecialPersonagem(Personagem.CARRO)),
+                new("Dê esta carta ao Gato e pegue outra carta de Sorte.\n" +
                     "Gato: no seu próximo turno, navegue até qualquer casa livre e compre-a. Se todas estiverem ocupadas, compre uma propriedade de qualquer jogador!",
                     new EfeitoEspecialPersonagem(Personagem.GATO)),
             };
+            cartas = EmbaralharCartas();
         }
 
         public static Tabuleiro GetInstance()
@@ -105,6 +104,7 @@ namespace Game
         public List<Carta> cartas = new();
         public InterfaceUsuario InterfaceUsuario;
         private int jogadorDaVez = 0;
+        private int cartaDaVez;
 
         public void ProximoJogador()
         {
@@ -123,6 +123,21 @@ namespace Game
         public Jogador JogadorAtual()
         {
             return jogadores[jogadorDaVez];
+        }
+
+        private List<Carta> EmbaralharCartas()
+        {
+            cartaDaVez = 0;
+            Random random = new();
+            return cartas.OrderBy(c => random.Next()).ToList();
+        }
+
+        public Carta PegarCarta()
+        {
+            cartaDaVez++;
+            if (cartaDaVez >= cartas.Count)
+                EmbaralharCartas();
+            return cartas[cartaDaVez];
         }
     }
 }
