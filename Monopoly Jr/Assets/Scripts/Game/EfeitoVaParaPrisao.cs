@@ -15,6 +15,7 @@ namespace Game
 
         public void RealizarEfeito()
         {
+            Tabuleiro.GetInstance().ProximoJogador();
         }
     }
 }

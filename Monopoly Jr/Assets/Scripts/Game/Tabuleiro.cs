@@ -6,6 +6,7 @@ namespace Game
 {
     public class Tabuleiro
     {
+        private const int POSICAO_PRISAO = 6;        
         private const int POSICAO_GO_KARTS = 10;        
         private const int POSICAO_CALCADAO = 23;        
 
@@ -21,13 +22,13 @@ namespace Game
 
             casas = new()
             {
-                new Casa("GO", 0, new EfeitoTransacao(2)),
+                new Casa("GO", 0, null),
                 new Propriedade("Taqueria", 1, 1, 1, Cor.MARROM),
                 new Propriedade("Pizzaria", 2, 1, 1, Cor.MARROM),
                 new Casa("Sorte ou Revés", 3, new EfeitoComprarCarta()),
                 new Propriedade("Padaria", 4, 1, 1, Cor.AZUL_CLARO),
                 new Propriedade("Sorveteria", 5, 1, 1, Cor.AZUL_CLARO),
-                new Casa("Prisão", 6, new EfeitoPrisao()),
+                new Casa("Prisão", 6, null),
                 new Propriedade("Museu", 7, 2, 2, Cor.ROSA),
                 new Propriedade("Biblioteca", 8, 2, 2, Cor.ROSA),
                 new Casa("Sorte ou Revés", 9, new EfeitoComprarCarta()),
@@ -39,7 +40,7 @@ namespace Game
                 new Casa("Sorte ou Revés", 15, new EfeitoComprarCarta()),
                 new Propriedade("Loja de Brinquedos", 16, 3, 3, Cor.AMARELO),
                 new Propriedade("Pet Shop", 17, 3, 3, Cor.AMARELO),
-                new Casa("Vá para prisão", 18, new EfeitoPrisao()),
+                new Casa("Vá para prisão", 18, new EfeitoVaParaPrisao(POSICAO_PRISAO)),
                 new Propriedade("Aquário", 19, 4, 4, Cor.VERDE),
                 new Propriedade("Zoológico", 20, 4, 4, Cor.VERDE),
                 new Casa("Sorte ou Revés", 21, new EfeitoComprarCarta()),
