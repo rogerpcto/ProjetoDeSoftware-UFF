@@ -16,7 +16,7 @@ namespace Unity
         private PropriedadeUI _propriedadePrefab;
         [SerializeField]
         private Image _image;
-        private List<PropriedadeUI> _propriedadesUI;
+        private List<PropriedadeUI> _propriedadesUI = new();
 
         public void MudarVez(bool ativar)
         {

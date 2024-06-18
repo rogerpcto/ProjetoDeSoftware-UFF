@@ -1,4 +1,5 @@
 using Game;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -16,6 +17,8 @@ namespace Unity
         private List<JogadorUI> _jogadoresUI;
         [SerializeField]
         private Dado dado;
+        [SerializeField]
+        private PropriedadeJanela propriedadeJanela;
 
         public void MudarVez(Personagem personagem, bool vez)
         {
@@ -71,7 +74,12 @@ namespace Unity
 
         public void AcabarJogo()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
+        }
+
+        public async Task PerguntarComprarPropriedade(Propriedade propriedade, Action opcao1, Action opcao2)
+        {
+            propriedadeJanela.Inicializar(propriedade, opcao1, opcao2);
         }
     }
 }

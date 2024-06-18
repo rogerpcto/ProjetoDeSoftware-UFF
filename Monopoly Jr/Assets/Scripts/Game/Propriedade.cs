@@ -22,7 +22,17 @@ namespace Game
 
         public override void RealizarEfeitos()
         {
-            throw new NotImplementedException();
+            Tabuleiro tabuleiro = Tabuleiro.GetInstance();
+            Jogador jogadorAtual = tabuleiro.JogadorAtual();
+
+            if (proprietario == null)
+            {
+                tabuleiro.InterfaceUsuario.PerguntarComprarPropriedade(this,
+                    () => Comprar(jogadorAtual),
+                    () => tabuleiro.ProximoJogador());
+            }
+            else if (!ChecarProprietario(jogadorAtual))
+                CobrarAluguel();
         }
 
         public bool ChecarProprietario(Jogador jogador)
@@ -43,8 +53,10 @@ namespace Game
             {
                 valorAPagar *= 2;
             }
+            // jogador da Vez tem saldo suficiente? se não, passa todo o dinheiro dele pro proprietário e acaba o jogo
             proprietario.Receber(valorAPagar);
             jogadorDaVez.Pagar(valorAPagar);
+            Tabuleiro.GetInstance().ProximoJogador();
         }
 
         public void Comprar(Jogador comprador)
@@ -56,6 +68,9 @@ namespace Game
                 proprietario = comprador;
                 Tabuleiro.GetInstance().InterfaceUsuario.AdicionarPropriedade(comprador.GetPersonagem(), this);
             }
+            Tabuleiro.GetInstance().ProximoJogador(); // Rever
         }
+
+        public int GetPreco() => preco;
     }
 }

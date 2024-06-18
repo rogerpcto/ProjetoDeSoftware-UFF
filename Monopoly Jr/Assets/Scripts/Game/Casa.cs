@@ -4,7 +4,7 @@ namespace Game
 {
     public class Casa
     {
-        private string nome;
+        protected string nome;
         private int posicao;
         private Efeito efeito;
 
@@ -19,6 +19,9 @@ namespace Game
 
         public virtual void RealizarEfeitos()
         {
+            //if (efeito != null)
+            //    efeito.RealizarEfeito();
+            Tabuleiro.GetInstance().ProximoJogador();
             throw new NotImplementedException();
         }
     }

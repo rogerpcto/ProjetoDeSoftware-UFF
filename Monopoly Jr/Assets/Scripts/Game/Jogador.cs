@@ -34,6 +34,7 @@ namespace Game
         private void GanharDinheiroPorVolta()
         {
             saldo += 2;
+            Tabuleiro.GetInstance().InterfaceUsuario.AtualizarSaldo(personagem, saldo);
         }
 
         public void Receber(int dinheiro)
@@ -56,7 +57,7 @@ namespace Game
             int passos = await JogarDado();
             await Mover(passos);
             // Resto da Rodada
-            Tabuleiro.GetInstance().ProximoJogador();
+            //Tabuleiro.GetInstance().ProximoJogador();
         }
 
         public async Task Mover(int passos)
@@ -65,18 +66,16 @@ namespace Game
             List<Casa> casas = tabuleiro.casas;
             for (int passo = 0; passo < passos; passo++)
             {
+                posicao++;
                 if (posicao >= casas.Count)
                 {
                     posicao = 0;
 
                     GanharDinheiroPorVolta();
                 }
-                else
-                {
-                    posicao += 1;
-                }
                 await tabuleiro.InterfaceUsuario.MoverPersonagemUmPasso(personagem, posicao);
             }
+            casas[posicao].RealizarEfeitos();
         }
 
         public void Teleportar(int posicaoCasa)

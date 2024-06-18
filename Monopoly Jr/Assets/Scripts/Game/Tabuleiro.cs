@@ -31,7 +31,7 @@ namespace Game
                 new Propriedade("Biblioteca", 8, 2, 2, Cor.ROSA),
                 new Casa("Sorte ou Revés", 9, new EfeitoComprarCarta()),
                 new Propriedade("Go Karts", 10, 2, 2, Cor.LARANJA),
-                new Propriedade("Piscina", 11, 2, 2, Cor.ROSA),
+                new Propriedade("Piscina", 11, 2, 2, Cor.LARANJA),
                 new Casa("Estacionamento", 12, null),
                 new Propriedade("Roda-gigante", 13, 3, 3, Cor.VERMELHO),
                 new Propriedade("Montanha-russa", 14, 3, 3, Cor.VERMELHO),
@@ -88,7 +88,6 @@ namespace Game
                     "Gato: no seu próximo turno, navegue até qualquer casa livre e compre-a. Se todas estiverem ocupadas, compre uma propriedade de qualquer jogador!",
                     new EfeitoEspecialPersonagem(Personagem.GATO)),
             };
-
         }
 
         public static Tabuleiro GetInstance()
