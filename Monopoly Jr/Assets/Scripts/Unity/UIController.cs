@@ -51,6 +51,11 @@ namespace Unity
         {
             await MoverPersonagem(personagem, posicaoFinal).AsTask(this);
         }
+        
+        public async Task TeleportarPersonagem(Personagem personagem, int posicaoFinal)
+        {
+            await MoverPersonagem(personagem, posicaoFinal).AsTask(this);
+        }
 
         public IEnumerator MoverPersonagem(Personagem personagem, int posicaoFinal)
         {
