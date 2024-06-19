@@ -31,8 +31,13 @@ namespace Game
                     () => Comprar(jogadorAtual),
                     () => tabuleiro.ProximoJogador());
             }
-            else if (!ChecarProprietario(jogadorAtual))
-                CobrarAluguel();
+            else 
+            {
+                if (!ChecarProprietario(jogadorAtual))
+                    CobrarAluguel();
+               
+                tabuleiro.ProximoJogador();
+            }
         }
 
         public bool ChecarProprietario(Jogador jogador)
@@ -56,7 +61,6 @@ namespace Game
             // jogador da Vez tem saldo suficiente? se não, passa todo o dinheiro dele pro proprietário e acaba o jogo
             proprietario.Receber(valorAPagar);
             jogadorDaVez.Pagar(valorAPagar);
-            Tabuleiro.GetInstance().ProximoJogador();
         }
 
         public void Comprar(Jogador comprador)
