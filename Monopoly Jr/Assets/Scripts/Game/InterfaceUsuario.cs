@@ -15,6 +15,7 @@ namespace Game
         Task TeleportarPersonagem(Personagem personagem, int posicaoFinal);
         Task MostrarCarta(Carta carta);
         Task<EfeitoPassos> EscolherPassos();
+        Task<Propriedade> EscolherPropriedade(Cor cor1, Cor cor2);
         void AcabarJogo();
     }
 }

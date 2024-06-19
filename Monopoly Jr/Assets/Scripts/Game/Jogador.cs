@@ -27,7 +27,6 @@ namespace Game
         {
             Random dado = new Random();
             int resultado = dado.Next(1, 6);
-            resultado = 3;
             await Tabuleiro.GetInstance().InterfaceUsuario.AnimarDado(resultado);
             return resultado;
         }
@@ -92,6 +91,10 @@ namespace Game
             List<Casa> casas = tabuleiro.casas;
             await tabuleiro.InterfaceUsuario.TeleportarPersonagem(personagem, posicaoCasa);
             await casas[posicaoCasa].RealizarEfeitos();
+            if (posicaoCasa == 0)
+            {
+                GanharDinheiroPorVolta();
+            }
         }
     }
 }
