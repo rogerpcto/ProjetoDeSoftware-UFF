@@ -1,13 +1,14 @@
 using System;
+using System.Threading.Tasks;
 
 namespace Game
 {
     public class EfeitoComprarCarta : Efeito
     {
-        public void RealizarEfeito()
+        public async Task RealizarEfeito()
         {
             Carta carta = ComprarCarta();
-            Tabuleiro.GetInstance().InterfaceUsuario.MostrarCarta(carta);
+            await Tabuleiro.GetInstance().InterfaceUsuario.MostrarCarta(carta);
         }
 
         private Carta ComprarCarta()

@@ -21,6 +21,8 @@ namespace Unity
         private PropriedadeJanela propriedadeJanela;
         [SerializeField]
         private CartaJanela cartaJanela;
+        [SerializeField]
+        private PassosJanela passosJanela;
 
         public void MudarVez(Personagem personagem, bool vez)
         {
@@ -86,12 +88,25 @@ namespace Unity
 
         public async Task PerguntarComprarPropriedade(Propriedade propriedade, Action opcao1, Action opcao2)
         {
-            await propriedadeJanela.Inicializar(propriedade, opcao1, opcao2);
+            var tcs = new TaskCompletionSource<Task>();
+            await propriedadeJanela.Inicializar(propriedade, opcao1, opcao2, tcs);
+            await tcs.Task;
         }
 
         public async Task MostrarCarta(Carta carta)
         {
-            await cartaJanela.Inicializar(carta);
+            var tcs = new TaskCompletionSource<Task>();
+            await cartaJanela.Inicializar(carta, tcs);
+            await tcs.Task;
+        }
+
+        public async Task<EfeitoPassos> EscolherPassos()
+        {
+            var tcs = new TaskCompletionSource<EfeitoPassos>();
+            await passosJanela.Inicializar(tcs);
+            EfeitoPassos resultado = await tcs.Task;
+
+            return resultado;
         }
     }
 }

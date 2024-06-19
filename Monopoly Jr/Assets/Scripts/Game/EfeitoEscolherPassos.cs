@@ -1,16 +1,18 @@
-using System;
+using System.Threading.Tasks;
 
 namespace Game
 {
     public class EfeitoEscolherPassos : Efeito
     {
-        public void RealizarEfeito()
+        public async Task RealizarEfeito()
         {
+            Efeito passos = await EscolherPassos();
+            await passos.RealizarEfeito();
         }
 
-        private Propriedade EscolherPropriedadeCor()
+        private async Task<EfeitoPassos> EscolherPassos()
         {
-            throw new NotImplementedException();
+            return await Tabuleiro.GetInstance().InterfaceUsuario.EscolherPassos();
         }
     }
 }

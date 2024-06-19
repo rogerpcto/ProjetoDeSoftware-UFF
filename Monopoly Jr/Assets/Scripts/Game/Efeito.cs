@@ -1,7 +1,9 @@
+using System.Threading.Tasks;
+
 namespace Game
 {
     public interface Efeito
     {
-        public void RealizarEfeito();
+        public Task RealizarEfeito();
     }
 }

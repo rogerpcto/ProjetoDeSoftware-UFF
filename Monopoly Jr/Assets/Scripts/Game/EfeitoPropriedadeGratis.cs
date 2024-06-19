@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace Game
 {
     public class EfeitoPropriedadeGratis : Efeito
@@ -9,7 +11,7 @@ namespace Game
             this.indicePropriedade = indicePropriedade;
         }
 
-        public async void RealizarEfeito()
+        public async Task RealizarEfeito()
         {
             await PegarOuPagar();
         }
@@ -29,10 +31,6 @@ namespace Game
                     Jogador dono = propriedade.GetProprietario();
                     jogadorAtual.Pagar(propriedade.GetPreco());
                     dono.Receber(propriedade.GetPreco());
-                }
-                else
-                {
-                    tabuleiro.ProximoJogador();
                 }
             }
             else

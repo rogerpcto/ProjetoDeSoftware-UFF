@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace Game
 {
     public class Carta
@@ -13,10 +15,9 @@ namespace Game
 
         public string GetTexto() => texto;
 
-        public void RealizarEfeito()
+        public async Task RealizarEfeito()
         {
-            efeito.RealizarEfeito();
-            Tabuleiro.GetInstance().ProximoJogador();
+            await efeito.RealizarEfeito();
         }
     }
 }

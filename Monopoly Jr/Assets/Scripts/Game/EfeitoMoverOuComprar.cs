@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace Game
 {
@@ -13,7 +14,7 @@ namespace Game
             efeitoComprarCarta = new();
         }
 
-        public void RealizarEfeito()
+        public async Task RealizarEfeito()
         {
         }
 

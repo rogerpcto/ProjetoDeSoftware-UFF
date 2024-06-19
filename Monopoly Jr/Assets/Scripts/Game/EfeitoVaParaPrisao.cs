@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace Game
 {
     public class EfeitoVaParaPrisao : Efeito
@@ -10,13 +12,10 @@ namespace Game
             efeitoTeleporte = new(posicaoPrisao);
             efeitoPrisao = new();
         }
-        public void RealizarEfeito()
+        public async Task RealizarEfeito()
         {
-            efeitoTeleporte.RealizarEfeito();
-            efeitoPrisao.RealizarEfeito();
+            await efeitoTeleporte.RealizarEfeito();
+            Tabuleiro.GetInstance().JogadorAtual().efeitoInicial = efeitoPrisao;
         }
-
-
-
     }
 }

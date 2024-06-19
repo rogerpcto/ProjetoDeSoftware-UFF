@@ -1,8 +1,10 @@
+using System.Threading.Tasks;
+
 namespace Game
 {
     public class EfeitoPrisao : Efeito
     {
-        public void RealizarEfeito()
+        public async Task RealizarEfeito()
         {
             Tabuleiro tabuleiro = Tabuleiro.GetInstance();
             Jogador jogadorAtual = tabuleiro.JogadorAtual();
@@ -14,7 +16,7 @@ namespace Game
             {
                 jogadorAtual.efeitoHabeasCorpus.SairDaPrisao();
             }
-            tabuleiro.ProximoJogador();
+            await Task.CompletedTask;
         }
 
         private bool VerificarHabeasCorpus()

@@ -1,12 +1,15 @@
+using System.Threading.Tasks;
+
 namespace Game
 {
     public class EfeitoHabeasCorpus : Efeito
     {
-        public void RealizarEfeito()
+        public async Task RealizarEfeito()
         {
             Tabuleiro tabuleiro = Tabuleiro.GetInstance();
             Jogador jogadorAtual = tabuleiro.JogadorAtual();
             jogadorAtual.efeitoHabeasCorpus = this;
+            await Task.CompletedTask;
         }
 
         public void SairDaPrisao()

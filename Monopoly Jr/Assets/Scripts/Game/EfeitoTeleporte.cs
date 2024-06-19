@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace Game
 {
     public class EfeitoTeleporte : Efeito
@@ -9,7 +11,7 @@ namespace Game
             this.destino = destino;
         }
 
-        public async void RealizarEfeito()
+        public async Task RealizarEfeito()
         {
             await TeleportarJogador(destino);
         }

@@ -14,7 +14,7 @@ namespace Unity
         [SerializeField]
         private Button _buttonConfirm;
 
-        public async Task Inicializar(Carta carta)
+        public async Task Inicializar(Carta carta, TaskCompletionSource<Task> tcs)
         {
             gameObject.SetActive(true);
             _buttonConfirm.onClick.RemoveAllListeners();
@@ -22,7 +22,8 @@ namespace Unity
             _buttonConfirm.onClick.AddListener(async () =>
             {
                 await Fechar().AsTask(this);
-                carta.RealizarEfeito();
+                await carta.RealizarEfeito();
+                tcs.SetResult(Task.CompletedTask);
             });
             await Abrir().AsTask(this);
             _texto.text = "?";

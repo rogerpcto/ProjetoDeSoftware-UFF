@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace Game
 {
@@ -11,13 +12,14 @@ namespace Game
             this.passos = passos;
         }
 
-        public void RealizarEfeito()
+        public async Task RealizarEfeito()
         {
+            await AndarJogador();
         }
 
-        private void AndarJogador()
+        private async Task AndarJogador()
         {
-            throw new NotImplementedException();
+            await Tabuleiro.GetInstance().JogadorAtual().Mover(passos);
         }
     }
 }

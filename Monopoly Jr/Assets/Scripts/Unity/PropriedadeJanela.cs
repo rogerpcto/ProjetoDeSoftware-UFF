@@ -20,7 +20,7 @@ namespace Unity
         [SerializeField]
         private Button _buttonCancel;
 
-        public async Task Inicializar(Propriedade propriedade, Action confirmar, Action cancelar)
+        public async Task Inicializar(Propriedade propriedade, Action confirmar, Action cancelar, TaskCompletionSource<Task> tcs)
         {
             gameObject.SetActive(true);
             _buttonConfirm.onClick.RemoveAllListeners();
@@ -34,11 +34,13 @@ namespace Unity
             {
                 await Fechar().AsTask(this);
                 confirmar();
+                tcs.SetResult(Task.CompletedTask);
             });
             _buttonCancel.onClick.AddListener(async () =>
             {
                 await Fechar().AsTask(this);
                 cancelar();
+                tcs.SetResult(Task.CompletedTask);
             });
             await Abrir().AsTask(this);
         }

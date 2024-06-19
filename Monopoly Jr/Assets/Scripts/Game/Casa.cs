@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace Game
 {
@@ -17,12 +18,10 @@ namespace Game
 
         public string GetNome() => nome;
 
-        public virtual void RealizarEfeitos()
+        public virtual async Task RealizarEfeitos()
         {
             if (efeito != null)
-                efeito.RealizarEfeito();
-            else
-                Tabuleiro.GetInstance().ProximoJogador();
+                await efeito.RealizarEfeito();
         }
     }
 }

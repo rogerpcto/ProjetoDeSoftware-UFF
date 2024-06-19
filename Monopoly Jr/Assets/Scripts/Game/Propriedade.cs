@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace Game
 {
     public class Propriedade : Casa
@@ -18,23 +20,21 @@ namespace Game
             Cor = cor;
         }
 
-        public override void RealizarEfeitos()
+        public override async Task RealizarEfeitos()
         {
             Tabuleiro tabuleiro = Tabuleiro.GetInstance();
             Jogador jogadorAtual = tabuleiro.JogadorAtual();
 
             if (proprietario == null)
             {
-                tabuleiro.InterfaceUsuario.PerguntarComprarPropriedade(this,
+                await tabuleiro.InterfaceUsuario.PerguntarComprarPropriedade(this,
                     () => Comprar(jogadorAtual),
-                    () => tabuleiro.ProximoJogador());
+                    () => { });
             }
             else
             {
                 if (!ChecarProprietario(jogadorAtual))
                     CobrarAluguel();
-
-                tabuleiro.ProximoJogador();
             }
         }
 
@@ -68,7 +68,6 @@ namespace Game
                 comprador.Pagar(preco);
                 SetProprietario(comprador);
             }
-            Tabuleiro.GetInstance().ProximoJogador();
         }
 
         public int GetPreco() => preco;

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace Game
 {
@@ -17,7 +18,7 @@ namespace Game
             this.cor1 = cor1;
         }
 
-        public void RealizarEfeito()
+        public async Task RealizarEfeito()
         {
         }
 
