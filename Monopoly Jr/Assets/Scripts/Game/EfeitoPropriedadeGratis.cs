@@ -1,5 +1,3 @@
-using System;
-
 namespace Game
 {
     public class EfeitoPropriedadeGratis : Efeito
@@ -11,13 +9,36 @@ namespace Game
             this.indicePropriedade = indicePropriedade;
         }
 
-        public void RealizarEfeito()
+        public async void RealizarEfeito()
         {
+            await PegarOuPagar();
         }
 
-        private Propriedade PegarOuPagar()
+        private async Task PegarOuPagar()
         {
-            throw new NotImplementedException();
+            Tabuleiro tabuleiro = Tabuleiro.GetInstance();
+            Jogador jogadorAtual = tabuleiro.JogadorAtual();
+            Propriedade propriedade = (Propriedade)tabuleiro.casas[indicePropriedade];
+
+            await jogadorAtual.Teleportar(indicePropriedade);
+
+            if (propriedade.GetProprietario() != null)
+            {
+                if (!propriedade.ChecarProprietario(jogadorAtual))
+                {
+                    Jogador dono = propriedade.GetProprietario();
+                    jogadorAtual.Pagar(propriedade.GetPreco());
+                    dono.Receber(propriedade.GetPreco());
+                }
+                else
+                {
+                    tabuleiro.ProximoJogador();
+                }
+            }
+            else
+            {
+                propriedade.SetProprietario(jogadorAtual);
+            }
         }
     }
 }

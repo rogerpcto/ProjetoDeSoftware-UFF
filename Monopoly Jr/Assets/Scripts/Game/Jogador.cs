@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
 namespace Game
 {
     public class Jogador
@@ -22,7 +18,7 @@ namespace Game
         }
 
         public Personagem GetPersonagem() => personagem;
-        
+
         private async Task<int> JogarDado()
         {
             Random dado = new Random();
@@ -84,9 +80,12 @@ namespace Game
             casas[posicao].RealizarEfeitos();
         }
 
-        public void Teleportar(int posicaoCasa)
+        public async Task Teleportar(int posicaoCasa)
         {
-            posicao = posicaoCasa;
+            Tabuleiro tabuleiro = Tabuleiro.GetInstance();
+            List<Casa> casas = tabuleiro.casas;
+            await tabuleiro.InterfaceUsuario.TeleportarPersonagem(personagem, posicaoCasa);
+            casas[posicaoCasa].RealizarEfeitos();
         }
     }
 }

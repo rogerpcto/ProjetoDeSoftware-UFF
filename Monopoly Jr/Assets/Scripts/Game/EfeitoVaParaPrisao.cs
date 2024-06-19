@@ -1,5 +1,3 @@
-using System;
-
 namespace Game
 {
     public class EfeitoVaParaPrisao : Efeito
@@ -12,10 +10,13 @@ namespace Game
             efeitoTeleporte = new(posicaoPrisao);
             efeitoPrisao = new();
         }
-
         public void RealizarEfeito()
         {
-            Tabuleiro.GetInstance().ProximoJogador();
+            efeitoTeleporte.RealizarEfeito();
+            efeitoPrisao.RealizarEfeito();
         }
+
+
+
     }
 }

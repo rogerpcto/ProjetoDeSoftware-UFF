@@ -1,22 +1,21 @@
-using System;
-
 namespace Game
 {
     public class EfeitoTeleporte : Efeito
     {
         private int destino;
-        
+
         public EfeitoTeleporte(int destino)
         {
             this.destino = destino;
         }
 
-        public void RealizarEfeito()
+        public async void RealizarEfeito()
         {
+            await TeleportarJogador(destino);
         }
-        private void TeleportarJogador()
+        private async Task TeleportarJogador(int destino)
         {
-            throw new NotImplementedException();
+            await Tabuleiro.GetInstance().JogadorAtual().Teleportar(destino);
         }
     }
 }

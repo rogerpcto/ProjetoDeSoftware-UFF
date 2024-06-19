@@ -1,5 +1,3 @@
-using System;
-
 namespace Game
 {
     public class Propriedade : Casa
@@ -31,11 +29,11 @@ namespace Game
                     () => Comprar(jogadorAtual),
                     () => tabuleiro.ProximoJogador());
             }
-            else 
+            else
             {
                 if (!ChecarProprietario(jogadorAtual))
                     CobrarAluguel();
-               
+
                 tabuleiro.ProximoJogador();
             }
         }
@@ -68,13 +66,20 @@ namespace Game
             if (proprietario == null)
             {
                 comprador.Pagar(preco);
-                comprador.propriedades.Add(this);
-                proprietario = comprador;
-                Tabuleiro.GetInstance().InterfaceUsuario.AdicionarPropriedade(comprador.GetPersonagem(), this);
+                SetProprietario(comprador);
             }
-            Tabuleiro.GetInstance().ProximoJogador(); // Rever
+            Tabuleiro.GetInstance().ProximoJogador();
         }
 
         public int GetPreco() => preco;
+        public Jogador GetProprietario() => proprietario;
+
+        public void SetProprietario(Jogador jogador)
+        {
+            Tabuleiro tabuleiro = Tabuleiro.GetInstance();
+            proprietario = jogador;
+            jogador.propriedades.Add(this);
+            tabuleiro.InterfaceUsuario.AdicionarPropriedade(jogador.GetPersonagem(), this);
+        }
     }
 }

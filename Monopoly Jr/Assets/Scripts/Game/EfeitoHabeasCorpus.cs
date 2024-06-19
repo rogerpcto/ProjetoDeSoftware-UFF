@@ -1,16 +1,19 @@
-using System;
-
 namespace Game
 {
     public class EfeitoHabeasCorpus : Efeito
     {
         public void RealizarEfeito()
         {
+            Tabuleiro tabuleiro = Tabuleiro.GetInstance();
+            Jogador jogadorAtual = tabuleiro.JogadorAtual();
+            jogadorAtual.efeitoHabeasCorpus = this;
         }
 
-        private void SairDaPrisao()
+        public void SairDaPrisao()
         {
-            throw new NotImplementedException();
+            Tabuleiro tabuleiro = Tabuleiro.GetInstance();
+            Jogador jogadorAtual = tabuleiro.JogadorAtual();
+            jogadorAtual.efeitoHabeasCorpus = null;
         }
     }
 }
