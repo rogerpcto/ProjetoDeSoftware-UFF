@@ -52,7 +52,7 @@ namespace Unity
             await MoverPersonagem(personagem, posicaoFinal).AsTask(this);
         }
 
-        private IEnumerator MoverPersonagem(Personagem personagem, int posicaoFinal)
+        public IEnumerator MoverPersonagem(Personagem personagem, int posicaoFinal)
         {
             Transform personagemAtual = _personagens[(int)personagem].transform;
 
