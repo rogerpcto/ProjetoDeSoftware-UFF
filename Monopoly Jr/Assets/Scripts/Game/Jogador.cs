@@ -63,8 +63,6 @@ namespace Game
             int passos = await JogarDado();
             await Mover(passos);
             Tabuleiro.GetInstance().ProximoJogador();
-            // Resto da Rodada
-            // Tabuleiro.GetInstance().ProximoJogador();
         }
 
         public async Task Mover(int passos)

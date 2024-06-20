@@ -1606,7 +1606,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &539358942
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4175,7 +4175,7 @@ MonoBehaviour:
   - {fileID: 2070466920}
   - {fileID: 1094320896}
   dado: {fileID: 372191610}
-  comprarPropriedadeJanela: {fileID: 0}
+  comprarPropriedadeJanela: {fileID: 539358945}
   cartaJanela: {fileID: 1551250089}
   passosJanela: {fileID: 1744571790}
   escolhaPropriedadeJanela: {fileID: 0}
@@ -5317,7 +5317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1546886553
 RectTransform:
   m_ObjectHideFlags: 0
