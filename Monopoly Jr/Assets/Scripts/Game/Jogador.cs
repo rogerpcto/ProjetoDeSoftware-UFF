@@ -87,6 +87,7 @@ namespace Game
         {
             Tabuleiro tabuleiro = Tabuleiro.GetInstance();
             List<Casa> casas = tabuleiro.casas;
+            posicao = posicaoCasa;
             await tabuleiro.InterfaceUsuario.TeleportarPersonagem(personagem, posicaoCasa);
             await casas[posicaoCasa].RealizarEfeitos();
             if (posicaoCasa == 0)
