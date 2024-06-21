@@ -11,7 +11,7 @@ namespace Unity
             Vector2 scaleFinal = Vector2.one;
             transform.localScale = scaleInicial;
 
-            float duration = .15f;
+            float duration = .25f;
 
             for (float t = 0; t < duration; t += Time.deltaTime)
             {
@@ -19,6 +19,8 @@ namespace Unity
                 transform.localScale = Vector3.Lerp(scaleInicial, scaleFinal, normalizedTime);
                 yield return null;
             }
+
+            transform.localScale = scaleFinal;
         }
 
         protected IEnumerator Fechar()
@@ -27,7 +29,7 @@ namespace Unity
             Vector2 scaleFinal = Vector2.zero;
             transform.localScale = scaleInicial;
 
-            float duration = .15f;
+            float duration = .25f;
 
             for (float t = 0; t < duration; t += Time.deltaTime)
             {
@@ -35,6 +37,8 @@ namespace Unity
                 transform.localScale = Vector3.Lerp(scaleInicial, scaleFinal, normalizedTime);
                 yield return null;
             }
+
+            transform.localScale = scaleFinal;
             gameObject.SetActive(false);
         }
     }

@@ -39,9 +39,8 @@ namespace Unity
                 buttons.Add(button);
             }
 
-            _scrollbar.value = 0;
-
             await Abrir().AsTask(this);
+            _scrollbar.value = 1;
             foreach (Button button in buttons)
             {
                 button.enabled = true;
