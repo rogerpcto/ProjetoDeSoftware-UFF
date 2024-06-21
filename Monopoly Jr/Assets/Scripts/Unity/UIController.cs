@@ -24,7 +24,7 @@ namespace Unity
         [SerializeField]
         private PassosJanela passosJanela;
         [SerializeField]
-        private EscolherPropriedadeJanela escolhaPropriedadeJanela;
+        private EscolherPropriedadeJanela escolherPropriedadeJanela;
         [SerializeField]
         private MoverOuComprarJanela moverOuComprarJanela;
 
@@ -115,7 +115,7 @@ namespace Unity
         public async Task<Propriedade> EscolherPropriedade(List<Propriedade> propriedades)
         {
             var tcs = new TaskCompletionSource<Propriedade>();
-            await escolhaPropriedadeJanela.Inicializar(propriedades, tcs);
+            await escolherPropriedadeJanela.Inicializar(propriedades, tcs);
             Propriedade resultado = await tcs.Task;
 
             return resultado;

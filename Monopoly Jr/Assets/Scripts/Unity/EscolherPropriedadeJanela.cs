@@ -12,6 +12,8 @@ namespace Unity
         private PropriedadeJanela _prefabPropriedade;
         [SerializeField]
         private Transform _grid;
+        [SerializeField]
+        private Scrollbar _scrollbar;
 
         public async Task Inicializar(List<Propriedade> propriedades, TaskCompletionSource<Propriedade> tcs)
         {
@@ -36,6 +38,8 @@ namespace Unity
                 button.enabled = false;
                 buttons.Add(button);
             }
+
+            _scrollbar.value = 0;
 
             await Abrir().AsTask(this);
             foreach (Button button in buttons)
