@@ -17,6 +17,7 @@ namespace Game
         }
 
         public string GetNome() => nome;
+        public int GetPosicao() => posicao;
 
         public virtual async Task RealizarEfeitos()
         {
