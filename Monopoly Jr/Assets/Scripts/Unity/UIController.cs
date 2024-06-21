@@ -18,13 +18,15 @@ namespace Unity
         [SerializeField]
         private Dado dado;
         [SerializeField]
-        private CompraPropriedadeJanela comprarPropriedadeJanela;
+        private ComprarPropriedadeJanela comprarPropriedadeJanela;
         [SerializeField]
         private CartaJanela cartaJanela;
         [SerializeField]
         private PassosJanela passosJanela;
         [SerializeField]
-        private EscolhaPropriedadeJanela escolhaPropriedadeJanela;
+        private EscolherPropriedadeJanela escolhaPropriedadeJanela;
+        [SerializeField]
+        private MoverOuComprarJanela moverOuComprarJanela;
 
         public void MudarVez(Personagem personagem, bool vez)
         {
@@ -115,6 +117,16 @@ namespace Unity
             var tcs = new TaskCompletionSource<Propriedade>();
             await escolhaPropriedadeJanela.Inicializar(propriedades, tcs);
             Propriedade resultado = await tcs.Task;
+
+            return resultado;
+        }
+
+        public async Task<bool> EscolheMoverOuComprar()
+        {
+            var tcs = new TaskCompletionSource<bool>();
+            await moverOuComprarJanela.Inicializar(tcs);
+
+            bool resultado = await tcs.Task;
 
             return resultado;
         }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Unity
 {
-    public class CompraPropriedadeJanela : Janela
+    public class ComprarPropriedadeJanela : Janela
     {
         [SerializeField]
         private Button _buttonConfirm;

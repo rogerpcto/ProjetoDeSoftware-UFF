@@ -16,11 +16,14 @@ namespace Game
 
         public async Task RealizarEfeito()
         {
+            Efeito efeito = await EscolherMoverOuComprar();
+            await efeito.RealizarEfeito();
         }
 
-        public Efeito EscolherMoverOuComprar()
+        public async Task<Efeito> EscolherMoverOuComprar()
         {
-            throw new NotImplementedException();
+            bool mover = await Tabuleiro.GetInstance().InterfaceUsuario.EscolheMoverOuComprar();
+            return mover ? efeitoPassos : efeitoComprarCarta;  
         }
     }
 }

@@ -17,6 +17,10 @@ namespace Game
         Task MostrarCarta(Carta carta);
         Task<EfeitoPassos> EscolherPassos();
         Task<Propriedade> EscolherPropriedade(List<Propriedade> propriedades);
+        /// <summary>
+        /// Retorna true se for Mover e false se for Comprar
+        /// </summary>
+        Task<bool> EscolheMoverOuComprar();
         void AcabarJogo();
     }
 }

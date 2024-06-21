@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Unity
 {
-    public class EscolhaPropriedadeJanela : Janela
+    public class EscolherPropriedadeJanela : Janela
     {
         [SerializeField]
         private PropriedadeJanela _prefabPropriedade;

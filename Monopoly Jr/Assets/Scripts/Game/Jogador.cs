@@ -90,10 +90,6 @@ namespace Game
             posicao = posicaoCasa;
             await tabuleiro.InterfaceUsuario.TeleportarPersonagem(personagem, posicaoCasa);
             await casas[posicaoCasa].RealizarEfeitos();
-            if (posicaoCasa == 0)
-            {
-                GanharDinheiroPorVolta();
-            }
         }
     }
 }

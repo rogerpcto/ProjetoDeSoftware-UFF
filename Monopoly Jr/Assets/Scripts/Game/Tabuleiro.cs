@@ -6,9 +6,10 @@ namespace Game
 {
     public class Tabuleiro
     {
-        private const int POSICAO_PRISAO = 6;        
-        private const int POSICAO_GO_KARTS = 10;        
-        private const int POSICAO_CALCADAO = 23;        
+        private const int POSICAO_GO = 0;
+        private const int POSICAO_PRISAO = 6;
+        private const int POSICAO_GO_KARTS = 10;
+        private const int POSICAO_CALCADAO = 23;
 
         #region Singleton
         private static Tabuleiro instance;
@@ -66,8 +67,8 @@ namespace Game
                     new EfeitoEscolherPropriedade(Cor.MARROM, Cor.AMARELO)),
                 new("Avance para o Calçadão", new EfeitoTeleporte(POSICAO_CALCADAO)),
                 new("Avance até 5 casas à frente.", new EfeitoEscolherPassos()),
-                new("Avance 1 casa à frente ou pegue outra carta de Sorte.", new EfeitoEscolherPassos()),
-                new("Avance para o Início. Receba $2.", new EfeitoTeleporte(0)),
+                new("Avance 1 casa à frente ou pegue outra carta de Sorte.", new EfeitoMoverOuComprar()),
+                new("Avance para o Início. Receba $2.", new EfeitoGo(POSICAO_GO)),
                 new("Avance para os Carrinhos de Bate-Bate. Se ninguém a possui, pegue-a de GRAÇA! Caso contrário, PAGUE aluguel ao proprietário.",
                     new EfeitoPropriedadeGratis(POSICAO_GO_KARTS)),
                 new("Saia da prisão de graça. Guarde esta carta até precisar dela.", new EfeitoHabeasCorpus()),
@@ -111,7 +112,7 @@ namespace Game
         {
             InterfaceUsuario.MudarVez(JogadorAtual().GetPersonagem(), false);
 
-            jogadorDaVez++;    
+            jogadorDaVez++;
 
             if (jogadorDaVez >= jogadores.Count)
             {
