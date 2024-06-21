@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Game
 {
@@ -24,22 +25,25 @@ namespace Game
             }
             else
             {
-                EntregarCartaAoPersonagem();
+                await EntregarCartaAoPersonagem();
             }
         }
 
         private async Task EscolherPropriedade()
         {
             Jogador jogadorAtual = Tabuleiro.GetInstance().JogadorAtual();
-            List<Propriedade> propriedades = (List<Propriedade>)Tabuleiro.GetInstance().casas.OfType<Propriedade>();
-            List<Propriedade> propriedadesFiltradas = (List<Propriedade>)propriedades.Where(p => p.GetProprietario() == null);
-            if (propriedadesFiltradas.Count() == 0)
+            var propriedades = Tabuleiro.GetInstance().casas.OfType<Propriedade>();
+            var propriedadesFiltradas = propriedades.Where(p => p.GetProprietario() == null);
+
+            if (propriedadesFiltradas.Count() != 0)
             {
-                await Tabuleiro.GetInstance().InterfaceUsuario.EscolherPropriedade(propriedades);
+                Propriedade propriedade = await Tabuleiro.GetInstance().InterfaceUsuario.EscolherPropriedade(propriedades.ToList());
+                await jogadorAtual.Teleportar(propriedade.GetPosicao());
+
             }
             else
             {
-                Propriedade propriedade = await Tabuleiro.GetInstance().InterfaceUsuario.EscolherPropriedade(propriedadesFiltradas);
+                Propriedade propriedade = await Tabuleiro.GetInstance().InterfaceUsuario.EscolherPropriedade(propriedadesFiltradas.ToList());
                 propriedade.GetProprietario().Receber(propriedade.GetPreco());
                 jogadorAtual.Pagar(propriedade.GetPreco());
                 propriedade.RemoverProprietario(propriedade.GetProprietario());
@@ -47,7 +51,7 @@ namespace Game
             }
         }
 
-        private void EntregarCartaAoPersonagem()
+        private async Task EntregarCartaAoPersonagem()
         {
             Tabuleiro tabuleiro = Tabuleiro.GetInstance();
             List<Jogador> jogadores = tabuleiro.jogadores;
@@ -59,7 +63,8 @@ namespace Game
                 }
 
             }
-            tabuleiro.PegarCarta();
+            Efeito efeito = new EfeitoComprarCarta();
+            await efeito.RealizarEfeito();
         }
     }
 }
