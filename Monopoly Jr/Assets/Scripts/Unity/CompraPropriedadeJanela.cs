@@ -20,22 +20,33 @@ namespace Unity
             gameObject.SetActive(true);
             _buttonConfirm.onClick.RemoveAllListeners();
             _buttonCancel.onClick.RemoveAllListeners();
+            _buttonConfirm.enabled = false;
+            _buttonCancel.enabled = false;
 
             _propriedadeJanela.Inicializar(propriedade);
 
             _buttonConfirm.onClick.AddListener(async () =>
             {
-                await Fechar().AsTask(this);
+                await FecharEDesativarBotoes();
                 confirmar();
                 tcs.SetResult(Task.CompletedTask);
             });
             _buttonCancel.onClick.AddListener(async () =>
             {
-                await Fechar().AsTask(this);
+                await FecharEDesativarBotoes();
                 cancelar();
                 tcs.SetResult(Task.CompletedTask);
             });
             await Abrir().AsTask(this);
+            _buttonConfirm.enabled = true;
+            _buttonCancel.enabled = true;
+        }
+
+        private async Task FecharEDesativarBotoes()
+        {
+            await Fechar().AsTask(this);
+            _buttonConfirm.enabled = false;
+            _buttonCancel.enabled = false;
         }
     }
 }

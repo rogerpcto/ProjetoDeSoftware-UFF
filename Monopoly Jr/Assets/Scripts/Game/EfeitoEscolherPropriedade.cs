@@ -26,7 +26,6 @@ namespace Game
 
             if (propriedade.GetProprietario() == null)
             {
-                jogadorAtual.propriedades.Add(propriedade);
                 propriedade.SetProprietario(jogadorAtual);
             }
             await jogadorAtual.Teleportar(propriedade.GetPosicao());

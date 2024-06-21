@@ -17,6 +17,8 @@ namespace Unity
         {
             gameObject.SetActive(true);
 
+            List<Button> buttons = new List<Button>();
+
             foreach (Propriedade propriedade in propriedades)
             {
                 PropriedadeJanela propriedadeJanela = Instantiate(_prefabPropriedade, _grid);
@@ -31,9 +33,15 @@ namespace Unity
                     }
                     tcs.SetResult(propriedade);
                 });
+                button.enabled = false;
+                buttons.Add(button);
             }
 
             await Abrir().AsTask(this);
+            foreach (Button button in buttons)
+            {
+                button.enabled = true;
+            }
         }
     }
 }
