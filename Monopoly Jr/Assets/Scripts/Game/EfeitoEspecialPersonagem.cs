@@ -1,7 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Game
 {
     public class EfeitoEspecialPersonagem : Efeito
@@ -20,31 +16,46 @@ namespace Game
             Jogador jogador = Tabuleiro.GetInstance().JogadorAtual();
             if (jogador.GetPersonagem() == personagem)
             {
-                var propriedades = Tabuleiro.GetInstance().casas.OfType<Propriedade>(); ;
-                var propriedadesSemProprietario = propriedades.Where(p => p.GetProprietario() == null);
-                if (propriedadesSemProprietario.Count() > 0)
-                {
-                await Tabuleiro.GetInstance().InterfaceUsuario.EscolherPropriedade(propriedadesSemProprietario.ToList());
-                }
-                else
-                {
-
-                }
+                await EscolherPropriedade();
             }
             else
             {
-
+                EntregarCartaAoPersonagem();
             }
         }
 
-        private Propriedade EscolherPropriedade()
+        private async Task EscolherPropriedade()
         {
-            throw new NotImplementedException();
+            Jogador jogadorAtual = Tabuleiro.GetInstance().JogadorAtual();
+            List<Propriedade> propriedades = (List<Propriedade>)Tabuleiro.GetInstance().casas.OfType<Propriedade>();
+            List<Propriedade> propriedadesFiltradas = (List<Propriedade>)propriedades.Where(p => p.GetProprietario() == null);
+            if (propriedadesFiltradas.Count() == 0)
+            {
+                await Tabuleiro.GetInstance().InterfaceUsuario.EscolherPropriedade(propriedades);
+            }
+            else
+            {
+                Propriedade propriedade = await Tabuleiro.GetInstance().InterfaceUsuario.EscolherPropriedade(propriedadesFiltradas);
+                propriedade.GetProprietario().Receber(propriedade.GetPreco());
+                jogadorAtual.Pagar(propriedade.GetPreco());
+                propriedade.RemoverProprietario(propriedade.GetProprietario());
+                propriedade.SetProprietario(jogadorAtual);
+            }
         }
 
         private void EntregarCartaAoPersonagem()
         {
-            throw new NotImplementedException();
+            Tabuleiro tabuleiro = Tabuleiro.GetInstance();
+            List<Jogador> jogadores = tabuleiro.jogadores;
+            foreach (Jogador jogador in jogadores)
+            {
+                if (jogador.GetPersonagem() == personagem)
+                {
+                    jogador.efeitoInicial = this;
+                }
+
+            }
+            tabuleiro.PegarCarta();
         }
     }
 }

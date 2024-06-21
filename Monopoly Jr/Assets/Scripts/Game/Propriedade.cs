@@ -1,6 +1,3 @@
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Game
 {
     public class Propriedade : Casa
@@ -80,14 +77,26 @@ namespace Game
             proprietario = jogador;
             Propriedade propriedadeMesmaCor = jogador.propriedades.FirstOrDefault(p => p.Cor == Cor);
             jogador.propriedades.Add(this);
-            
+
             if (propriedadeMesmaCor != null)
             {
                 aluguelDobrado = true;
                 propriedadeMesmaCor.aluguelDobrado = true;
-                
+
             }
             tabuleiro.InterfaceUsuario.AdicionarPropriedade(jogador.GetPersonagem(), this);
+        }
+        public void RemoverProprietario(Jogador jogador)
+        {
+            proprietario = null;
+            foreach (Propriedade propriedade in jogador.propriedades)
+            {
+                if (propriedade == this)
+                {
+                    jogador.propriedades.Remove(propriedade);
+                    aluguelDobrado = false;
+                }
+            }
         }
     }
 }
