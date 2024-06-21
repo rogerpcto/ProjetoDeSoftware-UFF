@@ -30,22 +30,22 @@ namespace Unity
         {
             _jogadoresUI[(int)personagem].MudarVez(vez);
         }
-        
+
         public void AtualizarSaldo(Personagem personagem, int saldo)
         {
             _jogadoresUI[(int)personagem].AtualizarSaldo(saldo);
         }
-        
+
         public void AdicionarPropriedade(Personagem personagem, Propriedade propriedade)
         {
             _jogadoresUI[(int)personagem].AdicionaPropriedade(propriedade);
         }
-        
+
         public void RemoverPropriedade(Personagem personagem, Propriedade propriedade)
         {
             _jogadoresUI[(int)personagem].RemovePropriedade(propriedade);
         }
-        
+
         public async Task AnimarDado(int resultado)
         {
             await dado.RolarDado(resultado).AsTask(this);
@@ -55,7 +55,7 @@ namespace Unity
         {
             await MoverPersonagem(personagem, posicaoFinal).AsTask(this);
         }
-        
+
         public async Task TeleportarPersonagem(Personagem personagem, int posicaoFinal)
         {
             await MoverPersonagem(personagem, posicaoFinal).AsTask(this);
@@ -110,10 +110,10 @@ namespace Unity
 
             return resultado;
         }
-        public async Task<Propriedade> EscolherPropriedade(Cor cor1, Cor cor2)
+        public async Task<Propriedade> EscolherPropriedade(List<Propriedade> propriedades)
         {
             var tcs = new TaskCompletionSource<Propriedade>();
-            await escolhaPropriedadeJanela.Inicializar(cor1, cor2, tcs);
+            await escolhaPropriedadeJanela.Inicializar(propriedades, tcs);
             Propriedade resultado = await tcs.Task;
 
             return resultado;

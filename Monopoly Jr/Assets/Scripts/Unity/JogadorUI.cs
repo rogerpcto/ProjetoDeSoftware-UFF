@@ -35,7 +35,7 @@ namespace Unity
             propriedadeUI.transform.SetParent(_gridPropriedades);
             _propriedadesUI.Add(propriedadeUI);
         }
-        
+
         public void RemovePropriedade(Propriedade propriedade)
         {
             PropriedadeUI propriedadeUI = _propriedadesUI.Find(p => p.Nome == propriedade.GetNome());

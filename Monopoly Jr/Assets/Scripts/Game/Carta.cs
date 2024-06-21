@@ -6,7 +6,7 @@ namespace Game
     {
         private string texto;
         private Efeito efeito;
-        
+
         public Carta(string texto, Efeito efeito)
         {
             this.texto = texto;

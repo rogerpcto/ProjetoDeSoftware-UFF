@@ -1,5 +1,5 @@
 using Game;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,18 +13,11 @@ namespace Unity
         [SerializeField]
         private Transform _grid;
 
-        public async Task Inicializar(Cor cor1, Cor cor2, TaskCompletionSource<Propriedade> tcs)
+        public async Task Inicializar(List<Propriedade> propriedades, TaskCompletionSource<Propriedade> tcs)
         {
             gameObject.SetActive(true);
 
-            var propriedades = Tabuleiro.GetInstance().casas.OfType<Propriedade>(); ;
-            var propriedadesFiltradas = propriedades.Where(p => p.GetProprietario() != null && (p.Cor == cor1 || p.Cor == cor2));
-            if (propriedadesFiltradas.Count() == 0)
-            {
-                propriedadesFiltradas = propriedades.Where(p => p.Cor == cor1 || p.Cor == cor2);
-            }
-
-            foreach (Propriedade propriedade in propriedadesFiltradas)
+            foreach (Propriedade propriedade in propriedades)
             {
                 PropriedadeJanela propriedadeJanela = Instantiate(_prefabPropriedade, _grid);
                 propriedadeJanela.Inicializar(propriedade);
@@ -39,8 +32,8 @@ namespace Unity
                     tcs.SetResult(propriedade);
                 });
             }
-            
+
             await Abrir().AsTask(this);
         }
     }
-} 
+}

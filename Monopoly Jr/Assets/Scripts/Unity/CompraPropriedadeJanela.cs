@@ -1,7 +1,6 @@
 using Game;
 using System;
 using System.Threading.Tasks;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,4 +38,4 @@ namespace Unity
             await Abrir().AsTask(this);
         }
     }
-} 
+}

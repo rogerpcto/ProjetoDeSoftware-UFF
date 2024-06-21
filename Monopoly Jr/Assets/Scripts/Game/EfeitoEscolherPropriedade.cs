@@ -1,5 +1,4 @@
-using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Game
@@ -19,7 +18,7 @@ namespace Game
             this.cor1 = cor1;
             this.cor2 = cor1;
         }
-           
+
         public async Task RealizarEfeito()
         {
             Propriedade propriedade = await EscolherPropriedadeCor();
@@ -30,12 +29,18 @@ namespace Game
                 jogadorAtual.propriedades.Add(propriedade);
                 propriedade.SetProprietario(jogadorAtual);
             }
-            jogadorAtual.Teleportar(propriedade.GetPosicao());
+            await jogadorAtual.Teleportar(propriedade.GetPosicao());
         }
 
         private async Task<Propriedade> EscolherPropriedadeCor()
         {
-            return await Tabuleiro.GetInstance().InterfaceUsuario.EscolherPropriedade(cor1, cor2);
+            var propriedades = Tabuleiro.GetInstance().casas.OfType<Propriedade>(); ;
+            var propriedadesFiltradas = propriedades.Where(p => p.GetProprietario() == null && (p.Cor == cor1 || p.Cor == cor2));
+            if (propriedadesFiltradas.Count() == 0)
+            {
+                propriedadesFiltradas = propriedades.Where(p => p.Cor == cor1 || p.Cor == cor2);
+            }
+            return await Tabuleiro.GetInstance().InterfaceUsuario.EscolherPropriedade(propriedadesFiltradas.ToList());
         }
     }
 }

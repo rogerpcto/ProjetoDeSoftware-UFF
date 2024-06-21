@@ -17,7 +17,7 @@ namespace Game
         public async Task RealizarEfeito()
         {
         }
-        
+
         private Propriedade EscolherPropriedade()
         {
             throw new NotImplementedException();

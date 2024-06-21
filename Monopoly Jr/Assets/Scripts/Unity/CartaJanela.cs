@@ -27,9 +27,9 @@ namespace Unity
             });
             await Abrir().AsTask(this);
             _texto.text = "?";
-            await FadeTexto(1,0).AsTask(this);
+            await FadeTexto(1, 0).AsTask(this);
             _texto.text = carta.GetTexto();
-            await FadeTexto(0,1).AsTask(this);
+            await FadeTexto(0, 1).AsTask(this);
         }
 
         private IEnumerator FadeTexto(float alphaInicial, float alphaFinal)
@@ -46,4 +46,4 @@ namespace Unity
             }
         }
     }
-} 
+}

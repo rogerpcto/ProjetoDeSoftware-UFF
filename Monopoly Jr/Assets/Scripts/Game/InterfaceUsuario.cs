@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Game
@@ -15,7 +16,7 @@ namespace Game
         Task TeleportarPersonagem(Personagem personagem, int posicaoFinal);
         Task MostrarCarta(Carta carta);
         Task<EfeitoPassos> EscolherPassos();
-        Task<Propriedade> EscolherPropriedade(Cor cor1, Cor cor2);
+        Task<Propriedade> EscolherPropriedade(List<Propriedade> propriedades);
         void AcabarJogo();
     }
 }
