@@ -11,6 +11,8 @@ namespace Game
         private readonly Personagem personagem;
 
         public List<Propriedade> propriedades = new();
+        public EfeitoEspecialPersonagem efeitoEspecialPersonagem;
+        public EfeitoPrisao efeitoPrisao;
         public Efeito efeitoInicial;
         public EfeitoHabeasCorpus efeitoHabeasCorpus;
 
@@ -55,10 +57,13 @@ namespace Game
 
         public async Task IniciarRodada()
         {
-            if (efeitoInicial != null)
+            if (efeitoPrisao != null)
             {
-                await efeitoInicial.RealizarEfeito();
-                efeitoInicial = null;
+                await efeitoPrisao.RealizarEfeito();
+            }
+            if (efeitoEspecialPersonagem != null)
+            {
+                await efeitoEspecialPersonagem.RealizarEfeito();
             }
 
             int passos = await JogarDado();
