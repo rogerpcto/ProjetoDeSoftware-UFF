@@ -21,6 +21,7 @@ namespace Game
         /// Retorna true se for Mover e false se for Comprar
         /// </summary>
         Task<bool> EscolheMoverOuComprar();
+        Task MostrarMensagem(string message);
         void AcabarJogo();
     }
 }

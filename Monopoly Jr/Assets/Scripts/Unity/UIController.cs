@@ -16,17 +16,19 @@ namespace Unity
         [SerializeField]
         private List<JogadorUI> _jogadoresUI;
         [SerializeField]
-        private Dado dado;
+        private Dado _dado;
         [SerializeField]
-        private ComprarPropriedadeJanela comprarPropriedadeJanela;
+        private ComprarPropriedadeJanela _comprarPropriedadeJanela;
         [SerializeField]
-        private CartaJanela cartaJanela;
+        private CartaJanela _cartaJanela;
         [SerializeField]
-        private PassosJanela passosJanela;
+        private PassosJanela _passosJanela;
         [SerializeField]
-        private EscolherPropriedadeJanela escolherPropriedadeJanela;
+        private EscolherPropriedadeJanela _escolherPropriedadeJanela;
         [SerializeField]
-        private MoverOuComprarJanela moverOuComprarJanela;
+        private MoverOuComprarJanela _moverOuComprarJanela;
+        [SerializeField]
+        private JanelaGenerica janelaGenerica;
 
         public void MudarVez(Personagem personagem, bool vez)
         {
@@ -50,7 +52,7 @@ namespace Unity
 
         public async Task AnimarDado(int resultado)
         {
-            await dado.RolarDado(resultado).AsTask(this);
+            await _dado.RolarDado(resultado).AsTask(this);
         }
 
         public async Task MoverPersonagemUmPasso(Personagem personagem, int posicaoFinal)
@@ -85,29 +87,24 @@ namespace Unity
             personagemAtual.SetParent(_casas[posicaoFinal].transform);
         }
 
-        public void AcabarJogo()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task PerguntarComprarPropriedade(Propriedade propriedade, Action opcao1, Action opcao2)
         {
             var tcs = new TaskCompletionSource<Task>();
-            await comprarPropriedadeJanela.Inicializar(propriedade, opcao1, opcao2, tcs);
+            await _comprarPropriedadeJanela.Inicializar(propriedade, opcao1, opcao2, tcs);
             await tcs.Task;
         }
 
         public async Task MostrarCarta(Carta carta)
         {
             var tcs = new TaskCompletionSource<Task>();
-            await cartaJanela.Inicializar(carta, tcs);
+            await _cartaJanela.Inicializar(carta, tcs);
             await tcs.Task;
         }
 
         public async Task<EfeitoPassos> EscolherPassos()
         {
             var tcs = new TaskCompletionSource<EfeitoPassos>();
-            await passosJanela.Inicializar(tcs);
+            await _passosJanela.Inicializar(tcs);
             EfeitoPassos resultado = await tcs.Task;
 
             return resultado;
@@ -115,7 +112,7 @@ namespace Unity
         public async Task<Propriedade> EscolherPropriedade(List<Propriedade> propriedades)
         {
             var tcs = new TaskCompletionSource<Propriedade>();
-            await escolherPropriedadeJanela.Inicializar(propriedades, tcs);
+            await _escolherPropriedadeJanela.Inicializar(propriedades, tcs);
             Propriedade resultado = await tcs.Task;
 
             return resultado;
@@ -124,11 +121,24 @@ namespace Unity
         public async Task<bool> EscolheMoverOuComprar()
         {
             var tcs = new TaskCompletionSource<bool>();
-            await moverOuComprarJanela.Inicializar(tcs);
+            await _moverOuComprarJanela.Inicializar(tcs);
 
             bool resultado = await tcs.Task;
 
             return resultado;
+        }
+
+        public async Task MostrarMensagem(string message)
+        {
+            var tcs = new TaskCompletionSource<Task>();
+            await janelaGenerica.Inicializar(message, tcs);
+
+            await tcs.Task;
+        }
+
+        public void AcabarJogo()
+        {
+            throw new NotImplementedException();
         }
     }
 }

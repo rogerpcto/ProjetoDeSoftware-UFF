@@ -21,6 +21,9 @@ namespace Game
                 jogadores.Add(new(personagem));
             }
 
+            Random random = new();
+            jogadores = jogadores.OrderBy(c => random.Next()).ToList();
+
             casas = new()
             {
                 new Casa("GO", 0, null),
