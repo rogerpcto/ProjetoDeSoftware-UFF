@@ -42,11 +42,20 @@ namespace Game
             }
             else
             {
-                Propriedade propriedade = await Tabuleiro.GetInstance().InterfaceUsuario.EscolherPropriedade(propriedades.ToList());
-                propriedade.GetProprietario().Receber(propriedade.GetPreco());
-                jogadorAtual.Pagar(propriedade.GetPreco());
+                propriedadesFiltradas = propriedades.Where(p => p.GetProprietario() != jogadorAtual);
+                Propriedade propriedade = await Tabuleiro.GetInstance().InterfaceUsuario.EscolherPropriedade(propriedadesFiltradas.ToList());
+                Jogador auxiliar = propriedade.GetProprietario();
+                //jogadorAtual.Pagar(propriedade.GetPreco());
                 propriedade.RemoverProprietario(propriedade.GetProprietario());
-                propriedade.SetProprietario(jogadorAtual);
+                await jogadorAtual.Teleportar(propriedade.GetPosicao());
+                if(propriedade.GetProprietario() == null)
+                {
+                    propriedade.SetProprietario(auxiliar);
+                }
+                else
+                {
+                    auxiliar.Receber(propriedade.GetPreco());
+                }
             }
         }
 

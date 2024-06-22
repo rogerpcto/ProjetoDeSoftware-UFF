@@ -20,7 +20,7 @@ namespace Game
             proprietario = null;
             Cor = cor;
         }
-
+            
         public override async Task RealizarEfeitos()
         {
             Tabuleiro tabuleiro = Tabuleiro.GetInstance();
@@ -38,7 +38,7 @@ namespace Game
                     CobrarAluguel();
             }
         }
-
+       
         public bool ChecarProprietario(Jogador jogador)
         {
             if (jogador == proprietario)
@@ -91,15 +91,10 @@ namespace Game
         }
         public void RemoverProprietario(Jogador jogador)
         {
+            Tabuleiro.GetInstance().InterfaceUsuario.RemoverPropriedade(proprietario.GetPersonagem(), this);
             proprietario = null;
-            foreach (Propriedade propriedade in jogador.propriedades)
-            {
-                if (propriedade == this)
-                {
-                    jogador.propriedades.Remove(propriedade);
-                    aluguelDobrado = false;
-                }
-            }
+            jogador.propriedades.Remove(this);
+            aluguelDobrado = false;
         }
     }
 }
