@@ -1,5 +1,6 @@
 using Game;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Unity
 {
@@ -9,7 +10,7 @@ namespace Unity
         private UIController _UIController;
         private Tabuleiro _tabuleiro;
 
-        private void Start()
+        public void IniciarJogo()
         {
             _tabuleiro = Tabuleiro.GetInstance();
             _tabuleiro.InterfaceUsuario = _UIController;
@@ -19,6 +20,11 @@ namespace Unity
                 jogador.Receber(0);
             }
             _tabuleiro.JogadorAtual().IniciarRodada();
+        }
+
+        public void ReiniciarJogo()
+        {
+            SceneManager.LoadScene("Game");
         }
     }
 }

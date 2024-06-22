@@ -28,7 +28,9 @@ namespace Unity
         [SerializeField]
         private MoverOuComprarJanela _moverOuComprarJanela;
         [SerializeField]
-        private JanelaGenerica janelaGenerica;
+        private JanelaGenerica _janelaGenerica;
+        [SerializeField]
+        private FimDeJogoJanela _fimDeJogojanela;
 
         public void MudarVez(Personagem personagem, bool vez)
         {
@@ -131,14 +133,14 @@ namespace Unity
         public async Task MostrarMensagem(string message)
         {
             var tcs = new TaskCompletionSource<Task>();
-            await janelaGenerica.Inicializar(message, tcs);
+            await _janelaGenerica.Inicializar(message, tcs);
 
             await tcs.Task;
         }
 
-        public void AcabarJogo()
+        public async Task AcabarJogo(Personagem vencedor)
         {
-            throw new NotImplementedException();
+            await _fimDeJogojanela.Inicializar(vencedor);
         }
     }
 }

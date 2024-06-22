@@ -22,6 +22,6 @@ namespace Game
         /// </summary>
         Task<bool> EscolheMoverOuComprar();
         Task MostrarMensagem(string message);
-        void AcabarJogo();
+        Task AcabarJogo(Personagem vencedor);
     }
 }

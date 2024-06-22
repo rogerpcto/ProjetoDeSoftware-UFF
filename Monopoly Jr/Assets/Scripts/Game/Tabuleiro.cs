@@ -110,9 +110,13 @@ namespace Game
         public InterfaceUsuario InterfaceUsuario;
         private int jogadorDaVez = 0;
         private int cartaDaVez;
+        private bool acabou;
 
         public void ProximoJogador()
         {
+            if (acabou)
+                return;
+
             InterfaceUsuario.MudarVez(JogadorAtual().GetPersonagem(), false);
 
             jogadorDaVez++;
@@ -143,6 +147,17 @@ namespace Game
             if (cartaDaVez >= cartas.Count)
                 EmbaralharCartas();
             return cartas[cartaDaVez];
+        }
+
+        public void AcabarJogo()
+        {
+            // Lógica de escolher o vencedor
+            Personagem vencedor = JogadorAtual().GetPersonagem();
+            InterfaceUsuario.AcabarJogo(vencedor);
+
+            // Não mexe aqui, é para controlar o final do jogo
+            instance = null;
+            acabou = true;
         }
     }
 }

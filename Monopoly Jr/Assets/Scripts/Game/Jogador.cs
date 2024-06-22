@@ -49,7 +49,7 @@ namespace Game
             saldo -= dinheiro;
             tabuleiro.InterfaceUsuario.AtualizarSaldo(personagem, saldo);
             if (saldo < 0)
-                tabuleiro.InterfaceUsuario.AcabarJogo();
+                tabuleiro.AcabarJogo();
         }
 
         public async Task IniciarRodada()
