@@ -20,7 +20,7 @@ namespace Game
             proprietario = null;
             Cor = cor;
         }
-            
+
         public override async Task RealizarEfeitos()
         {
             Tabuleiro tabuleiro = Tabuleiro.GetInstance();
@@ -38,7 +38,7 @@ namespace Game
                     CobrarAluguel();
             }
         }
-       
+
         public bool ChecarProprietario(Jogador jogador)
         {
             if (jogador == proprietario)

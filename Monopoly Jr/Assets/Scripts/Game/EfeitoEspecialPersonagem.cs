@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Game
 {
@@ -48,7 +47,7 @@ namespace Game
                 //jogadorAtual.Pagar(propriedade.GetPreco());
                 propriedade.RemoverProprietario(propriedade.GetProprietario());
                 await jogadorAtual.Teleportar(propriedade.GetPosicao());
-                if(propriedade.GetProprietario() == null)
+                if (propriedade.GetProprietario() == null)
                 {
                     propriedade.SetProprietario(auxiliar);
                 }

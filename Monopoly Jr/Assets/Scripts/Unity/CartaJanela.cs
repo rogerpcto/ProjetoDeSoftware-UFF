@@ -16,14 +16,14 @@ namespace Unity
 
         public async Task Inicializar(Carta carta, TaskCompletionSource<Task> tcs)
         {
-            _buttonConfirm.enabled = false;
+            _buttonConfirm.interactable = false;
             gameObject.SetActive(true);
             _buttonConfirm.onClick.RemoveAllListeners();
 
             _buttonConfirm.onClick.AddListener(async () =>
             {
                 await Fechar().AsTask(this);
-                _buttonConfirm.enabled = false;
+                _buttonConfirm.interactable = false;
                 await carta.RealizarEfeito();
                 tcs.SetResult(Task.CompletedTask);
             });
@@ -32,7 +32,14 @@ namespace Unity
             await FadeTexto(1, 0).AsTask(this);
             _texto.text = carta.GetTexto();
             await FadeTexto(0, 1).AsTask(this);
-            _buttonConfirm.enabled = true;
+
+            if (ehBot)
+            {
+                await Task.Delay(750);
+                _buttonConfirm.onClick.Invoke();
+            }
+            else
+                _buttonConfirm.interactable = true;
         }
 
         private IEnumerator FadeTexto(float alphaInicial, float alphaFinal)

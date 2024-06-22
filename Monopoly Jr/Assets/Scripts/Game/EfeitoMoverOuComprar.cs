@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 
 namespace Game
@@ -23,7 +22,7 @@ namespace Game
         public async Task<Efeito> EscolherMoverOuComprar()
         {
             bool mover = await Tabuleiro.GetInstance().InterfaceUsuario.EscolheMoverOuComprar();
-            return mover ? efeitoPassos : efeitoComprarCarta;  
+            return mover ? efeitoPassos : efeitoComprarCarta;
         }
     }
 }

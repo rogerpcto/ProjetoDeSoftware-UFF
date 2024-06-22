@@ -14,20 +14,29 @@ namespace Unity
 
         public async Task Inicializar(string message, TaskCompletionSource<Task> tcs)
         {
-            _buttonOk.enabled = false;
+            _buttonOk.interactable = false;
             gameObject.SetActive(true);
             _buttonOk.onClick.RemoveAllListeners();
 
             _buttonOk.onClick.AddListener(async () =>
             {
                 await Fechar().AsTask(this);
-                _buttonOk.enabled = false;
+                _buttonOk.interactable = false;
                 tcs.SetResult(Task.CompletedTask);
             });
             _texto.text = "?";
             await Abrir().AsTask(this);
             _texto.text = message;
-            _buttonOk.enabled = true;
+
+            if (ehBot)
+            {
+                await Task.Delay(750);
+                _buttonOk.onClick.Invoke();
+            }
+            else
+            {
+                _buttonOk.interactable = true;
+            }
         }
     }
 }

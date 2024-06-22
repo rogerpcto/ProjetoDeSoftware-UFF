@@ -1,5 +1,3 @@
-using Game;
-using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,8 +16,8 @@ namespace Unity
             gameObject.SetActive(true);
             _buttonMover.onClick.RemoveAllListeners();
             _buttonComprar.onClick.RemoveAllListeners();
-            _buttonMover.enabled = false;
-            _buttonComprar.enabled = false;
+            _buttonMover.interactable = false;
+            _buttonComprar.interactable = false;
 
             _buttonMover.onClick.AddListener(async () =>
             {
@@ -32,15 +30,29 @@ namespace Unity
                 tcs.SetResult(false);
             });
             await Abrir().AsTask(this);
-            _buttonMover.enabled = true;
-            _buttonComprar.enabled = true;
+
+            if (ehBot)
+            {
+                await Task.Delay(750);
+                System.Random random = new();
+                int botao = random.Next(2);
+                if (botao == 0)
+                    _buttonMover.onClick.Invoke();
+                else
+                    _buttonComprar.onClick.Invoke();
+            }
+            else
+            {
+                _buttonMover.interactable = true;
+                _buttonComprar.interactable = true;
+            }
         }
 
         private async Task FecharEDesativarBotoes()
         {
             await Fechar().AsTask(this);
-            _buttonMover.enabled = false;
-            _buttonComprar.enabled = false;
+            _buttonMover.interactable = false;
+            _buttonComprar.interactable = false;
         }
     }
 }

@@ -35,15 +35,26 @@ namespace Unity
                     }
                     tcs.SetResult(propriedade);
                 });
-                button.enabled = false;
+                button.interactable = false;
                 buttons.Add(button);
             }
 
             await Abrir().AsTask(this);
             _scrollbar.value = 1;
-            foreach (Button button in buttons)
+
+            if (ehBot)
             {
-                button.enabled = true;
+                System.Random random = new();
+                int botao = random.Next(buttons.Count);
+                await Task.Delay(750);
+                buttons[botao].onClick.Invoke();
+            }
+            else
+            {
+                foreach (Button button in buttons)
+                {
+                    button.interactable = true;
+                }
             }
         }
     }

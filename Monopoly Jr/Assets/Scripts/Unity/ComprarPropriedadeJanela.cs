@@ -20,8 +20,8 @@ namespace Unity
             gameObject.SetActive(true);
             _buttonConfirm.onClick.RemoveAllListeners();
             _buttonCancel.onClick.RemoveAllListeners();
-            _buttonConfirm.enabled = false;
-            _buttonCancel.enabled = false;
+            _buttonConfirm.interactable = false;
+            _buttonCancel.interactable = false;
 
             _propriedadeJanela.Inicializar(propriedade);
 
@@ -38,15 +38,29 @@ namespace Unity
                 tcs.SetResult(Task.CompletedTask);
             });
             await Abrir().AsTask(this);
-            _buttonConfirm.enabled = true;
-            _buttonCancel.enabled = true;
+
+            if (ehBot)
+            {
+                await Task.Delay(750);
+                System.Random random = new();
+                int botao = random.Next(2);
+                if (botao == 0)
+                    _buttonConfirm.onClick.Invoke();
+                else
+                    _buttonCancel.onClick.Invoke();
+            }
+            else
+            {
+                _buttonConfirm.interactable = true;
+                _buttonCancel.interactable = true;
+            }
         }
 
         private async Task FecharEDesativarBotoes()
         {
             await Fechar().AsTask(this);
-            _buttonConfirm.enabled = false;
-            _buttonCancel.enabled = false;
+            _buttonConfirm.interactable = false;
+            _buttonCancel.interactable = false;
         }
     }
 }

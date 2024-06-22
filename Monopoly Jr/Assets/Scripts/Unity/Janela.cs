@@ -1,3 +1,4 @@
+using Game;
 using System.Collections;
 using UnityEngine;
 
@@ -5,6 +6,8 @@ namespace Unity
 {
     public class Janela : MonoBehaviour
     {
+        protected bool ehBot => Tabuleiro.GetInstance().JogadorAtual().EhBot();
+
         protected IEnumerator Abrir()
         {
             Vector2 scaleInicial = Vector3.zero;

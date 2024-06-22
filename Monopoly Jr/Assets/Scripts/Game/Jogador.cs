@@ -9,6 +9,7 @@ namespace Game
         private int saldo;
         private int posicao;
         private readonly Personagem personagem;
+        private readonly bool ehBot;
 
         public List<Propriedade> propriedades = new();
         public EfeitoEspecialPersonagem efeitoEspecialPersonagem;
@@ -16,11 +17,12 @@ namespace Game
         public Efeito efeitoInicial;
         public EfeitoHabeasCorpus efeitoHabeasCorpus;
 
-        public Jogador(Personagem personagem)
+        public Jogador(Personagem personagem, bool ehBot)
         {
             saldo = 18;
             posicao = 0;
             this.personagem = personagem;
+            this.ehBot = ehBot;
         }
 
         public Personagem GetPersonagem() => personagem;
@@ -104,5 +106,7 @@ namespace Game
         {
             saldo += valor;
         }
+
+        public bool EhBot() => ehBot;
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-//using Unity.VisualScripting;
 
 namespace Game
 {
@@ -19,7 +18,7 @@ namespace Game
         {
             foreach (Personagem personagem in Enum.GetValues(typeof(Personagem)))
             {
-                jogadores.Add(new(personagem));
+                jogadores.Add(new(personagem, true));
             }
 
             Random random = new();

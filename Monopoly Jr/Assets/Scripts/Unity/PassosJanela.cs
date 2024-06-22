@@ -14,7 +14,7 @@ namespace Unity
         {
             foreach (var button in _buttons)
             {
-                button.enabled = false;
+                button.interactable = false;
             }
             gameObject.SetActive(true);
             for (int i = 0; i < _buttons.Length; i++)
@@ -27,15 +27,26 @@ namespace Unity
                     await Fechar().AsTask(this);
                     foreach (var button in _buttons)
                     {
-                        button.enabled = false;
+                        button.interactable = false;
                     }
                     tcs.SetResult(efeito);
                 });
             }
             await Abrir().AsTask(this);
-            foreach (var button in _buttons)
+
+            if (ehBot)
             {
-                button.enabled = true;
+                System.Random random = new();
+                int botao = random.Next(_buttons.Length);
+                await Task.Delay(750);
+                _buttons[botao].onClick.Invoke();
+            }
+            else
+            {
+                foreach (var button in _buttons)
+                {
+                    button.interactable = true;
+                }
             }
         }
     }
