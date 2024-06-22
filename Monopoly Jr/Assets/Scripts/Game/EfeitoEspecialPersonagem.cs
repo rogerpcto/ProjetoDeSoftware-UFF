@@ -67,7 +67,7 @@ namespace Game
             {
                 if (jogador.GetPersonagem() == personagem)
                 {
-                    jogador.efeitoInicial = this;
+                    jogador.efeitoEspecialPersonagem = this;
                 }
 
             }

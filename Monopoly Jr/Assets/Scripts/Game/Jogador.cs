@@ -60,10 +60,12 @@ namespace Game
             if (efeitoPrisao != null)
             {
                 await efeitoPrisao.RealizarEfeito();
+                efeitoPrisao = null;
             }
             if (efeitoEspecialPersonagem != null)
             {
                 await efeitoEspecialPersonagem.RealizarEfeito();
+                efeitoEspecialPersonagem = null;
             }
 
             int passos = await JogarDado();
