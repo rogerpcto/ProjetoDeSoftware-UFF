@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+//using Unity.VisualScripting;
 
 namespace Game
 {
@@ -149,13 +150,59 @@ namespace Game
             return cartas[cartaDaVez];
         }
 
+        public int MaiorSaldo()
+        {
+            List<int> saldoJogadores = new List<int>();
+            foreach (Jogador jogador in jogadores)
+            {
+                saldoJogadores.Add(jogador.GetSaldo());
+            }
+            return saldoJogadores.Max();
+        }
+
+        public Jogador AcharVencedor(List<Jogador> vencedores)
+        {
+            foreach (Jogador jogador in vencedores)
+            {
+                foreach (Propriedade propriedade in jogador.propriedades)
+                {
+                    jogador.SetSaldo(propriedade.GetPreco());
+                }
+            }
+            int valorFinal = vencedores[0].GetSaldo();
+            foreach (Jogador jogador in vencedores)
+            {
+                if (jogador.GetSaldo() >= valorFinal)
+                {
+                    return jogador;
+                }
+            }
+            return vencedores[0];
+        }
+
         public void AcabarJogo()
         {
-            // Lógica de escolher o vencedor
-            Personagem vencedor = JogadorAtual().GetPersonagem();
-            InterfaceUsuario.AcabarJogo(vencedor);
+            Jogador vencedor;
+            List<Jogador> vencedores = new List<Jogador>();
+            int maiorSaldo = MaiorSaldo();
+            foreach (Jogador jogador in jogadores)
+            {
+                if (jogador.GetSaldo() == maiorSaldo)
+                {
+                    vencedores.Add(jogador);
+                }
+            }
 
-            // Não mexe aqui, é para controlar o final do jogo
+            if (vencedores.Count > 1)
+            {
+                vencedor = AcharVencedor(vencedores);
+            }
+            else
+            {
+                vencedor = vencedores[0];
+            }
+            InterfaceUsuario.AcabarJogo(vencedor.GetPersonagem());
+
             instance = null;
             acabou = true;
         }

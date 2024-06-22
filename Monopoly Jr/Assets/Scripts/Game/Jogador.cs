@@ -22,6 +22,7 @@ namespace Game
         }
 
         public Personagem GetPersonagem() => personagem;
+        public int GetSaldo() => saldo;
 
         private async Task<int> JogarDado()
         {
@@ -90,6 +91,11 @@ namespace Game
             posicao = posicaoCasa;
             await tabuleiro.InterfaceUsuario.TeleportarPersonagem(personagem, posicaoCasa);
             await casas[posicaoCasa].RealizarEfeitos();
+        }
+
+        public void SetSaldo(int valor)
+        {
+            saldo += valor;
         }
     }
 }
