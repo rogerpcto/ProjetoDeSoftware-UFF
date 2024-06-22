@@ -18,7 +18,7 @@ namespace Game
         {
             foreach (Personagem personagem in Enum.GetValues(typeof(Personagem)))
             {
-                jogadores.Add(new(personagem, true));
+                jogadores.Add(new(personagem, (int)personagem));
             }
 
             Random random = new();

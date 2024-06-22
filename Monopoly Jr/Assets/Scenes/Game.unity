@@ -1043,7 +1043,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5048294171563098130, guid: 2e9baf766cee6214c8ee3fa87d0ec090, type: 3}
       propertyPath: m_Name
-      value: UI Barco
+      value: UI P1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5048294171563098130, guid: 2e9baf766cee6214c8ee3fa87d0ec090, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5048294171563098131, guid: 2e9baf766cee6214c8ee3fa87d0ec090, type: 3}
       propertyPath: m_Pivot.x
@@ -1891,7 +1895,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: e177a69e5992d034daa300e30bc4d5d0, type: 3}
     - target: {fileID: 5048294171563098130, guid: 2e9baf766cee6214c8ee3fa87d0ec090, type: 3}
       propertyPath: m_Name
-      value: UI Gato
+      value: UI P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5048294171563098130, guid: 2e9baf766cee6214c8ee3fa87d0ec090, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5048294171563098131, guid: 2e9baf766cee6214c8ee3fa87d0ec090, type: 3}
       propertyPath: m_Pivot.x
@@ -10590,7 +10598,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: d20e4f2a57f4b8c4182f9fe14c03e8d9, type: 3}
     - target: {fileID: 5048294171563098130, guid: 2e9baf766cee6214c8ee3fa87d0ec090, type: 3}
       propertyPath: m_Name
-      value: UI Carro
+      value: UI P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5048294171563098130, guid: 2e9baf766cee6214c8ee3fa87d0ec090, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5048294171563098131, guid: 2e9baf766cee6214c8ee3fa87d0ec090, type: 3}
       propertyPath: m_Pivot.x
@@ -11733,7 +11745,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 8576d9256652be04e818397e92e82ed9, type: 3}
     - target: {fileID: 5048294171563098130, guid: 2e9baf766cee6214c8ee3fa87d0ec090, type: 3}
       propertyPath: m_Name
-      value: UI Cachorro
+      value: UI P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5048294171563098130, guid: 2e9baf766cee6214c8ee3fa87d0ec090, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5048294171563098131, guid: 2e9baf766cee6214c8ee3fa87d0ec090, type: 3}
       propertyPath: m_Pivot.x

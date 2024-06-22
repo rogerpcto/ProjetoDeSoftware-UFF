@@ -2,6 +2,7 @@ using Game;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -31,6 +32,20 @@ namespace Unity
         private JanelaGenerica _janelaGenerica;
         [SerializeField]
         private FimDeJogoJanela _fimDeJogojanela;
+
+        public void InicializarUI(List<Jogador> jogadoresEmOrdem)
+        {
+            JogadorUI[] jogadoresUIOrdenados = new JogadorUI[4];
+            for (int i = 0; i < _jogadoresUI.Count; i++)
+            {
+                Jogador jogador = jogadoresEmOrdem[i];
+                JogadorUI jogadorUI = _jogadoresUI[i];
+                jogadorUI.Inicializar(jogador);
+                jogadoresUIOrdenados[(int)jogador.GetPersonagem()] = jogadorUI;
+                jogadorUI.gameObject.SetActive(true);
+            }
+            _jogadoresUI = new List<JogadorUI>(jogadoresUIOrdenados);
+        }
 
         public void MudarVez(Personagem personagem, bool vez)
         {
