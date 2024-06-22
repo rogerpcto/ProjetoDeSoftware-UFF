@@ -34,13 +34,13 @@ namespace Game
         public async Task RealizarEfeito()
         {
             Tabuleiro tabuleiro = Tabuleiro.GetInstance();
-            
+
             Random random = new Random();
             int indiceAleatorio = random.Next(motivosParaPrisao.Count);
 
             await tabuleiro.InterfaceUsuario.MostrarMensagem(motivosParaPrisao[indiceAleatorio]);
             await efeitoTeleporte.RealizarEfeito();
-            Tabuleiro.GetInstance().JogadorAtual().efeitoInicial = efeitoPrisao;
+            Tabuleiro.GetInstance().JogadorAtual().efeitoPrisao = efeitoPrisao;
         }
     }
 }
