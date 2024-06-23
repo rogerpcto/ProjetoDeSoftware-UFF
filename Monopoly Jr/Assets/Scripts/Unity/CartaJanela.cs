@@ -35,7 +35,7 @@ namespace Unity
 
             if (ehBot)
             {
-                await Task.Delay(750);
+                await Task.Delay(1500);
                 _buttonConfirm.onClick.Invoke();
             }
             else

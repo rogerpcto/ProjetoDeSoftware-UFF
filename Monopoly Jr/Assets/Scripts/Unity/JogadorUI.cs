@@ -23,7 +23,7 @@ namespace Unity
         [SerializeField]
         private Image _image;
         private List<PropriedadeUI> _propriedadesUI = new();
-        
+
         private readonly Color[] _colors = new Color[5]
         {
             Color.gray,

@@ -30,9 +30,9 @@ namespace Game
             {
                 if (jogadorAtual.GetSaldo() >= preco)
                 {
-                await tabuleiro.InterfaceUsuario.PerguntarComprarPropriedade(this,
-                    () => Comprar(jogadorAtual),
-                    () => { });
+                    await tabuleiro.InterfaceUsuario.PerguntarComprarPropriedade(this,
+                        () => Comprar(jogadorAtual),
+                        () => { });
 
                 }
             }

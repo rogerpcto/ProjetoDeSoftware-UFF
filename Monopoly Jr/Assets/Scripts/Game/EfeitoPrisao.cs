@@ -10,10 +10,12 @@ namespace Game
             Jogador jogadorAtual = tabuleiro.JogadorAtual();
             if (!VerificarHabeasCorpus())
             {
+                await tabuleiro.InterfaceUsuario.MostrarMensagem("Você pagou a fiança de $ 1 para poder sair da prisão.");
                 CobrarMulta();
             }
             else
             {
+                await tabuleiro.InterfaceUsuario.MostrarMensagem("Você utilizou sua carta para sair da prisão de graça!");
                 jogadorAtual.efeitoHabeasCorpus.SairDaPrisao();
             }
             await Task.CompletedTask;

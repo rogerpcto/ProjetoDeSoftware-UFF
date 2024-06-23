@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 
 namespace Game
@@ -14,19 +13,19 @@ namespace Game
 
         public async Task RealizarEfeito()
         {
-            AplicarTransacao(transacao);
+            AplicarTransacao();
         }
 
-        private void AplicarTransacao(int valor)
+        private void AplicarTransacao()
         {
             Jogador jogadorAtual = Tabuleiro.GetInstance().JogadorAtual();
-            if(valor < 0)
+            if (transacao < 0)
             {
-                jogadorAtual.Pagar(-valor);
+                jogadorAtual.Pagar(-transacao);
             }
             else
             {
-                jogadorAtual.Receber(valor);
+                jogadorAtual.Receber(transacao);
             }
         }
 
