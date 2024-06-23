@@ -35,7 +35,7 @@ namespace Unity
                     }
                     tcs.SetResult(propriedade);
                 });
-                button.interactable = false;
+                button.enabled = false;
                 buttons.Add(button);
             }
 
@@ -53,7 +53,7 @@ namespace Unity
             {
                 foreach (Button button in buttons)
                 {
-                    button.interactable = true;
+                    button.enabled = true;
                 }
             }
         }

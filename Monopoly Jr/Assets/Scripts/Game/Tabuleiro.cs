@@ -16,14 +16,6 @@ namespace Game
 
         private Tabuleiro()
         {
-            foreach (Personagem personagem in Enum.GetValues(typeof(Personagem)))
-            {
-                jogadores.Add(new(personagem, (int)personagem));
-            }
-
-            Random random = new();
-            jogadores = jogadores.OrderBy(c => random.Next()).ToList();
-
             casas = new()
             {
                 new Casa("GO", 0, null),
@@ -111,6 +103,17 @@ namespace Game
         private int jogadorDaVez = 0;
         private int cartaDaVez;
         private bool acabou;
+
+        public void InicializarJogadores()
+        {
+            foreach (Personagem personagem in Enum.GetValues(typeof(Personagem)))
+            {
+                jogadores.Add(new(personagem, InterfaceUsuario.GetNumeroPlayer(personagem)));
+            }
+
+            Random random = new();
+            jogadores = jogadores.OrderBy(c => random.Next()).ToList();
+        }
 
         public void ProximoJogador()
         {

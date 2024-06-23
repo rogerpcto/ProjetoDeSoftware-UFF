@@ -2,7 +2,6 @@ using Game;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -16,6 +15,8 @@ namespace Unity
         private List<GameObject> _personagens;
         [SerializeField]
         private List<JogadorUI> _jogadoresUI;
+        [SerializeField]
+        private List<SeletorJogador> _seletoresDejogador;
         [SerializeField]
         private Dado _dado;
         [SerializeField]
@@ -31,7 +32,9 @@ namespace Unity
         [SerializeField]
         private JanelaGenerica _janelaGenerica;
         [SerializeField]
-        private FimDeJogoJanela _fimDeJogojanela;
+        private FimDeJogoJanela _fimDeJogoJanela;
+
+        public int GetNumeroPlayer(Personagem personagem) => _seletoresDejogador[(int)personagem].GetNumeroPlayer();
 
         public void InicializarUI(List<Jogador> jogadoresEmOrdem)
         {
@@ -155,7 +158,7 @@ namespace Unity
 
         public async Task AcabarJogo(Personagem vencedor)
         {
-            await _fimDeJogojanela.Inicializar(vencedor);
+            await _fimDeJogoJanela.Inicializar(vencedor);
         }
     }
 }

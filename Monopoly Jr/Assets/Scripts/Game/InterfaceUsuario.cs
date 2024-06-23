@@ -23,5 +23,6 @@ namespace Game
         Task<bool> EscolheMoverOuComprar();
         Task MostrarMensagem(string message);
         Task AcabarJogo(Personagem vencedor);
+        int GetNumeroPlayer(Personagem personagem);
     }
 }
