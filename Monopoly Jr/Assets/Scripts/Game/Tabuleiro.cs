@@ -64,7 +64,7 @@ namespace Game
                 new("Avance até 5 casas à frente.", new EfeitoEscolherPassos()),
                 new("Avance 1 casa à frente ou pegue outra carta de Sorte.", new EfeitoMoverOuComprar()),
                 new("Avance para o Início. Receba $2.", new EfeitoGo(POSICAO_GO)),
-                new("Avance para os Carrinhos de Bate-Bate. Se ninguém a possui, pegue-a de GRAÇA! Caso contrário, PAGUE aluguel ao proprietário.",
+                new("Avance para o Go Karts. Se ninguém a possui, pegue-a de GRAÇA! Caso contrário, PAGUE aluguel ao proprietário.",
                     new EfeitoPropriedadeGratis(POSICAO_GO_KARTS)),
                 new("Saia da prisão de graça. Guarde esta carta até precisar dela.", new EfeitoHabeasCorpus()),
                 new("Você fez todos os seus deveres! Receba $2 do Banco.", new EfeitoTransacao(2)),
@@ -168,7 +168,7 @@ namespace Game
             {
                 foreach (Propriedade propriedade in jogador.propriedades)
                 {
-                    jogador.SetSaldo(propriedade.GetPreco());
+                    jogador.Receber(propriedade.GetPreco());
                 }
             }
             int valorFinal = vencedores[0].GetSaldo();

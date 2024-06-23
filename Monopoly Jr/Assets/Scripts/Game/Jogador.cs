@@ -102,11 +102,6 @@ namespace Game
             await casas[posicaoCasa].RealizarEfeitos();
         }
 
-        public void SetSaldo(int valor)
-        {
-            saldo += valor;
-        }
-
         public int GetNumeroPlayer() => numeroPlayer;
         public bool EhBot() => numeroPlayer == 0;
     }
