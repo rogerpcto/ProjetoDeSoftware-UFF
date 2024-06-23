@@ -5,6 +5,7 @@ namespace Unity
 {
     public class RectTransformContextMenu
     {
+#if UNITY_EDITOR
         [MenuItem("CONTEXT/RectTransform/SetEasyAnchors", false, 151)]
         static void SetEasyAnchors()
         {
@@ -39,5 +40,6 @@ namespace Unity
                 }
             }
         }
+#endif
     }
 }
