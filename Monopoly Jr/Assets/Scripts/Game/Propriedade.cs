@@ -28,9 +28,12 @@ namespace Game
 
             if (proprietario == null)
             {
-                await tabuleiro.InterfaceUsuario.PerguntarComprarPropriedade(this,
-                    () => Comprar(jogadorAtual),
-                    () => { });
+                if (jogadorAtual.GetSaldo() >= preco)
+                {
+                    await tabuleiro.InterfaceUsuario.PerguntarComprarPropriedade(this,
+                        () => Comprar(jogadorAtual),
+                        () => { });
+                }
             }
             else
             {
