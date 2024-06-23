@@ -14,11 +14,20 @@ namespace Game
 
         public async Task RealizarEfeito()
         {
+            AplicarTransacao(transacao);
         }
 
-        private void AplicarTransacao()
+        private void AplicarTransacao(int valor)
         {
-            throw new NotImplementedException();
+            Jogador jogadorAtual = Tabuleiro.GetInstance().JogadorAtual();
+            if(valor < 0)
+            {
+                jogadorAtual.Pagar(-valor);
+            }
+            else
+            {
+                jogadorAtual.Receber(valor);
+            }
         }
 
     }
