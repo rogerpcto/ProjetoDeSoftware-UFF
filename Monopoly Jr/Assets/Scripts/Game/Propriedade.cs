@@ -30,9 +30,10 @@ namespace Game
             {
                 if (jogadorAtual.GetSaldo() >= preco)
                 {
-                    await tabuleiro.InterfaceUsuario.PerguntarComprarPropriedade(this,
-                        () => Comprar(jogadorAtual),
-                        () => { });
+                await tabuleiro.InterfaceUsuario.PerguntarComprarPropriedade(this,
+                    () => Comprar(jogadorAtual),
+                    () => { });
+
                 }
             }
             else
@@ -60,8 +61,14 @@ namespace Game
             {
                 valorAPagar *= 2;
             }
-            // jogador da Vez tem saldo suficiente? se não, passa todo o dinheiro dele pro proprietário e acaba o jogo
-            proprietario.Receber(valorAPagar);
+            if (jogadorDaVez.GetSaldo() < valorAPagar)
+            {
+                proprietario.Receber(jogadorDaVez.GetSaldo());
+            }
+            else
+            {
+                proprietario.Receber(valorAPagar);
+            }
             jogadorDaVez.Pagar(valorAPagar);
         }
 
