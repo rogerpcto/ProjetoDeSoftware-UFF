@@ -44,5 +44,10 @@ namespace Unity
             transform.localScale = scaleFinal;
             gameObject.SetActive(false);
         }
+
+        protected IEnumerator Esperar(float segundos)
+        {
+            yield return new WaitForSeconds(segundos);
+        }
     }
 }

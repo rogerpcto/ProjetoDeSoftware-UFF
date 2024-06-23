@@ -33,7 +33,7 @@ namespace Unity
 
             if (ehBot)
             {
-                await Task.Delay(750);
+                await Esperar(0.75f).AsTask(this);
                 System.Random random = new();
                 int botao = random.Next(2);
                 if (botao == 0)

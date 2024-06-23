@@ -38,7 +38,7 @@ namespace Unity
             {
                 System.Random random = new();
                 int botao = random.Next(_buttons.Length);
-                await Task.Delay(750);
+                await Esperar(0.75f).AsTask(this);
                 _buttons[botao].onClick.Invoke();
             }
             else
