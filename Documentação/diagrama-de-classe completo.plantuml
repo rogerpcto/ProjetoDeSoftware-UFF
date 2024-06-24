@@ -56,13 +56,12 @@ entity Propriedade{
     - Preco: int
     - Aluguel: int
     - AluguelDobrado : bool [= false]
-    - Proprietario : Jogador [= null]
 
     + RealizarEfeitos() : void
     + ChecarProprietario(Jogador) : bool
     + RemoverProprietario(Jogador) : void
-    + CobrarAluguel(): void
     + Comprar(Jogador): void
+    + CobrarAluguel(): void
 }
 
 entity Tabuleiro<<singleton>>{
@@ -156,19 +155,20 @@ entity EfeitoVaParaPrisao{
 
 Carta o- "*...*" Efeito : - Efeitos
 
-Casa --> "1...1" Efeito : - Efeito
+Casa --> Efeito : - Efeito
 
 Jogador  o-- "1...*" Propriedade : + Propriedades
 Jogador --> "1...1" Personagem : - Personagem
 Jogador --> Efeito : + EfeitoInicial
 
-Propriedade --> "1..1" Cor : + Cor
-Propriedade --> Jogador: - Proprietario
+Propriedade --> Cor : + Cor
+Propriedade --> "0..1" Jogador: - Proprietario
 Propriedade --|> Casa
 
 Tabuleiro *- "1...*" Jogador : + Jogadores[]
 Tabuleiro *- "1...*" Casa : + Casas[]
 Tabuleiro *- "1...*" Carta : + Cartas[]
+Tabuleiro --> InterfaceUsuario
 
 Efeito ..> EfeitoComprarCarta
 Efeito ..> EfeitoEscolhePropriedade
