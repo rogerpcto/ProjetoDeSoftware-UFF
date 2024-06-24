@@ -9,17 +9,12 @@ entity Carta{
     + RealizarEfeitos() : void
 }
 
-Carta o- "*...*" Efeito : - Efeitos
-
 entity Casa{
     - Nome: string
     - Posicao : int
 
     + RealizarEfeitos() : void
 }
-
-Casa --|> Propriedade
-Casa --> "1...1" Efeito : - Efeito
 
 enum Cor{
     AMARELO
@@ -49,10 +44,6 @@ entity Jogador{
     + Teleportar(int) : void
 }
 
-Jogador  o-- "1...*" Propriedade : + Propriedades
-Jogador --> "1...1" Personagem : - Personagem
-Jogador --> Efeito : + EfeitoInicial
-
 enum Personagem{
     BARCO
     CACHORRO
@@ -71,16 +62,25 @@ entity Propriedade{
     + Comprar(Jogador): void
 }
 
-Propriedade --> "1..1" Cor : + Cor
-Propriedade --> Jogador: - Proprietario
-
-entity Tabuleiro{
+entity Tabuleiro <<singleton>>{
     <u>- Instance : Tabuleiro</u>
 
     <u>+ GetInstance() : Tabuleiro</u>
     + ProximoJogador() : void
     + JogadorAtual(): Jogador
 }
+
+Carta o- "*...*" Efeito : - Efeitos
+
+Casa --|> Propriedade
+Casa --> "1...1" Efeito : - Efeito
+
+Jogador  o-- "1...*" Propriedade : + Propriedades
+Jogador --> "1...1" Personagem : - Personagem
+Jogador --> Efeito : + EfeitoInicial
+
+Propriedade --> "1..1" Cor : + Cor
+Propriedade --> Jogador: - Proprietario
 
 Tabuleiro *- "1...*" Jogador : + Jogadores
 Tabuleiro *- "1...*" Casa : + Casas
