@@ -62,12 +62,21 @@ entity Propriedade{
     + Comprar(Jogador): void
 }
 
-entity Tabuleiro <<singleton>>{
+entity Tabuleiro<<singleton>>{
     <u>- Instance : Tabuleiro</u>
+    - jogadorDaVez : int [=0]
+    - cartaDaVez : int
+    - acabou : bool
 
     <u>+ GetInstance() : Tabuleiro</u>
+    - EmbaralharCartas() : Cartas[Carta]
+    + InicializarJogadores(): void
     + ProximoJogador() : void
-    + JogadorAtual(): Jogador
+    + JogadorAtual() : Jogador
+    + PegarCarta() : Carta
+    + MaiorSaldo() : int
+    + AcharVencedor(Vencedores[Jogador]) : Jogador
+    + AcabarJogo() : void
 }
 
 Carta o- "*...*" Efeito : - Efeitos
@@ -82,8 +91,8 @@ Jogador --> Efeito : + EfeitoInicial
 Propriedade --> "1..1" Cor : + Cor
 Propriedade --> Jogador: - Proprietario
 
-Tabuleiro *- "1...*" Jogador : + Jogadores
-Tabuleiro *- "1...*" Casa : + Casas
-Tabuleiro *- "1...*" Carta : + Cartas
+Tabuleiro *- "1...*" Jogador : + Jogadores []
+Tabuleiro *- "1...*" Casa : + Casas []
+Tabuleiro *- "1...*" Carta : + Cartas []
 
 @enduml
