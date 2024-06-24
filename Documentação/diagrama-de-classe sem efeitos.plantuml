@@ -96,6 +96,5 @@ Propriedade --> "0..1" Jogador: - Proprietario
 Tabuleiro *- "1...*" Jogador : + Jogadores []
 Tabuleiro *- "1...*" Casa : + Casas []
 Tabuleiro *- "1...*" Carta : + Cartas []
-Tabuleiro --> InterfaceUsuario
 
 @enduml

@@ -169,18 +169,17 @@ Propriedade --|> Casa
 Tabuleiro *- "1...*" Jogador : + Jogadores[]
 Tabuleiro *- "1...*" Casa : + Casas[]
 Tabuleiro *- "1...*" Carta : + Cartas[]
-Tabuleiro --> InterfaceUsuario
 
-Efeito ..> EfeitoComprarCarta
-Efeito ..> EfeitoEscolhePropriedade
-Efeito ..> EfeitoEspecialPersonagem
-Efeito ..> EfeitoHabeasCorpus
-Efeito ..> EfeitoMoverOuComprar
-Efeito ..> EfeitoPassos
-Efeito ..> EfeitoPropriedadeGratis
-Efeito ..> EfeitoPrisao
-Efeito ..> EfeitoTeleporte
-Efeito ..> EfeitoTransacao
-Efeito ..> EfeitoVaParaPrisao
+EfeitoComprarCarta ..|> Efeito
+EfeitoEscolhePropriedade ..|> Efeito
+EfeitoEspecialPersonagem ..|> Efeito
+EfeitoHabeasCorpus ..|> Efeito
+EfeitoMoverOuComprar ..|> Efeito
+EfeitoPassos ..|> Efeito
+EfeitoPropriedadeGratis ..|> Efeito
+EfeitoPrisao ..|> Efeito
+EfeitoTeleporte ..|> Efeito
+EfeitoTransacao ..|> Efeito
+EfeitoVaParaPrisao ..|> Efeito
 
 @enduml
