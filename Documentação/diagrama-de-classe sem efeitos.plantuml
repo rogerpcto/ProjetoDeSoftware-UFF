@@ -10,8 +10,9 @@ entity Carta{
 }
 
 entity Casa{
-    - Nome: string
+    # Nome: string
     - Posicao : int
+    - Efeito : Efeito
 
     + RealizarEfeitos() : void
 }
@@ -54,11 +55,13 @@ enum Personagem{
 entity Propriedade{
     - Preco: int
     - Aluguel: int
-    - AluguelDobrado : bool
+    - AluguelDobrado : bool [= false]
+    - Proprietario : Jogador [= null]
 
     + RealizarEfeitos() : void
     + ChecarProprietario(Jogador) : bool
-    + CobrarAluguel(): int
+    + RemoverProprietario(Jogador) : void
+    + CobrarAluguel(): void
     + Comprar(Jogador): void
 }
 
@@ -81,13 +84,13 @@ entity Tabuleiro<<singleton>>{
 
 Carta o- "*...*" Efeito : - Efeitos
 
-Casa --|> Propriedade
 Casa --> "1...1" Efeito : - Efeito
 
 Jogador  o-- "1...*" Propriedade : + Propriedades
 Jogador --> "1...1" Personagem : - Personagem
 Jogador --> Efeito : + EfeitoInicial
 
+Propriedade --|> Casa
 Propriedade --> "1..1" Cor : + Cor
 Propriedade --> Jogador: - Proprietario
 
