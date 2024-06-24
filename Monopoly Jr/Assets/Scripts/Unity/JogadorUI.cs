@@ -56,9 +56,8 @@ namespace Unity
 
         public void AdicionaPropriedade(Propriedade propriedade)
         {
-            PropriedadeUI propriedadeUI = Instantiate(_propriedadePrefab);
+            PropriedadeUI propriedadeUI = Instantiate(_propriedadePrefab, _gridPropriedades);
             propriedadeUI.Inicializar(propriedade);
-            propriedadeUI.transform.SetParent(_gridPropriedades);
             _propriedadesUI.Add(propriedadeUI);
         }
 
