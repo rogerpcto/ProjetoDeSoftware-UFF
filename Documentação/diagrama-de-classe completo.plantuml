@@ -34,6 +34,7 @@ interface Efeito <<interface>>{
 entity Jogador{
     - Saldo : int
     - Posicao: int
+    - numeroPlayer: int {readonly}
     + EfeitoHabeasCorpus: EfeitoHabeasCorpus
 
     - JogarDado(): int
@@ -157,8 +158,8 @@ Carta o- "*...*" Efeito : - Efeitos
 
 Casa --> Efeito : - Efeito
 
-Jogador  o-- "1...*" Propriedade : + Propriedades
-Jogador --> "1...1" Personagem : - Personagem
+Jogador  o-- "1...*" Propriedade : + Propriedades[]
+Jogador --> Personagem : - Personagem {readonly}
 Jogador --> Efeito : + EfeitoInicial
 
 Propriedade --> Cor : + Cor
