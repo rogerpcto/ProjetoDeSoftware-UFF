@@ -19,12 +19,13 @@ class Casa{
 
 enum Cor{
     AMARELO
-    AZUL
-    BRANCO
+    AZUL_CLARO
+    AZUL_ESCURO
     LARANJA
     MARROM
+    VERDE
     VERMELHO
-    ROXO
+    ROSA
 }
 
 interface Efeito <<interface>>{
@@ -82,7 +83,7 @@ class Tabuleiro<<singleton>>{
     + AcabarJogo() : void
 }
 
-entity GUI <<interface>>{
+entity InterfaceUsuario <<interface>>{
     + MudarVezPersonagem(personagem : Personagem, vez : bool)
     + AtualizarSaldo(personagem: Personagem, saldo : int)
     + PerguntarCompraPropriedade(propriedade : Propriedade)
@@ -102,14 +103,20 @@ entity GUI <<interface>>{
 }
 
 entity EfeitoComprarCarta{
-    + RealizarEfeito()
+    + RealizarEfeito() : void
     - ComprarCarta() : void 
+}
+
+entity EfeitoEscolherPassos{
+    + RealizarEfeito() : void
+
+    - EscolherPassos() : void
 }
 
 entity EfeitoEscolherPropriedade{
     - Cor1, Cor2 : Cor
 
-    + RealizarEfeito()
+    + RealizarEfeito() : void
     - EscolherPropriedadeCor() : Propriedade
 }
 
@@ -117,13 +124,21 @@ entity EfeitoEspecialPersonagem{
     - EfeitoComprarCarta : EfeitoComprarCarta
     - Personagem : Personagem
 
-    + RealizarEfeito()
+    + RealizarEfeito() : void
     - EscolherPropriedade() : Propriedade
     - EntregarCartaAoPersonagem(Efeito) : void
 }
 
+entity EfeitoGO{
+    - EfeitoTeleporte : EfeitoTeleporte
+    - EfeitoTransacao : EfeitoTransacao 
+
+    + RealizarEfeito() : void
+    - SairDaPrisao() : void
+}
+
 entity EfeitoHabeasCorpus{
-    + RealizarEfeito()
+    + RealizarEfeito() : void
     - SairDaPrisao() : void
 }
 
@@ -131,46 +146,50 @@ entity EfeitoMoverOuComprar{
     - EfeitoPassos : EfeitoPassos
     - EfeitoComprarCarta : EfeitoComprarCarta
 
-    + RealizarEfeito()
+    + RealizarEfeito() : void
     - EscolherMoverOuComprar() : Efeito
 }
 
 entity EfeitoPassos{
     - Passos : int
 
-    + RealizarEfeito()
+    + RealizarEfeito() : void
     - AndarJogador() : void
 }
 
 entity EfeitoPrisao{
-    + RealizarEfeito()
+    + RealizarEfeito() : void
     - VerificarHabeasCorpus() : bool
     - CobrarMulta() : void
 }
 
 entity EfeitoPropriedadeGratis{
-    + RealizarEfeito()
+    - IndicePropriedade : int
+
+    + RealizarEfeito() : void
     - PegarOuPagar() : Propriedade
 }
 
 entity EfeitoTeleporte{
     - Destino : int
 
-    + RealizarEfeito()
+    + RealizarEfeito() : void
     - TeleportarJogador() : void
 }
 
 entity EfeitoTransacao{
     - Transacao : int
 
-    + RealizarEfeito()
+    + RealizarEfeito() : void
     - AplicarTransacao() : void
 }
 
 entity EfeitoVaParaPrisao{
+    - MotivosParaPrisao : List<string>
     - EfeitoTeleporte : EfeitoTeleporte
     - EfeitoPrisao : EfeitoPrisao
-    + RealizarEfeito()
+    
+    + RealizarEfeito() : void
 }
 
 Carta o- "*...*" Efeito : - Efeitos
@@ -188,11 +207,13 @@ Propriedade --|> Casa
 Tabuleiro *- "1...*" Jogador : + Jogadores[]
 Tabuleiro *- "1...*" Casa : + Casas[]
 Tabuleiro *- "1...*" Carta : + Cartas[]
-Tabuleiro --> GUI : + InterfaceUsuario
+Tabuleiro --> InterfaceUsuario : + InterfaceUsuario
 
 EfeitoComprarCarta ..|> Efeito
+EfeitoEscolherPassos ..|> Efeito
 EfeitoEscolherPropriedade ..|> Efeito
 EfeitoEspecialPersonagem ..|> Efeito
+EfeitoGO ..|> Efeito
 EfeitoHabeasCorpus ..|> Efeito
 EfeitoMoverOuComprar ..|> Efeito
 EfeitoPassos ..|> Efeito

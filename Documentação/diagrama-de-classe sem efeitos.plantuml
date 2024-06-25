@@ -18,12 +18,13 @@ class Casa{
 
 enum Cor{
     AMARELO
-    AZUL
-    BRANCO
+    AZUL_CLARO
+    AZUL_ESCURO
     LARANJA
     MARROM
+    VERDE
     VERMELHO
-    ROXO
+    ROSA
 }
 
 interface Efeito{
@@ -81,7 +82,7 @@ class Tabuleiro<<singleton>>{
     + AcabarJogo() : void
 }
 
-entity GUI <<interface>>{
+entity InterfaceUsuario <<interface>>{
     + MudarVezPersonagem(personagem : Personagem, vez : bool)
     + AtualizarSaldo(personagem: Personagem, saldo : int)
     + PerguntarCompraPropriedade(propriedade : Propriedade)
@@ -97,7 +98,6 @@ entity GUI <<interface>>{
     + MostrarCarta (carta : Carta)
     + MostrarMensagem (message : string)
     + AcabarJogo(vencedor : Personagem)
-
 }
 
 Carta o- "*...*" Efeito : - Efeitos
@@ -115,6 +115,6 @@ Propriedade --> "0..1" Jogador: - Proprietario
 Tabuleiro *- "1...*" Jogador : + Jogadores []
 Tabuleiro *- "1...*" Casa : + Casas []
 Tabuleiro *- "1...*" Carta : + Cartas []
-Tabuleiro --> GUI : + InterfaceUsuario
+Tabuleiro --> InterfaceUsuario : + InterfaceUsuario
 
 @enduml
