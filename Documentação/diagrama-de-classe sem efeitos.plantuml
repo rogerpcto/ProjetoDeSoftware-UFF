@@ -84,17 +84,17 @@ class Tabuleiro<<singleton>>{
 entity GUI <<interface>>{
     + MudarVezPersonagem(personagem : Personagem, vez : bool)
     + AtualizarSaldo(personagem: Personagem, saldo : int)
-    + PerguntarCompraPropriedade(propriedade : Propriedade)
+    + PerguntarCompraPropriedade(propriedade : Propriedade)  : task
     + AdicionarPropriedade (personagem: Personagem, propriedade : Propriedade)
     + RemoverPropriedade (personagem: Personagem, propriedade : Propriedade)
     + EscolherPropriedade (Propriedades : Propriedade[]) : Propriedade
-    + AnimarDado(resultado : int)
+    + AnimarDado(resultado : int) : task
     + EscolherMoverOuComprar () : bool
-    + MoverPersonagem(personagem : Personagem, posicaoFinal : bool)
-    + TeleportarPersonagem(personagem : Personagem, posicaoFinal : bool)
+    + MoverPersonagem(personagem : Personagem, posicaoFinal : bool) : task
+    + TeleportarPersonagem(personagem : Personagem, posicaoFinal : bool) : task
     + GetNumeroPlayer (personagem : Personagem) : int
-    + MostrarMensagem (message : string)
-    + AcabarJogo(vencedor : Personagem)
+    + MostrarMensagem (message : string) : task
+    + AcabarJogo(vencedor : Personagem) : task
 
 }
 
