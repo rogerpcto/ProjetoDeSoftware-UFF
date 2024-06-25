@@ -4,14 +4,16 @@ Activate Tabuleiro
 
 Create ": Jogador" as Jogador
 loop for each personagem in Personagem
-    Tabuleiro -> Jogador : <<create>> 2.jogadores.add(personagem, interfaceUsuario.GetNumeroPlayer(personagem))
-    activate Jogador
-    
-        Jogador-> ":interfaceUsuario" as GUI : 3.getNumeroPlayer(personagem) 
-        Activate GUI
-        Jogador <-- GUI 
-        Deactivate GUI
-    Deactivate Jogador   
+    activate Tabuleiro
+        Tabuleiro -> Jogador : <<create>> 2.jogadores.add(personagem, interfaceUsuario.GetNumeroPlayer(personagem))
+        activate Jogador
+        
+            Jogador-> ":interfaceUsuario" as GUI : 3.getNumeroPlayer(personagem) 
+            Activate GUI
+            Jogador <-- GUI : numeroPlayer : int
+            Deactivate GUI
+        Deactivate Jogador
+    Deactivate Tabuleiro   
 end loop
 Tabuleiro -> Tabuleiro : 4.random(jogadores[])
 @enduml
