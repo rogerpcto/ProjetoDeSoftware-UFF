@@ -6,7 +6,7 @@ skinparam ranksep 150
 
 entity Carta{
     - Texto : string
-    + RealizarEfeitos() : void
+    + RealizarEfeito() : task
 }
 
 entity Casa{
@@ -14,7 +14,7 @@ entity Casa{
     - Posicao : int
     - Efeito : Efeito
 
-    + RealizarEfeitos() : void
+    + RealizarEfeito() : task
 }
 
 enum Cor{
@@ -28,7 +28,7 @@ enum Cor{
 }
 
 interface Efeito <<interface>>{
-    + RealizarEfeito() : void
+    + RealizarEfeito() : task
 }
 
 entity Jogador{
@@ -58,7 +58,7 @@ entity Propriedade{
     - Aluguel: int
     - AluguelDobrado : bool [= false]
 
-    + RealizarEfeitos() : void
+    + RealizarEfeitos() : task
     + ChecarProprietario(Jogador) : bool
     + RemoverProprietario(Jogador) : void
     + Comprar(Jogador): void
@@ -83,14 +83,14 @@ entity Tabuleiro<<singleton>>{
 }
 
 entity EfeitoComprarCarta{
-    + RealizarEfeito() : void
+    + RealizarEfeito() : task
     - ComprarCarta() : void 
 }
 
 entity EfeitoEscolherPropriedade{
     - Cor1, Cor2 : Cor
 
-    + RealizarEfeito() : void
+    + RealizarEfeito() : task
     - EscolherPropriedadeCor() : Propriedade
 }
 
@@ -98,13 +98,13 @@ entity EfeitoEspecialPersonagem{
     - EfeitoComprarCarta : EfeitoComprarCarta
     - Personagem : Personagem
 
-    + RealizarEfeito() : void
+    + RealizarEfeito() : task
     - EscolherPropriedade() : Propriedade
     - EntregarCartaAoPersonagem(Efeito) : void
 }
 
 entity EfeitoHabeasCorpus{
-    + RealizarEfeito() : void
+    + RealizarEfeito() : task
     - SairDaPrisao() : void
 }
 
@@ -112,46 +112,46 @@ entity EfeitoMoverOuComprar{
     - EfeitoPassos : EfeitoPassos
     - EfeitoComprarCarta : EfeitoComprarCarta
 
-    + RealizarEfeito() : void
+    + RealizarEfeito() : task
     - EscolherMoverOuComprar() : Efeito
 }
 
 entity EfeitoPassos{
     - Passos : int
 
-    + RealizarEfeito() : void
+    + RealizarEfeito() : task
     - AndarJogador() : void
 }
 
 entity EfeitoPrisao{
-    + RealizarEfeito() : void
+    + RealizarEfeito() : task
     - VerificarHabeasCorpus() : bool
     - CobrarMulta() : void
 }
 
 entity EfeitoPropriedadeGratis{
-    + RealizarEfeito() : void
+    + RealizarEfeito() : task
     - PegarOuPagar() : Propriedade
 }
 
 entity EfeitoTeleporte{
     - Destino : int
 
-    + RealizarEfeito() : void
+    + RealizarEfeito() : task
     - TeleportarJogador() : void
 }
 
 entity EfeitoTransacao{
     - Transacao : int
 
-    + RealizarEfeito() : void
+    + RealizarEfeito() : task
     - AplicarTransacao() : void
 }
 
 entity EfeitoVaParaPrisao{
     - EfeitoTeleporte : EfeitoTeleporte
     - EfeitoPrisao : EfeitoPrisao
-    + RealizarEfeito() : void
+    + RealizarEfeito() : task
 }
 
 Carta o- "*...*" Efeito : - Efeitos
