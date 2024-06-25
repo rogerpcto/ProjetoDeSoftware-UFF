@@ -2,7 +2,7 @@
 opt (!Acabou)
 Activate Tabuleiro
 ": Tabuleiro" as  Tabuleiro->": Tabuleiro" as  Tabuleiro : 1:MudarVez(JogadorAtual().GetPersonagem(), false)
-Tabuleiro -> ":InterfaceUsuario" as GUI : 2: JogadorAtual().GetPersonagem()
+Tabuleiro -> ": InterfaceUsuario" as GUI : 2: JogadorAtual().GetPersonagem()
     activate Tabuleiro
     activate GUI
     GUI -> ": Jogador" as Jogador : 3: GetPersonagem()
@@ -13,8 +13,8 @@ Tabuleiro -> ":InterfaceUsuario" as GUI : 2: JogadorAtual().GetPersonagem()
     deactivate GUI
     deactivate Tabuleiro
 Tabuleiro -> Tabuleiro : 4: JogadorDaVez +=1
-    opt jogadoDaVez >= Jogadores.count
-        Tabuleiro -> Tabuleiro : 5: JoadorDaVez = 0
+    opt jogadorDaVez >= Jogadores.count
+        Tabuleiro -> Tabuleiro : 5: JogadorDaVez = 0
     end
 Tabuleiro -> Tabuleiro : 6: MudarVez(JogadorAtual().GetPersonagem(), true)
     Tabuleiro -> GUI : 7: JogadorAtual().GetPersonagem()

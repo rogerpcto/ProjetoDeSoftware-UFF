@@ -29,5 +29,5 @@ Create ": Jogador" as Jogador
         activate Tabuleiro
         deactivate Tabuleiro
     end
-    Tabuleiro ->> GUI : 8: AcabarJogo(vencedor.GetPersonagem())
+    Tabuleiro ->> ": InterfaceUsuario" as GUI : 8: AcabarJogo(vencedor.GetPersonagem())
 @enduml
