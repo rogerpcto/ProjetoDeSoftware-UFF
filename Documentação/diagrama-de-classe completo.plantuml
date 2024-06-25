@@ -4,12 +4,12 @@ skinparam classAttributeIconSize 0
 skinparam nodesep 200
 skinparam ranksep 150
 
-entity Carta{
+class Carta{
     - Texto : string
     + RealizarEfeito() : task
 }
 
-entity Casa{
+class Casa{
     # Nome: string
     - Posicao : int
     - Efeito : Efeito
@@ -31,7 +31,7 @@ interface Efeito <<interface>>{
     + RealizarEfeito() : task
 }
 
-entity Jogador{
+class Jogador{
     - Saldo : int
     - Posicao: int
     - numeroPlayer: int {readonly}
@@ -53,7 +53,7 @@ enum Personagem{
     GATO
 }
 
-entity Propriedade{
+class Propriedade{
     - Preco: int
     - Aluguel: int
     - AluguelDobrado : bool [= false]
@@ -65,7 +65,7 @@ entity Propriedade{
     + CobrarAluguel(): void
 }
 
-entity Tabuleiro<<singleton>>{
+class Tabuleiro<<singleton>>{
     <u>- Instance : Tabuleiro</u>
     - jogadorDaVez : int [=0]
     - cartaDaVez : int
@@ -80,6 +80,23 @@ entity Tabuleiro<<singleton>>{
     + MaiorSaldo() : int
     + AcharVencedor(Vencedores[Jogador]) : Jogador
     + AcabarJogo() : void
+}
+
+entity GUI <<interface>>{
+    + MudarVezPersonagem(personagem : Personagem, vez : bool)
+    + AtualizarSaldo(personagem: Personagem, saldo : int)
+    + PerguntarCompraPropriedade(propriedade : Propriedade)
+    + AdicionarPropriedade (personagem: Personagem, propriedade : Propriedade)
+    + RemoverPropriedade (personagem: Personagem, propriedade : Propriedade)
+    + EscolherPropriedade (Propriedades : Propriedade[]) : Propriedade
+    + AnimarDado(resultado : int)
+    + EscolherMoverOuComprar () : bool
+    + MoverPersonagem(personagem : Personagem, posicaoFinal : bool)
+    + TeleportarPersonagem(personagem : Personagem, posicaoFinal : bool)
+    + GetNumeroPlayer (personagem : Personagem) : int
+    + MostrarMensagem (message : string)
+    + AcabarJogo(vencedor : Personagem)
+
 }
 
 entity EfeitoComprarCarta{
@@ -169,9 +186,10 @@ Propriedade --|> Casa
 Tabuleiro *- "1...*" Jogador : + Jogadores[]
 Tabuleiro *- "1...*" Casa : + Casas[]
 Tabuleiro *- "1...*" Carta : + Cartas[]
+Tabuleiro --> GUI : + InterfaceUsuario
 
 EfeitoComprarCarta ..|> Efeito
-EfeitoEscolhePropriedade ..|> Efeito
+EfeitoEscolherPropriedade ..|> Efeito
 EfeitoEspecialPersonagem ..|> Efeito
 EfeitoHabeasCorpus ..|> Efeito
 EfeitoMoverOuComprar ..|> Efeito

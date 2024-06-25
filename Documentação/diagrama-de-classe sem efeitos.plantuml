@@ -4,12 +4,12 @@ skinparam classAttributeIconSize 0
 skinparam nodesep 200
 skinparam ranksep 150
 
-entity Carta{
+class Carta{
     - Texto : string
     + RealizarEfeitos() : void
 }
 
-entity Casa{
+class Casa{
     # Nome: string
     - Posicao : int
 
@@ -30,7 +30,7 @@ interface Efeito{
     + RealizarEfeito() : void
 }
 
-entity Jogador{
+class Jogador{
     - Saldo : int
     - Posicao: int
     - numeroPlayer: int {readonly}
@@ -52,7 +52,7 @@ enum Personagem{
     GATO
 }
 
-entity Propriedade{
+class Propriedade{
     - Preco: int
     - Aluguel: int
     - AluguelDobrado : bool [= false]
@@ -64,7 +64,7 @@ entity Propriedade{
     + CobrarAluguel(): void
 }
 
-entity Tabuleiro<<singleton>>{
+class Tabuleiro<<singleton>>{
     <u>- Instance : Tabuleiro</u>
     - jogadorDaVez : int [=0]
     - cartaDaVez : int
@@ -79,6 +79,23 @@ entity Tabuleiro<<singleton>>{
     + MaiorSaldo() : int
     + AcharVencedor(Vencedores[Jogador]) : Jogador
     + AcabarJogo() : void
+}
+
+entity GUI <<interface>>{
+    + MudarVezPersonagem(personagem : Personagem, vez : bool)
+    + AtualizarSaldo(personagem: Personagem, saldo : int)
+    + PerguntarCompraPropriedade(propriedade : Propriedade)
+    + AdicionarPropriedade (personagem: Personagem, propriedade : Propriedade)
+    + RemoverPropriedade (personagem: Personagem, propriedade : Propriedade)
+    + EscolherPropriedade (Propriedades : Propriedade[]) : Propriedade
+    + AnimarDado(resultado : int)
+    + EscolherMoverOuComprar () : bool
+    + MoverPersonagem(personagem : Personagem, posicaoFinal : bool)
+    + TeleportarPersonagem(personagem : Personagem, posicaoFinal : bool)
+    + GetNumeroPlayer (personagem : Personagem) : int
+    + MostrarMensagem (message : string)
+    + AcabarJogo(vencedor : Personagem)
+
 }
 
 Carta o- "*...*" Efeito : - Efeitos
@@ -96,5 +113,6 @@ Propriedade --> "0..1" Jogador: - Proprietario
 Tabuleiro *- "1...*" Jogador : + Jogadores []
 Tabuleiro *- "1...*" Casa : + Casas []
 Tabuleiro *- "1...*" Carta : + Cartas []
+Tabuleiro --> GUI : + InterfaceUsuario
 
 @enduml
