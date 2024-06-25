@@ -8,7 +8,7 @@ loop for each personagem in Personagem
         Tabuleiro -> Jogador : <<create>> 2: personagem, interfaceUsuario.GetNumeroPlayer(personagem)
         activate Jogador
         
-            Jogador-> ":interfaceUsuario" as GUI : 3: getNumeroPlayer(personagem) 
+            Jogador-> ":interfaceUsuario" as GUI : 3: GetNumeroPlayer(personagem) 
             Activate GUI
             Jogador <-- GUI : numeroPlayer : int
             Deactivate GUI
