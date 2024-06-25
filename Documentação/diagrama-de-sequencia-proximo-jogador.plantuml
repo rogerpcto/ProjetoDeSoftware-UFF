@@ -7,9 +7,9 @@ Tabuleiro -> ":InterfaceUsuario" as GUI : 2: JogadorAtual().GetPersonagem()
     activate GUI
     GUI -> ": Jogador" as Jogador : 3: GetPersonagem()
     activate Jogador
-    GUI <-- Jogador : personagem
+    GUI <<-- Jogador : personagem
     deactivate Jogador
-    Tabuleiro <-- GUI : Jogador
+    Tabuleiro <<-- GUI : Jogador
     deactivate GUI
     deactivate Tabuleiro
 Tabuleiro -> Tabuleiro : 4: JogadorDaVez +=1
@@ -22,12 +22,12 @@ Tabuleiro -> Tabuleiro : 6: MudarVez(JogadorAtual().GetPersonagem(), true)
     activate GUI
     GUI -> ": Jogador" as Jogador : 8: GetPersonagem()
     activate Jogador
-    GUI <-- Jogador : personagem
+    GUI <<-- Jogador : personagem
     deactivate Jogador
-    Tabuleiro <-- GUI : Jogador
+    Tabuleiro <<-- GUI : Jogador
     deactivate GUI
     deactivate Tabuleiro
-Tabuleiro -> Jogador : 9: JogadorAtual().IniciarRodada()
+Tabuleiro ->> Jogador : 9: JogadorAtual().IniciarRodada()
 deactivate Tabuleiro
 end
 @enduml
