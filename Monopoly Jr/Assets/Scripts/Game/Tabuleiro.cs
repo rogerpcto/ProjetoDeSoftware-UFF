@@ -172,14 +172,15 @@ namespace Game
                 }
             }
             int valorFinal = vencedores[0].GetSaldo();
+            Jogador vencedor = vencedores[0];
             foreach (Jogador jogador in vencedores)
             {
                 if (jogador.GetSaldo() >= valorFinal)
                 {
-                    return jogador;
+                   vencedor = jogador;
                 }
             }
-            return vencedores[0];
+            return vencedor;
         }
 
         public void AcabarJogo()
