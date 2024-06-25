@@ -1,0 +1,12 @@
+@startuml
+opt (!Acabou)
+Activate Tabuleiro
+":Tabuleiro" as Tabuleiro -> ":InterfaceUsuario" as GUI : 1. MudarVez(JogadorAtual().GetPersonagem(), false)
+Tabuleiro -> Tabuleiro : 2. JogadorDaVez +=1
+    opt jogadoDaVez >= Jogadores.count
+        Tabuleiro -> Tabuleiro : 3a. JoadorDaVez = 0
+    end
+Tabuleiro -> GUI : 3b. MudarVez(JogadorAtual().GetPersonagem(), true)
+Tabuleiro -> Tabuleiro : 4. JogadorAtual().IniciarRodada()
+end
+@enduml
