@@ -1,0 +1,19 @@
+@startuml
+activate Tabuleiro
+
+":Tabuleiro" as Tabuleiro -> Tabuleiro : 1: InicializarJogadores()
+
+Create ": Jogador" as Jogador
+loop for each personagem in Personagem
+        activate Tabuleiro
+        Tabuleiro -> Jogador : <<create>> 2: personagem, interfaceUsuario.GetNumeroPlayer(personagem)
+            activate Jogador
+            Jogador-> ": interfaceUsuario" as GUI : 3: GetNumeroPlayer(personagem) 
+            activate GUI
+            Jogador <-- GUI : numeroPlayer : int
+            deactivate GUI
+        deactivate Jogador
+    deactivate Tabuleiro   
+end loop
+Tabuleiro -> Tabuleiro : 4: random(jogadores[ ])
+@enduml

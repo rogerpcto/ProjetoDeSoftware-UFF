@@ -4,40 +4,37 @@ skinparam classAttributeIconSize 0
 skinparam nodesep 200
 skinparam ranksep 150
 
-entity Carta{
+class Carta{
     - Texto : string
     + RealizarEfeitos() : void
 }
 
-Carta o- "*...*" Efeito : - Efeitos
-
-entity Casa{
-    - Nome: string
+class Casa{
+    # Nome: string
     - Posicao : int
 
     + RealizarEfeitos() : void
 }
 
-Casa --|> Propriedade
-Casa --> "1...1" Efeito : - Efeito
-
 enum Cor{
     AMARELO
-    AZUL
-    BRANCO
+    AZUL_CLARO
+    AZUL_ESCURO
     LARANJA
     MARROM
+    VERDE
     VERMELHO
-    ROXO
+    ROSA
 }
 
 interface Efeito{
     + RealizarEfeito() : void
 }
 
-entity Jogador{
+class Jogador{
     - Saldo : int
     - Posicao: int
+    - numeroPlayer: int {readonly}
     + EfeitoHabeasCorpus: EfeitoHabeasCorpus
 
     - JogarDado(): int
@@ -49,10 +46,6 @@ entity Jogador{
     + Teleportar(int) : void
 }
 
-Jogador  o-- "1...*" Propriedade : + Propriedades
-Jogador --> "1...1" Personagem : - Personagem
-Jogador --> Efeito : + EfeitoInicial
-
 enum Personagem{
     BARCO
     CACHORRO
@@ -60,30 +53,68 @@ enum Personagem{
     GATO
 }
 
-entity Propriedade{
+class Propriedade{
     - Preco: int
     - Aluguel: int
-    - AluguelDobrado : bool
+    - AluguelDobrado : bool [= false]
 
     + RealizarEfeitos() : void
     + ChecarProprietario(Jogador) : bool
-    + CobrarAluguel(): int
+    + RemoverProprietario(Jogador) : void
     + Comprar(Jogador): void
+    + CobrarAluguel(): void
 }
 
-Propriedade --> "1..1" Cor : + Cor
-Propriedade --> Jogador: - Proprietario
-
-entity Tabuleiro{
+class Tabuleiro<<singleton>>{
     <u>- Instance : Tabuleiro</u>
+    - jogadorDaVez : int [=0]
+    - cartaDaVez : int
+    - acabou : bool
 
     <u>+ GetInstance() : Tabuleiro</u>
+    - EmbaralharCartas() : Cartas[Carta]
+    + InicializarJogadores(): void
     + ProximoJogador() : void
-    + JogadorAtual(): Jogador
+    + JogadorAtual() : Jogador
+    + PegarCarta() : Carta
+    + MaiorSaldo() : int
+    + AcharVencedor(Vencedores[Jogador]) : Jogador
+    + AcabarJogo() : void
 }
 
-Tabuleiro *- "1...*" Jogador : + Jogadores
-Tabuleiro *- "1...*" Casa : + Casas
-Tabuleiro *- "1...*" Carta : + Cartas
+entity InterfaceUsuario <<interface>>{
+    + MudarVezPersonagem(personagem : Personagem, vez : bool)
+    + AtualizarSaldo(personagem: Personagem, saldo : int)
+    + PerguntarCompraPropriedade(propriedade : Propriedade)
+    + AdicionarPropriedade (personagem: Personagem, propriedade : Propriedade)
+    + RemoverPropriedade (personagem: Personagem, propriedade : Propriedade)
+    + EscolherPropriedade (Propriedades : Propriedade[]) : Propriedade
+    + AnimarDado(resultado : int)
+    + EscolherMoverOuComprar () : bool
+    + MoverPersonagem(personagem : Personagem, posicaoFinal : bool)
+    + TeleportarPersonagem(personagem : Personagem, posicaoFinal : bool)
+    + EscolherPassos() : EfeitoPassos
+    + GetNumeroPlayer (personagem : Personagem) : int
+    + MostrarCarta (carta : Carta)
+    + MostrarMensagem (message : string)
+    + AcabarJogo(vencedor : Personagem)
+}
+
+Carta o- "*...*" Efeito : - Efeitos
+
+Casa --> Efeito : - Efeito
+
+Jogador  o-- "1...*" Propriedade : + Propriedades[]
+Jogador --> Personagem : - Personagem {readonly}
+Jogador --> Efeito : + EfeitoInicial
+
+Propriedade --|> Casa
+Propriedade --> Cor : + Cor
+Propriedade --> "0..1" Jogador: - Proprietario
+
+Tabuleiro *- "1...*" Jogador : + Jogadores []
+Tabuleiro *- "1...*" Casa : + Casas []
+Tabuleiro *- "1...*" Carta : + Cartas []
+Tabuleiro --> InterfaceUsuario : + InterfaceUsuario
 
 @enduml

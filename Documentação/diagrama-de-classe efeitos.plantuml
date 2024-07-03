@@ -9,6 +9,12 @@ entity EfeitoComprarCarta{
     - ComprarCarta() : void 
 }
 
+entity EfeitoEscolherPassos{
+    + RealizarEfeito() : void
+
+    - EscolherPassos() : void
+}
+
 entity EfeitoEscolherPropriedade{
     - Cor1, Cor2 : Cor
 
@@ -23,6 +29,14 @@ entity EfeitoEspecialPersonagem{
     + RealizarEfeito() : void
     - EscolherPropriedade() : Propriedade
     - EntregarCartaAoPersonagem(Efeito) : void
+}
+
+entity EfeitoGO{
+    - EfeitoTeleporte : EfeitoTeleporte
+    - EfeitoTransacao : EfeitoTransacao 
+
+    + RealizarEfeito() : void
+    - SairDaPrisao() : void
 }
 
 entity EfeitoHabeasCorpus{
@@ -52,6 +66,8 @@ entity EfeitoPrisao{
 }
 
 entity EfeitoPropriedadeGratis{
+    - IndicePropriedade : int
+
     + RealizarEfeito() : void
     - PegarOuPagar() : Propriedade
 }
@@ -71,8 +87,10 @@ entity EfeitoTransacao{
 }
 
 entity EfeitoVaParaPrisao{
+    - MotivosParaPrisao : List<string>
     - EfeitoTeleporte : EfeitoTeleporte
     - EfeitoPrisao : EfeitoPrisao
+    
     + RealizarEfeito() : void
 }
 
