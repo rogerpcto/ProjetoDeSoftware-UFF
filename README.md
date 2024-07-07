@@ -11,6 +11,15 @@
 
 # Diagramas de Sequência
 
+## Movimenta Jogador
+![diagrama-sequencia-Movimenta-Jogador](https://www.plantuml.com/plantuml/png/7Own2i8m48PtdqA7Zcc63e9JnT9140Jn0SxaJ2D9hbxkxEjRklp_ydtmzLM0HNFQ7M9nIJqgf_qaCjUJjGnB6w9C-jAAxAW85caTPSiKa6SdPEzC7nGQy45lMO3HFCVHPeZ53kGqhmOqbwuv7xVjoFe8WI63yMWgVXMBYs1kz8iRRAuKm1EtSuAofVLO_Ff_)
+
+## Propriedade
+![diagrama-sequencia-Propriedade](https://www.plantuml.com/plantuml/png/7Ownhi8m303tznMFeMEQeGCIKn5LPoJ41vZ4j4697HnR_NsgBdVRwSQc86eb_vqIXMmHJVB_gbhRnNk1hL-IhlQoXXAO54dxmCKBBoWrAFkxy0UL9tpmMpSGTCzvzWKI-Oc35II5xZPqr_F1WNrCi0WKS15TmwyXXGHkxrH9625YNpFGCJKYnTq_)
+
+## Realiza Efeito Carta
+![diagrama-sequencia-Realiza-Efeito-Carta](https://www.plantuml.com/plantuml/png/7Swz3e8m54VntQVGWR5qO31nqe3CHkC3_2qNg6bxyVOs93wz7ylPJl8xPeLeYM6pyyc5Cb2Hi9rLbtomLh3MazUvF4ecSPoKajQEenMUI1QdR2_2JrBkwCQZhX0ozxwt4JxPZbs9tmDLsrId_RyDsy5Z4aIOWKocLw7aFCoL4FmRvZoILpOjH54l0Ucd-m00)
+
 ## Inicializa Jogadores
 ![diagrama-de-sequencia-Inicializa-jogadores](https://www.plantuml.com/plantuml/svg/7Swn2i8m483XtQVGeMEQeOFWLB4Kt0Jn0SxaJ5EIktgvKF3fBLt-R_txeY1QSpgS8hbKFLP9nqbrAHTh1TOsH9tgknOKnwH8sZhELZYWB4xPFeHdL1xmoHzTGT2ynj5cY6G7TZKZAJIthhcUztPiVOGWaC5uD0M_5Sb5C7UA6od-mCmSmBDWQPS4jD_rI7xp3m00)
 

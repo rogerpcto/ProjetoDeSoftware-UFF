@@ -1,40 +1,40 @@
 @startuml 
 
-": InterfaceUsuario" as GUI <- "propriedade : Propriedade" as Prp : 1: PerguntarComprarPropriedade(propriedade:Propriedade, Comprar(jogadorAtual:Jogador) )
+": InterfaceUsuario" as GUI <- "propriedade : Propriedade" as Prp : PerguntarComprarPropriedade(propriedade:Propriedade, Comprar(jogadorAtual:Jogador) )
     activate GUI
     activate Prp
         opt Comprar() 
-            GUI -> Prp : 2: Comprar(comprador:jogador)
+            GUI -> Prp : Comprar(comprador:jogador)
             deactivate GUI
                 activate Prp
-                    Prp ->> "compador : Jogador" as Jog : 3: Pagar(preco:int)
+                    Prp ->> "compador : Jogador" as Jog : Pagar(preco:int)
                     activate Jog
                     deactivate Jog
 
-                    Prp -> Prp : 4: SetProprietario (comprador:Jogador)
+                    Prp -> Prp : SetProprietario (comprador:Jogador)
                     activate Prp
 
                     loop for each comprador.propriedades[]
-                        Prp -> "PropriedadeMesmaCor: Propriedade" as Prp2: 5: getCor()
+                        Prp -> "PropriedadeMesmaCor: Propriedade" as Prp2: GetCor()
                         activate Prp2
                         Prp2 -->> Prp
                         deactivate Prp2
 
                         alt PropriedadeMesmaCor.cor == propriedade.cor
-                            Prp -> Prp : 6: AlugelDobrado = True
+                            Prp -> Prp : AluguelDobrado = True
                             activate Prp
                             deactivate Prp
-                            Prp2 -> Prp2 : 7: AlugelDobrado = True
+                            Prp -> Prp2 : AluguelDobrado = True
                             activate Prp2
                             deactivate Prp2  
                         end
                     deactivate Prp
                     end
 
-                Prp ->> Jog : 8: propriedades[].add (propriedade : Propriedade)
+                Prp ->> Jog : propriedades[].add (propriedade : Propriedade)
                     activate Jog
                     deactivate Jog
-                    Prp ->> GUI : 9: AdicionarPropriedade (comprador.getPersonagem(), propriedade:Propriedade)
+                    Prp ->> GUI : AdicionarPropriedade (comprador.getPersonagem(), propriedade:Propriedade)
                     activate GUI
                     deactivate GUI
                 deactivate Prp

@@ -1,16 +1,33 @@
 @startuml 
 
-": Casa" as Casa -> "EfeitoComprarCarta : Efeito" as ECC : 1:RealizarEfeitos()
+": Casa" as Casa -> "EfeitoComprarCarta : Efeito" as ECC : RealizarEfeitos()
 activate ECC
 
- ECC -> ECC : 2: RealizarEfeito()
+ ECC -> ECC : RealizarEfeito()
  activate ECC
- ECC -> ": Tabuleiro" as Tab: 3: PegarCarta(): carta
+ ECC -> ": Tabuleiro" as Tab: GetInstance().PegarCarta(): Carta
  ECC <--Tab
 
- ECC -> ": InterfaceUsuario" as GUI : 4:MostrarCarta(carta)
+ ECC -> ": InterfaceUsuario" as GUI : MostrarCarta(carta : Carta)
  activate GUI
  deactivate GUI
  deactivate ECC
- 
+
+ECC -> ": Carta" as Carta :  RealizarEfeito()
+activate Carta
+Carta -> ": EfeitoMoverOuComprar" as EfeitoMC: RealizarEfeito()
+activate EfeitoMC
+EfeitoMC -> EfeitoMC: EscolherMoverOuComprar() : Efeito
+activate EfeitoMC
+EfeitoMC -> GUI : EscolheMoverOuComprar() : bool
+deactivate EfeitoMC
+alt [retorno True]
+EfeitoMC -> ": EfeitoPassos" as EfeitoM : RealizarEfeito()
+else
+EfeitoMC -> ECC : RealizarEfeito()
+end [retorno True]
+deactivate EfeitoMC
+deactivate Carta
+
+deactivate ECC
 @enduml

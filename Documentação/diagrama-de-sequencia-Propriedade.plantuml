@@ -1,34 +1,33 @@
-@startuml 
-
+@startuml
 alt proprietario == null
- "propriedade : Propriedade" as Prp -> "jogadorAtual : Jogador" as Jog : 1: GetSaldo() : int
+ "propriedade : Propriedade" as Prp -> "jogadorAtual : Jogador" as Jog : GetSaldo() : int
 activate Prp
 activate Jog
 deactivate Jog
     opt saldo >= preco
-    Prp ->> ": InterfaceUsuario" as GUI : 2: PerguntarComprarPropriedade(propriedade:Propriedade, Comprar(jogadorAtual:Jogador), ())
+    Prp ->> ": InterfaceUsuario" as GUI : PerguntarComprarPropriedade(propriedade:Propriedade, Comprar(jogadorAtual:Jogador), null)
     activate GUI
-    activate Prp
     deactivate GUI
-    deactivate Prp
-
+opt Jogador decide comprar 
+    Prp -> Prp : Comprar(jogadorAtual:Jogador)
+end Jogador decide comprar
+    activate Prp
         
     end Saldo >= preco
 
 else
-    activate Prp
-        Prp -> Prp : 4: ChecarProprietario(jogadorAtual):bool
+        Prp -> Prp : ChecarProprietario(jogadorAtual):bool
         activate Prp
         deactivate Prp
             opt proprietario != jogadorAtual
-            Prp -> Prp : 5: CobrarAluguel()
+            Prp -> Prp : CobrarAluguel()
             activate Prp
-                alt aluguelDobrado = True
-                 Prp -> Prp: 6: valorAPagar = aluguel * 2
+                alt aluguelDobrado == True
+                 Prp -> Prp: valorAPagar = aluguel * 2
                 else
-                 Prp -> Prp: 7: valorAPagar = aluguel
+                 Prp -> Prp: valorAPagar = aluguel
                 end aluguelDobrado
-                Prp -> Jog: 8: GetSaldo():int
+                Prp -> Jog: GetSaldo():int
                 activate Prp
                 activate Jog
                 Prp <<-- Jog
@@ -36,17 +35,17 @@ else
                 deactivate Prp
 
                 alt saldo < valorAPagar               
-                 Prp ->> "proprietario : Jogador" as Jog2: 9: Receber(saldo:int)
+                 Prp ->> "proprietario : Jogador" as Jog2: Receber(saldo:int)
                  activate Jog2
                  deactivate Jog2
                 else
-                 Prp ->> Jog2: 10:Receber(valorAPagar:int)
+                 Prp ->> Jog2: Receber(valorAPagar:int)
                  activate Jog2
                  deactivate Jog2
             deactivate Prp
                 end Saldo < valorAPagar
            
-            Prp ->> Jog : 11:Pagar(valorAPagar)
+            Prp ->> Jog : Pagar(valorAPagar)
                 activate Jog
                 deactivate Jog
                 deactivate Prp

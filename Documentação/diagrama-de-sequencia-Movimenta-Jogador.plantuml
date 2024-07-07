@@ -3,51 +3,51 @@
 ": Tabuleiro" as Tab -> ": Jogador" as Jog : IniciaRodada()
 activate Jog
 
-opt efeitoPrisao
-    Jog -> ": efeitoPrisao" as Pris : 1: RealizarEfeito()
+opt efeitoPrisao != null
+    Jog -> ": EfeitoPrisao" as Pris : RealizarEfeito()
 end
 
-opt efeitoEspecialPersonagem
-    Jog -> ": efeitoEspecialPersonagem" as EFS : 2: RelizarEfeito()
+opt efeitoEspecialPersonagem != null
+    Jog -> ": EfeitoEspecialPersonagem" as EFS : RealizarEfeito()
 end 
 
-Jog -> Jog : 3: JogarDado() : int
+Jog -> Jog : JogarDado() : int
     activate Jog
     Jog -> ": InterfaceUsuario" as GUI : AnimarDado(resultado : int)
         activate GUI
         deactivate GUI
     deactivate Jog
 
-Jog -> Jog : 5: Mover(passos : int)
+Jog -> Jog : Mover(passos : int)
     activate Jog
-    Jog -> Tab: 6: getCasas() : casas[]:Casa
+    Jog -> Tab: GetInstance().casas : List<Casa>
         activate Tab
         Tab --> Jog
         deactivate Tab
-    loop passos > passos
-        Jog -> Jog : 7: posicao ++
+    loop i < passos
+        Jog -> Jog : posicao ++
         activate Jog
         deactivate Jog
-        Jog -> GUI : 8: MoverPersonagemUmPasso(personagem, posicao)
+        Jog -> GUI : MoverPersonagemUmPasso(personagem, posicao)
         activate GUI
         deactivate GUI
         opt posicao = 0
-         Jog -> Jog : 9: GanharDinheiroPorVolta();
+         Jog -> Jog : GanharDinheiroPorVolta();
          activate Jog
-            Jog -> GUI : 10: AtualizarSaldo(personagem, saldo)
+            Jog -> GUI : AtualizarSaldo(personagem, saldo)
             activate GUI
             deactivate GUI 
          deactivate Jog
         end opt
     end loop
     
-    Jog -> "casas[posicao] : Casa" as Casa : 11: RealizarEfeitos()
+    Jog -> "casas[posicao] : Casa" as Casa : RealizarEfeitos()
         activate Casa
         deactivate Casa
     deactivate Jog
 
 
-Jog ->> Tab : 12 : ProximoJogador()
+Jog ->> Tab : ProximoJogador()
 deactivate Jog
 
 @enduml
