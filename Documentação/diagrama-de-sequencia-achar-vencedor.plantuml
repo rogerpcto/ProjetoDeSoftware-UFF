@@ -1,29 +1,29 @@
 @startuml
-":Tabuleiro" as Tabuleiro -> Tabuleiro : 1: AcharVencedor(vencedores : Jogador)
+":Tabuleiro" as Tabuleiro -> Tabuleiro : AcharVencedor(vencedores : Jogador)
 Activate Tabuleiro  
 loop for each jogador in vencedores
     loop for each propriedade in jogador.propriedades
     activate Tabuleiro
-    Tabuleiro -> ": Jogador" as Jogador : 2: Receber(Propriedade.GetPreco())
+    Tabuleiro -> ": Jogador" as Jogador : Receber(Propriedade.GetPreco())
         activate Jogador
-        Jogador -> ": Propriedade" as Propriedade : 3: GetPreco()
+        Jogador -> ": Propriedade" as Propriedade : GetPreco()
        activate Propriedade
        Jogador <<-- Propriedade : preco : int
        deactivate Propriedade
        deactivate Jogador
     end loop
 end loop
-Tabuleiro -> Jogador : 4: valorFinal = vencedores[0].GetSaldo
+Tabuleiro -> Jogador : valorFinal = vencedores[0].GetSaldo
 activate Jogador
 Tabuleiro <<-- Jogador : saldo : int
 deactivate Jogador
 loop for each jogador in vencedores
-Tabuleiro -> Jogador : 5: GetSaldo()
+Tabuleiro -> Jogador : GetSaldo()
 activate Jogador
 Tabuleiro <-- Jogador : saldo
 deactivate Jogador
 opt saldo >= valorFinal
-    Tabuleiro -> Tabuleiro : 6: vencedor = jogador
+    Tabuleiro -> Tabuleiro : vencedor = jogador
 deactivate Tabuleiro
 end opt
 end loop
