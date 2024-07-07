@@ -1,33 +1,33 @@
 @startuml
 Activate Tabuleiro
-":Tabuleiro" as Tabuleiro -> Tabuleiro : 1: AcabarJogo()
+":Tabuleiro" as Tabuleiro -> Tabuleiro : AcabarJogo()
 
 Create ": Jogador" as Jogador
-    Tabuleiro -> Jogador : <<create>> 2: vencedores [ ]
-    Tabuleiro -> Tabuleiro : 3: MaiorSaldo() : int
+    Tabuleiro -> Jogador : <<create>> vencedores [ ]
+    Tabuleiro -> Tabuleiro : MaiorSaldo() : int
     activate Tabuleiro
     deactivate Tabuleiro   
     loop for each jogador in jogadores   
-        Tabuleiro -> Jogador : 4: GetSaldo()
+        Tabuleiro -> Jogador : GetSaldo()
         activate Jogador
         Tabuleiro <<-- Jogador: saldo
         deactivate Jogador
         opt saldo == maiorSaldo
-            Tabuleiro -> Tabuleiro : 5: vencedores.add(jogador)
+            Tabuleiro -> Tabuleiro : vencedores.add(jogador)
             activate Tabuleiro
             deactivate Tabuleiro
         end alt
     end loop
 
     alt vencedores.Count > 1
-        Tabuleiro-> Tabuleiro: 6: AcharVencedor(vencedores)
+        Tabuleiro-> Tabuleiro: AcharVencedor(vencedores)
         activate Tabuleiro
         deactivate Tabuleiro
 
     else vencedores == 1
-        Tabuleiro -> Tabuleiro: 7: vencedor = vencedores[0]
+        Tabuleiro -> Tabuleiro: vencedor = vencedores[0]
         activate Tabuleiro
         deactivate Tabuleiro
     end
-    Tabuleiro ->> ": InterfaceUsuario" as GUI : 8: AcabarJogo(vencedor.GetPersonagem())
+    Tabuleiro ->> ": InterfaceUsuario" as GUI : AcabarJogo(vencedor.GetPersonagem())
 @enduml
