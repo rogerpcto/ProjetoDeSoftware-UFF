@@ -1,25 +1,25 @@
 @startuml
-": Propriedade" as Propriedade -> ": Tabuleiro" as Tabuleiro : 1: GetInstance().JogadorAtual()
+": Propriedade" as Propriedade -> ": Tabuleiro" as Tabuleiro : GetInstance().JogadorAtual()
 activate Propriedade
 Propriedade <-- Tabuleiro : Jogador
 
 opt aluguel dobrado
-    Propriedade -> Propriedade: 2: valorAPagar *= 2
+    Propriedade -> Propriedade: valorAPagar *= 2
 end opt
 
-Propriedade ->  " JogadorDaVez : Jogador" as Jogador1 : 3: GetSaldo()
+Propriedade ->  " JogadorDaVez : Jogador" as Jogador1 : GetSaldo()
 activate Jogador1
 Propriedade <-- Jogador1 : saldo
 deactivate Jogador1
 
 alt saldo < valorAPagar
-    Propriedade -> "Proprietario : Jogador" as Jogador2 : 4: proprietário.Receber(saldo)
+    Propriedade -> "Proprietario : Jogador" as Jogador2 : proprietário.Receber(saldo)
     activate Propriedade
     activate Jogador2
     deactivate Propriedade
     deactivate Jogador2
 else
-    Propriedade -> Jogador2 : 5: proprietário.Receber(valorAPagar)
+    Propriedade -> Jogador2 : proprietário.Receber(valorAPagar)
         activate Propriedade
     activate Jogador2
     deactivate Propriedade
