@@ -1,0 +1,58 @@
+@startuml 
+
+alt proprietario == null
+ "propriedade : Propriedade" as Prp -> "jogadorAtual : Jogador" as Jog : 1: GetSaldo() : int
+activate Prp
+activate Jog
+deactivate Jog
+    opt saldo >= preco
+    Prp ->> ": InterfaceUsuario" as GUI : 2: PerguntarComprarPropriedade(propriedade:Propriedade, Comprar(jogadorAtual:Jogador), ())
+    activate GUI
+    activate Prp
+    deactivate GUI
+    deactivate Prp
+
+        
+    end Saldo >= preco
+
+else
+    activate Prp
+        Prp -> Prp : 4: ChecarProprietario(jogadorAtual):bool
+        activate Prp
+        deactivate Prp
+            opt proprietario != jogadorAtual
+            Prp -> Prp : 5: CobrarAluguel()
+            activate Prp
+                alt aluguelDobrado = True
+                 Prp -> Prp: 6: valorAPagar = aluguel * 2
+                else
+                 Prp -> Prp: 7: valorAPagar = aluguel
+                end aluguelDobrado
+                Prp -> Jog: 8: GetSaldo():int
+                activate Prp
+                activate Jog
+                Prp <<-- Jog
+                deactivate Jog
+                deactivate Prp
+
+                alt saldo < valorAPagar               
+                 Prp ->> "proprietario : Jogador" as Jog2: 9: Receber(saldo:int)
+                 activate Jog2
+                 deactivate Jog2
+                else
+                 Prp ->> Jog2: 10:Receber(valorAPagar:int)
+                 activate Jog2
+                 deactivate Jog2
+            deactivate Prp
+                end Saldo < valorAPagar
+           
+            Prp ->> Jog : 11:Pagar(valorAPagar)
+                activate Jog
+                deactivate Jog
+                deactivate Prp
+            
+            end
+
+
+end proprietario == null
+@enduml

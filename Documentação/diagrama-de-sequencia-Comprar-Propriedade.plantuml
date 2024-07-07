@@ -1,0 +1,45 @@
+@startuml 
+
+": InterfaceUsuario" as GUI <- "propriedade : Propriedade" as Prp : 1: PerguntarComprarPropriedade(propriedade:Propriedade, Comprar(jogadorAtual:Jogador) )
+    activate GUI
+    activate Prp
+        opt Comprar() 
+            GUI -> Prp : 2: Comprar(comprador:jogador)
+            deactivate GUI
+                activate Prp
+                    Prp ->> "compador : Jogador" as Jog : 3: Pagar(preco:int)
+                    activate Jog
+                    deactivate Jog
+
+                    Prp -> Prp : 4: SetProprietario (comprador:Jogador)
+                    activate Prp
+
+                    loop for each comprador.propriedades[]
+                        Prp -> "PropriedadeMesmaCor: Propriedade" as Prp2: 5: getCor()
+                        activate Prp2
+                        Prp2 -->> Prp
+                        deactivate Prp2
+
+                        alt PropriedadeMesmaCor.cor == propriedade.cor
+                            Prp -> Prp : 6: AlugelDobrado = True
+                            activate Prp
+                            deactivate Prp
+                            Prp2 -> Prp2 : 7: AlugelDobrado = True
+                            activate Prp2
+                            deactivate Prp2  
+                        end
+                    deactivate Prp
+                    end
+
+                Prp ->> Jog : 8: propriedades[].add (propriedade : Propriedade)
+                    activate Jog
+                    deactivate Jog
+                    Prp ->> GUI : 9: AdicionarPropriedade (comprador.getPersonagem(), propriedade:Propriedade)
+                    activate GUI
+                    deactivate GUI
+                deactivate Prp
+            deactivate Prp
+
+        end ComprarPropriedade
+
+@enduml
