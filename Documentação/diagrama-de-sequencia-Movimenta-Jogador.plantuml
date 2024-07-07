@@ -1,6 +1,6 @@
 @startuml comunicacao
 
-": Tabuleiro" as Tab -> ": Jogador" as Jog : IniciaRodada()
+": Tabuleiro" as Tab -> ": Jogador" as Jog : IniciarRodada()
 activate Jog
 
 opt efeitoPrisao != null
