@@ -1,0 +1,53 @@
+@startuml comunicacao
+
+": Tabuleiro" as Tab -> ": Jogador" as Jog : IniciaRodada()
+activate Jog
+
+opt efeitoPrisao
+    Jog -> ": efeitoPrisao" as Pris : 1: RealizarEfeito()
+end
+
+opt efeitoEspecialPersonagem
+    Jog -> ": efeitoEspecialPersonagem" as EFS : 2: RelizarEfeito()
+end 
+
+Jog -> Jog : 3: JogarDado() : int
+    activate Jog
+    Jog -> ": InterfaceUsuario" as GUI : AnimarDado(resultado : int)
+        activate GUI
+        deactivate GUI
+    deactivate Jog
+
+Jog -> Jog : 5: Mover(passos : int)
+    activate Jog
+    Jog -> Tab: 6: getCasas() : casas[]:Casa
+        activate Tab
+        Tab --> Jog
+        deactivate Tab
+    loop passos > passos
+        Jog -> Jog : 7: posicao ++
+        activate Jog
+        deactivate Jog
+        Jog -> GUI : 8: MoverPersonagemUmPasso(personagem, posicao)
+        activate GUI
+        deactivate GUI
+        opt posicao = 0
+         Jog -> Jog : 9: GanharDinheiroPorVolta();
+         activate Jog
+            Jog -> GUI : 10: AtualizarSaldo(personagem, saldo)
+            activate GUI
+            deactivate GUI 
+         deactivate Jog
+        end opt
+    end loop
+    
+    Jog -> "casas[posicao] : Casa" as Casa : 11: RealizarEfeitos()
+        activate Casa
+        deactivate Casa
+    deactivate Jog
+
+
+Jog ->> Tab : 12 : ProximoJogador()
+deactivate Jog
+
+@enduml
