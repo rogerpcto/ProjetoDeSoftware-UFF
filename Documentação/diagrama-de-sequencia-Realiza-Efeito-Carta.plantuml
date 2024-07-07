@@ -1,0 +1,16 @@
+@startuml 
+
+": Casa" as Casa -> "EfeitoComprarCarta : Efeito" as ECC : 1:RealizarEfeitos()
+activate ECC
+
+ ECC -> ECC : 2: RealizarEfeito()
+ activate ECC
+ ECC -> ": Tabuleiro" as Tab: 3: PegarCarta(): carta
+ ECC <--Tab
+
+ ECC -> ": InterfaceUsuario" as GUI : 4:MostrarCarta(carta)
+ activate GUI
+ deactivate GUI
+ deactivate ECC
+ 
+@enduml
